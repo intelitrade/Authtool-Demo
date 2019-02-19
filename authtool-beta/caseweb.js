@@ -22,7 +22,7 @@ function buildTreeViewEx(sSectionLabel,oDoc)//,oProgBar)
 					var oParentListItemNode = document.createElement("LI");
 					//var oTextnode = document.createTextNode(sSectionLabel);
 					var oTextnode = document.createTextNode(sSectionTitle);
-					oParentListItemNode.appendChild(oTextnode);
+					oParentListItemNode.innerHTML="<SPAN>"+sSectionTitle+"</SPAN>"//.appendChild(oTextnode);
 					oParentNode.setAttribute("id",sMainSectionId);
 					//oParentListItemNode.setAttribute("style","background-color:#F5DEB3");
 					oParentListItemNode.style.backgroundColor = "#F5DEB3";
@@ -41,7 +41,10 @@ function buildTreeViewEx(sSectionLabel,oDoc)//,oProgBar)
 					oParentListItemNode.setAttribute("jumpcode",sSectionLabel);
 					oParentListItemNode.setAttribute("onclick","gotoSection(this);highlightElement(this)");
 					oParentListItemNode.onclick = function() { gotoSection();highlightElement();  };					
-					oParentNode.setAttribute("title","Component: Section\nSection name: "+sSectionTitle+"\nSection label: "+sSectionLabel+"\nSection index: "+oSection.index()+"\nVersion: "+oSection.propGet("CVERSION"));
+					oParentNode.setAttribute("title","Component: Section\nSection name: "+sSectionTitle+"\nSection label: "+sSectionLabel+"\nSection index: "+oSection.index()+"\nVersion: "+oSection.propGet("CVERSION")+"\nSection type: "+oSection.propGet("CTYPE"));
+					
+					oParentNode.setAttribute("typeofsection",oSection.propGet("CTYPE"));
+					oParentListItemNode.setAttribute("typeofsection",oSection.propGet("CTYPE")); 
 					
 					if(document.getElementById("docmapheading"))
 						document.getElementById("docmapheading").innerHTML = "Edit options<br>"+sSectionTitle;
@@ -91,9 +94,11 @@ function buildTreeViewEx(sSectionLabel,oDoc)//,oProgBar)
 										var oChildListItemNode = document.createElement("LI");
 										var oChildTextnode = document.createTextNode(sSectionTitle);
 										oChildNode.setAttribute("id",iSubSectionId);
-										oChildListItemNode.appendChild(oChildTextnode);
+										oChildListItemNode.innerHTML="<SPAN>"+sSectionTitle+"</SPAN>"//.appendChild(oChildTextnode);
 										oChildNode.appendChild(oChildListItemNode);
 										oHTMLParentElement.appendChild(oChildNode);
+										oChildNode.setAttribute("typeofsection",oSubSection.propGet("CTYPE"));
+										oChildListItemNode.setAttribute("typeofsection",oSubSection.propGet("CTYPE"));
 										
 										var iSectionSkipCond = oSubSection.evaluateSkip();
 										var iSectionHideCond = oSubSection.evaluateHide();
@@ -113,14 +118,14 @@ function buildTreeViewEx(sSectionLabel,oDoc)//,oProgBar)
 											oChildListItemNode.onclick = function() { gotoSection();highlightElement();  };
 	
 											oChildNode.style.color=sColor;
-											oChildNode.setAttribute("title","Component: Section\nSection name: "+sSectionTitle+"\nSection label: "+sSubSection+"\nSection index: "+oSubSection.index()+"\nVersion: "+oSection.propGet("CVERSION"));
+											oChildNode.setAttribute("title","Component: Section\nSection name: "+sSectionTitle+"\nSection label: "+sSubSection+"\nSection index: "+oSubSection.index()+"\nVersion: "+oSubSection.propGet("CVERSION")+"\nSection type: "+oSubSection.propGet("CTYPE"));
 											oChildListItemNode.style.backgroundColor = "#F5DEB3";
 											oChildListItemNode.style.fontWeight = "bold"
 											oChildListItemNode.style.padding="10px";
 
 											oChildListItemNode.setAttribute("component","section");
 											oChildListItemNode.setAttribute("objecttype","section");
-											oChildNode.setAttribute("use","sectionconytainer");
+											oChildNode.setAttribute("use","sectioncontainer");
 											
 										}
 										
@@ -135,10 +140,11 @@ function buildTreeViewEx(sSectionLabel,oDoc)//,oProgBar)
 												continue;
 											var sTableTypeDesc = getTableTypeDesc(sCtypeVal);
 											oChildNode.innerHTML = sStr;
-											oChildNode.setAttribute("title","Component: Section\nSection name: "+sSectionTitle+"\nSection label: "+sSubSection+"\nSection GUID: "+oSubSection.propGet("GUID")+"\nVersion: "+oSection.propGet("CVERSION")+"\nTable Type: "+sCtypeVal+"\nTable type desc: "+sTableTypeDesc+"\nUse: Table container");
+											oChildNode.setAttribute("title","Component: Section\nSection name: "+sSectionTitle+"\nSection label: "+sSubSection+"\nSection GUID: "+oSubSection.propGet("GUID")+"\nVersion: "+oSubSection.propGet("CVERSION")+"\nTable Type: "+sCtypeVal+"\nTable type desc: "+sTableTypeDesc+"\nUse: Table container"+"\nSection type: "+oSubSection.propGet("CTYPE"));
 											oChildNode.setAttribute("use","tablecontainer");
 											var aTableName = getTableinSection("",oDoc,oSubSection.index);
 											oChildNode.setAttribute("tablename",aTableName[0]);
+											//oChildNode.setAttribute("typeofsection",oSubSection.propGet("CTYPE"));
 											//var olastChild = oChildNode.lastChild;
 											//olastChild.style.borderBottom="1px dotted";
 										}
@@ -147,9 +153,10 @@ function buildTreeViewEx(sSectionLabel,oDoc)//,oProgBar)
 										{
 											var sStr = getParaData(oDoc,oSubSection);	
 											oChildNode.innerHTML = sStr;
-											oChildNode.setAttribute("title","Component: Section\nSection name: "+sSectionTitle+"\nSection label: "+"\nSection index: "+oSubSection.index()+"\nVersion: "+oSection.propGet("CVERSION"));
+											oChildNode.setAttribute("title","Component: Section\nSection name: "+sSectionTitle+"\nSection label: "+"\nSection index: "+oSubSection.index()+"\nVersion: "+oSubSection.propGet("CVERSION")+"\nSection type: "+oSubSection.propGet("CTYPE"));
 											oChildNode.setAttribute("component","para");
-											oChildNode.setAttribute("objecttype","para");											
+											oChildNode.setAttribute("objecttype","para");	
+											oChildNode.setAttribute("typeofsection",oSubSection.propGet("CTYPE"));
 										}		
 										break;
 									}
