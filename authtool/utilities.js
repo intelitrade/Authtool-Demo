@@ -2,8 +2,8 @@
 function mouseUp()
 {
 	try{
-		debugger;
-		debugger;
+		//debugger;
+		//debugger;
 		if (oElement && isInputValid(sRefElement)) {
 			//Check if the element need to be added or note
 			if(oElement.style.color=="green")

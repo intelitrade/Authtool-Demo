@@ -328,16 +328,14 @@ function getOuterSections(sSection,oDoc)
 						iOuterFirstPara = oOuterSection.firstParaIndex // assign the fisrt paragraph index to iSubFirstPara
 						iOuterLastPara = oOuterSection.lastParaIndex// assign the last paragraph index to iSubLastPara
 						
+						//if(oOuterSection.lastParaIndex<oSection.firstParaIndex)
+							//break;						
+						
 						//check if these fall outside the first sections para range
 						if (iOuterFirstPara <= iFirstParaIndex & iOuterLastPara >= iLastParaIndex && oOuterSection.label!="" && oOuterSection.label!=sSection)
 						{
 							aOuterSections.unshift(oOuterSection.label);
 						}							
-						
-						//Check if main page has been reached. If main page break out of the loop this is the outter most section
-						if(oOuterSection.propExists("CFORMAT")==1)
-							break;												
-						
 					}
 				}
 			}
@@ -390,7 +388,22 @@ function getSubsections(sSectionLabel,oDoc,iSectionIndex)
 						aSection[aSection.length]=oSubSection // if a section is found within the specified section add to array aSections
 					}
 				}
-			}
+			}			
+			/*for (var j=1;j<=iSections;j++) // loop through sections in the document
+			{
+				var oSubSection = oDoc.section(j); // assign sections in the document to oSubSection
+				//Much more generic
+				if(oSubSection && oSubSection.index!=oSection.index)
+				{
+					var iSubFirstPara = oSubSection.firstParaIndex; // assign the fisrt paragraph index to iSubFirstPara
+					var iSubLastPara = oSubSection.lastParaIndex;// assign the last paragraph index to iSubLastPara
+					//check if these fall within the first sections para range
+					if (iSubFirstPara >= iFirstPara & iSubLastPara <= iLastPara)
+					{
+						aSection[aSection.length]=oSubSection; // if a section is found within the specified section add to array aSections
+					}
+				}
+			}*/
 			return aSection; // return an array with sections found within that section i.e. the Section Object is returned
 		}
 	}catch(e)

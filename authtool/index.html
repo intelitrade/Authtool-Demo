@@ -175,58 +175,58 @@
 						Drag & drop options into edit pane
 					</div>				
 					<div id="insertoptionsmain" style="overflow-y: auto;height:500px;width:100%">
-						<ul class="categorytitle"><li style='padding:10px;'><b>Sections</b></li></ul>
-						<ul style='margin-top:0px;margin-bottom:10px' title="New and available in this beta release">
-							<li class="menulinespacer" onmousedown="onMouseDownSections(this.id)" id="NOTECONTROL" sectiontype="NOTECONTROL" component="section" objettype="section">Note control</li>
-							<li class="menulinespacer" onmousedown="onMouseDownSections(this.id)" id="SUBNOTECONTROL" sectiontype="SUBNOTECONTROL" component="section" objettype="section">Sub note control</li>
-							<li class="menulinespacer" onmousedown="onMouseDownSections(this.id)" id="SUBNOTECONTROLGROUP" sectiontype="SUBNOTECONTROLGROUP" component="section" objettype="section">Sub note control (Group)</li>
-							<li class="menulinespacer" onmousedown="onMouseDownSections(this.id)" id="EXPANDCOLLAPSE" sectiontype="EXPANDCOLLAPSE" component="section" objettype="section">Expand collapse</li>
-							<li class="menulinespacer" onmousedown="onMouseDownSections(this.id)" id="EXPANDCOLLAPSECOMPANY3RDYEAR" sectiontype="EXPANDCOLLAPSECOMPANY3RDYEAR" component="section" objettype="section">Expand collapse (Company 3yr)</li>
+						<ul class="categorytitle"><li style='padding:10px;' disabled><b>Sections</b></li></ul>
+						<ul style='margin-top:0px;margin-bottom:10px' disabled title="Not available for this beta release">
+							<li class="menulinespacer" sectiontype="NOTECONTROL">Note control</li>
+							<li class="menulinespacer" sectiontype="SUBNOTECONTROL">Sub note control</li>
+							<li class="menulinespacer" sectiontype="SUBNOTECONTROLGROUP">Sub note control (Group)</li>
+							<li class="menulinespacer" sectiontype="EXPANDCOLLAPSE">Expand collapse</li>
+							<li class="menulinespacer" sectiontype="EXPANDCOLLAPSECOMPANY3RDYEAR">Expand collapse (Company 3yr)</li>
 						</ul>						
 						<ul class="categorytitle" disabled title="Not available for this beta release">
 							<li style='padding:10px;'><b>Table types</b></li>
 						</ul>
 						<ul style='margin-top:0px;margin-bottom:10px;' disabled title="Not available for this beta release">
-							<li class="menulinespacer" onmousedown="onMouseDownTables(this.id)" tabletype="CONTROLTABLE" component="table" objettype="table">Control table</li>
-							<li class="menulinespacer" onmousedown="onMouseDownTables(this.id)" tabletype="STATEMENTTABLE" component="table" objettype="table">Statement table</li>
-							<li class="menulinespacer" onmousedown="onMouseDownTables(this.id)" tabletype="MODIFIABLETABLE" component="table" objettype="table">Modifiable table</li>
-							<li class="menulinespacer" onmousedown="onMouseDownTables(this.id)" tabletype="NOTETABLE" component="table" objettype="table">Note table</li>
-							<li class="menulinespacer" onmousedown="onMouseDownTables(this.id)" tabletype="STD6COLUMNTABLE" component="table" objettype="table">Std 6 column table</li>
-							<li class="menulinespacer" onmousedown="onMouseDownTables(this.id)" tabletype="SUMMARYTABLE" component="table" objettype="table">Summary table</li>
-							<li class="menulinespacer" onmousedown="onMouseDownTables(this.id)" tabletype="SUMMARYTABLEGROUP" component="table" objettype="table">Summary table (Group)</li>
-							<li class="menulinespacer" onmousedown="onMouseDownTables(this.id)" tabletype="RECONTABLE" component="table" objettype="table">Recon table</li>
-							<li class="menulinespacer" onmousedown="onMouseDownTables(this.id)" tabletype="RADIOBUTTONTABLE" component="table" objettype="table">Radio button table</li>		
+							<li class="menulinespacer" tabletype="CONTROLTABLE">Control table</li>
+							<li class="menulinespacer" tabletype="STATEMENTTABLE">Statement table</li>
+							<li class="menulinespacer" tabletype="MODIFIABLETABLE">Modifiable table</li>
+							<li class="menulinespacer" tabletype="NOTETABLE">Note table</li>
+							<li class="menulinespacer" tabletype="STD6COLUMNTABLE">Std 6 column table</li>
+							<li class="menulinespacer" tabletype="SUMMARYTABLE">Summary table</li>
+							<li class="menulinespacer" tabletype="SUMMARYTABLEGROUP">Summary table (Group)</li>
+							<li class="menulinespacer" tabletype="RECONTABLE">Recon table</li>
+							<li class="menulinespacer" tabletype="RADIOBUTTONTABLE">Radio button table</li>		
 						</ul>
 						<ul class="categorytitle">
 							<li style='padding:10px;' onClick="testIt()"><b>Row types</b></li>
 						</ul>
 						<ul style='margin-top:0px;margin-bottom:10px;'>
-							<li class="menulinespacer" onmousedown="onMouseDownRows(this.id)" id="C1" onmouseup="mouseUp()" name="Link to map row" rowtype="C1" component="row" objettype="row">Link to map row</li>
-							<li class="menulinespacer" onmousedown="onMouseDownRows(this.id)" id="C2" onmouseup="mouseUp()" name="Negative link to map row" rowtype="C2" component="row" objettype="row">Negative link to map row</li>	
-							<li class="menulinespacer" onmousedown="onMouseDownRows(this.id)" id="C3" onmouseup="mouseUp()" name="Link to map (Debits only)" rowtype="C3" component="row" objettype="row">Link to map (Debits only)</li>
-							<li class="menulinespacer" onmousedown="onMouseDownRows(this.id)" id="G3" onmouseup="mouseUp()" name="Link to map (Credits only)" rowtype="G3" component="row" objettype="row">Link to map (Credits only)</li>
-							<li class="menulinespacer" onmousedown="onMouseDownRows(this.id)" id="C4" onmouseup="mouseUp()" name="Negative link to map (Debits only)" rowtype="C4" component="row" objettype="row">Negative link to map (Debits only)</li>
-							<li class="menulinespacer" onmousedown="onMouseDownRows(this.id)" id="C4" onmouseup="mouseUp()" name="Negative link to map (Credits only)" rowtype="G4" component="row" objettype="row">Negative link to map (Credits only)</li>	
-							<li class="menulinespacer" onmousedown="onMouseDownRows(this.id)" id="A1" onmouseup="mouseUp()" name="Link to account" rowtype="A1" component="row" objettype="row">Link to account</li>
-							<li class="menulinespacer" onmousedown="onMouseDownRows(this.id)" id="A2" onmouseup="mouseUp()" name="Negative link to account" rowtype="A2">Negative link to account</li>
-							<li class="menulinespacer" onmousedown="onMouseDownRows(this.id)" id="I1" onmouseup="mouseUp()" name="Input row" rowtype="I1" component="row" objettype="row">Input row</li>
-							<li class="menulinespacer" onmousedown="onMouseDownRows(this.id)" id="D1" onmouseup="mouseUp()" name="Heading row" rowtype="D1" component="row" objettype="row">Heading row</li>
-							<li class="menulinespacer" onmousedown="onMouseDownRows(this.id)" id="SUBTOTAL" onmouseup="mouseUp()" name="Sub-total row" rowtype="S1" component="row" objettype="row">Sub-total row</li>
-							<li class="menulinespacer" onmousedown="onMouseDownRows(this.id)" id="L1" onmouseup="mouseUp()" name="Heading row" rowtype="L1" component="row" objettype="row">Thin line</li>
-							<li class="menulinespacer" onmousedown="onMouseDownRows(this.id)" id="L2" onmouseup="mouseUp()" name="Heading row" rowtype="L2" component="row" objettype="row">Thick line</li>
+							<li class="menulinespacer" onmousedown="onMouseDown2(this.id)" id="C1" onmouseup="mouseUp()" name="Link to map row" rowtype="C1">Link to map row</li>
+							<li class="menulinespacer" onmousedown="onMouseDown2(this.id)" id="C2" onmouseup="mouseUp()" name="Negative link to map row" rowtype="C2">Negative link to map row</li>	
+							<li class="menulinespacer" onmousedown="onMouseDown2(this.id)" id="C3" onmouseup="mouseUp()" name="Link to map (Debits only)" rowtype="C3">Link to map (Debits only)</li>
+							<li class="menulinespacer" onmousedown="onMouseDown2(this.id)" id="G3" onmouseup="mouseUp()" name="Link to map (Credits only)" rowtype="G3">Link to map (Credits only)</li>
+							<li class="menulinespacer" onmousedown="onMouseDown2(this.id)" id="C4" onmouseup="mouseUp()" name="Negative link to map (Debits only)" rowtype="C4">Negative link to map (Debits only)</li>
+							<li class="menulinespacer" onmousedown="onMouseDown2(this.id)" id="C4" onmouseup="mouseUp()" name="Negative link to map (Credits only)" rowtype="G4">Negative link to map (Credits only)</li>	
+							<li class="menulinespacer" onmousedown="onMouseDown2(this.id)" id="A1" onmouseup="mouseUp()" name="Link to account" rowtype="A1">Link to account</li>
+							<li class="menulinespacer" onmousedown="onMouseDown2(this.id)" id="A2" onmouseup="mouseUp()" name="Negative link to account" rowtype="A2">Negative link to account</li>
+							<li class="menulinespacer" onmousedown="onMouseDown2(this.id)" id="I1" onmouseup="mouseUp()" name="Input row" rowtype="I1">Input row</li>
+							<li class="menulinespacer" onmousedown="onMouseDown2(this.id)" id="D1" onmouseup="mouseUp()" name="Heading row" rowtype="D1">Heading row</li>
+							<li class="menulinespacer" onmousedown="onMouseDown2(this.id)" id="SUBTOTAL" onmouseup="mouseUp()" name="Sub-total row" rowtype="S1">Sub-total row</li>
+							<li class="menulinespacer" onmousedown="onMouseDown2(this.id)" id="L1" onmouseup="mouseUp()" name="Heading row" rowtype="L1">Thin line</li>
+							<li class="menulinespacer" onmousedown="onMouseDown2(this.id)" id="L2" onmouseup="mouseUp()" name="Heading row" rowtype="L2">Thick line</li>
 						</ul>
 						<ul class="categorytitle" disabled title="Not available for this beta release"><li style='padding:10px;'><b>Paragraph</b></li></ul>
 						<ul style='margin-top:0px;margin-bottom:10px;' disabled title="Not available for this beta release">
-							<li class="menulinespacer" component="paragraph" objettype="paragraph">Document</li>
-							<li class="menulinespacer" component="paragraph" objettype="paragraph">Section</li>
-							<li class="menulinespacer" component="paragraph" objettype="paragraph">Table</li>
-							<li class="menulinespacer" component="paragraph" objettype="paragraph">Row</li>
+							<li class="menulinespacer">Document</li>
+							<li class="menulinespacer">Section</li>
+							<li class="menulinespacer">Table</li>
+							<li class="menulinespacer">Row</li>
 						</ul>
 						<ul class="categorytitle" disabled title="Not available for this beta release"><li style='padding:10px;'><b>Subdocument</b></li></ul>
 						<ul style='margin-top:0px;margin-bottom:10px;' disabled title="Not available for this beta release">
-							<li class="menulinespacer" component="subdocument" objettype="subdocument">Header</li>
-							<li class="menulinespacer" component="subdocument" objettype="subdocument">Footer</li>
-							<li class="menulinespacer" component="subdocument" objettype="subdocument">External document</li>
+							<li class="menulinespacer">Header</li>
+							<li class="menulinespacer">Footer</li>
+							<li class="menulinespacer">External document</li>
 						</ul>						
 					</div>
 				</td>			
@@ -292,9 +292,6 @@
 	{
 
 	}
-	
-	debugger;
-	debugger;
 	
 	function getCorrectContainer(sSectionLabel)
 	{

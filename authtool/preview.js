@@ -507,9 +507,6 @@ function previewDocument(sCVTableName)
 		//document.getElementById("editorPane").innerHTML = '<table width="100%" height="100%"><tr><td width="100%" height="100%" align="center"><p><b>Select Item on the left to view / modify its properties</b></p><object width="100%" height="400" data="PWC Illustrative Financial Statements 2013 - Financial statements - IFRS.pdf"></object></td></tr></table>';
 		//debugger;
 		//debugger;
-		//Clear the document first before adding any data to italics
-		document.getElementById("editorPane") = "";
-		
 		if(!isInputValid(sCVTableName))
 			var sCVTableName = "HBD";
 		//var sCVTableName = "MFG";
