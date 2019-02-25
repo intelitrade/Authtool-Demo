@@ -81,8 +81,21 @@ try{
 			var sCellToUpdate = oElement.id;
 			var oMappingCell = oDoc.cell(sCellToUpdate)
 			if(oMappingCell)
-			{
-				oMappingCell.value = oElement.value;
+            {
+                var oSourceElement = document.getElementById(oElement.srcelement);
+				if(isInputValid(oSourceElement))
+				{
+					var sExpression = "grpdesc('M','"+oElement.value+"',3,"+oDoc.cell("LANGUAGE").value+")";
+					var sNewDesc = oDoc.interpret(sExpression);	
+                    //if (isInputValid(sNewDesc)){
+						oSourceElement.innerText = sNewDesc;
+						oSourceElement.description = sNewDesc;
+						oSourceElement.mapping = oElement.value;
+						document.getElementById("PREVIEWDESC_"+oElement.srcelement).innerText = sNewDesc;
+					//}
+				}
+				
+				/*oMappingCell.value = oElement.value;
 				//get the description cell and remove overridden if it is there
 				var sDescCell = oElement.getAttribute("desccell");
 				var oCell = oDoc.cell(sDescCell);
@@ -101,7 +114,7 @@ try{
 					oSrcElement.innerHTML="["+oDoc.cell(sDescCell).value+"]";
 					//Reload preview pane to have the right properties displaying, otherwise some fields will show wrong data
 					updatePreviewPane(oSrcElement);
-				}
+				}*/
 			}
 			
 		}catch(e)
@@ -115,11 +128,24 @@ try{
 	function updateDescCell(oElement)
 	{
 		try{
+			//debugger;
+			//debugger;
 			var sDescCell = oElement.getAttribute("desccell");
 			oDescCell = oDoc.cell(sDescCell);
 			if(oDescCell)
 			{
-				oDescCell.value = oElement.value;
+                var oSourceElement = document.getElementById(oElement.srcelement);
+				if(isInputValid(oSourceElement))
+				{
+                    var sNewDesc = oElement.value;
+					//if (isInputValid(sNewDesc)){
+						oSourceElement.innerText = sNewDesc;
+						oSourceElement.description = sNewDesc;
+						document.getElementById("PREVIEWDESC_"+oElement.srcelement).innerText = sNewDesc;
+					//}
+				}				
+				
+				/*oDescCell.value = oElement.value;
 				oDoc.recalculate(0);
 				//Update description on UI
 				var oSrcElement = document.getElementById(oElement.srcelement);
@@ -128,7 +154,7 @@ try{
 					oSrcElement.innerHTML="["+oDoc.cell(sDescCell).value+"]";
 					//Reload preview pane to have the right properties displaying, otherwise some fields will show wrong data
 					updatePreviewPane(oSrcElement);
-				}
+				}*/
 			}
 		}catch(e)
 		{
@@ -141,12 +167,24 @@ try{
 	function updateColDesc(sCellName,oElement)
 	{
 		try{
-			var oCell = oDoc.cell(sCellName);
+			//debugger;
+			//debugger;
+			var sSourceElement = oElement.srcelement;
+			if(isInputValid(sSourceElement))
+			{
+				var oSourceElement = document.getElementById(sSourceElement);
+				if(oSourceElement)
+				{
+					oSourceElement.description = oElement.value;
+				}
+			}
+			/*var oCell = oDoc.cell(sCellName);
 			if(oCell)
 			{
 				oCell.calculation = '"'+oElement.value+'"';
 			}
 			oDoc.recalculate(0);
+			*/
 		}catch(e)
 		{
 			alert(e.description);

@@ -11,6 +11,7 @@ var oRefElement;
 var sRefElement = "";
 var bMultiSelect = false;//Tracks if multiple items have been selected
 var aSelectedItems = [];
+var aCopiedItems = [];
 /*var oElement;
 var oRefElement;
 var sRefElement = "";

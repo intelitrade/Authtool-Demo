@@ -494,7 +494,60 @@ function getMetaData(sFilePath, sPropertyName)
 	return sMetaValue;
 }
 
+function copyElement()
+{
+	try{
+		//debugger;
+		//debugger;
+		//Check if there is any element or elements that need to be copied in the array that keeps selected elements
+		if(aSelectedItems.length>0)
+		{
+			for(var i=0;i<aSelectedItems.length;i++)
+			{
+				var oElementToCopy = aSelectedItems[i];
+				if(oElementToCopy.component=="section")
+					aCopiedItems[aCopiedItems.length] = oElementToCopy.parentNode.cloneNode(true);
+				else
+					aCopiedItems[aCopiedItems.length] = oElementToCopy.cloneNode(true);
+			}
+		}		
+	}catch(e)
+	{
+		alert(e.description);
+	}finally{
+		
+	}
+}
 
+function pasteElement()
+{
+	try{
+		//debugger;
+		//debugger;
+		//Check if there is any element or elements that need to be copied in the array that keeps selected elements
+		if(aCopiedItems.length>0)
+		{
+			for(var i=0;i<aCopiedItems.length;i++)
+			{
+				var oElementToPaste = aCopiedItems[i];
+				var oItemToInsertAfter = aSelectedItems[0];
+				if(oElementToPaste.component=="section")
+					oItemToInsertAfter = oItemToInsertAfter.parentNode;
+				
+				//Check if the components are the same
+				//if(oItemToInsertAfter.component!=oItemToInsertAfter.component)
+					//alert("Cannot paste here!");
+				
+				insertAfter(oElementToPaste, oItemToInsertAfter);
+			}
+		}		
+	}catch(e)
+	{
+		alert(e.description);
+	}finally{
+		
+	}	
+}
 /*
 function convertLetterToNumber(str) {
   var out = 0, len = str.length;

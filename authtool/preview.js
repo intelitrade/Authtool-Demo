@@ -1,8 +1,7 @@
 function updatePreviewPane(oElement)
 {
 	try{
-		//debugger;
-		//debugger;
+
 		var sStr = "";
 	
 		if(!oElement)	
@@ -80,7 +79,7 @@ function updatePreviewPane(oElement)
 								<td style="width:35%">\
 									<b>Description: </b>\
 								</td>\
-								<td style="width:65%"><b>'+sCellValue+'</b></td>\
+								<td style="width:65%;font-weight:bold" id="PREVIEWDESC_'+oElement.id+'">'+sCellValue+'</td>\
 							</tr>\
 							<tr>\
 								<td>\
@@ -91,7 +90,7 @@ function updatePreviewPane(oElement)
 								<td>\
 									<b>Value: </b>\
 								</td>\
-								<td><input type="text" style="background-color:#FFFFC6;width:100%" value="'+sCellValue+'" desccell="'+sCellNumber+'" id="'+sCellNumber+'" srcelement="'+oElement.id+'" onblur="updateDescCell(this)"></td>\
+								<td><input type="text" style="background-color:#FFFFC6;width:100%" value="'+sCellValue+'" desccell="'+sCellNumber+'" id="'+sCellNumber+'" srcelement="'+oElement.id+'" onkeyup="updateDescCell(this)"></td>\
 							</tr><tr>\
 								<td>\
 									<b>Calculation: </b>\
@@ -117,7 +116,7 @@ function updatePreviewPane(oElement)
 								<td style="width:35%">\
 									<b>Description: </b>\
 								</td>\
-								<td style="width:65%"><b>'+sCellValue+'</b></td>\
+								<td style="width:65%;font-weight:bold">'+sCellValue+'</td>\
 							</tr>\
 							<tr>\
 								<td>\
@@ -137,6 +136,8 @@ function updatePreviewPane(oElement)
 								<td><input type="text"  id="guidrow" disabled style="width:75%" value="'+sGuid+'"> <input '+sDisableGuid+' type="button" value="Generate..." style="width:20%" tempguid="'+sTempGuid+'" tablename="'+sTable+'" onClick="addGUIDToRow(this)"></td></tr></table>';
 				sStr = sPreviewControlDiv + sStr+"</div><br>";
 			}else{
+				//debugger;
+				//debugger;
 				sStr= sShowTableStr+'<table>\
 							<tr>\
 								<td colspan=2 width:100%>\
@@ -147,7 +148,7 @@ function updatePreviewPane(oElement)
 								<td style="width:35%">\
 									<b>Description: </b>\
 								</td>\
-								<td style="width:65%"><b>'+sCellValue+'</b></td>\
+								<td style="width:65%;font-weight:bold" id="PREVIEWDESC_'+oElement.id+'">'+sCellValue+'</td>\
 							</tr>\
 							<tr>\
 								<td>\
@@ -158,7 +159,12 @@ function updatePreviewPane(oElement)
 								<td>\
 									<b>Map number: </b>\
 								</td>\
-								<td><input type="text" style="background-color:#FFFFC6;width:100%" value="'+sMapNo+'" desccell="'+sCellNumber+'" id="'+sMapCell+'" srcelement="'+oElement.id+'" onblur="updateMapNo(this)"></td>\
+								<td><input type="text" style="background-color:#FFFFC6;width:100%" value="'+sMapNo+'" desccell="'+sCellNumber+'" id="'+sMapCell+'" srcelement="'+oElement.id+'" onkeyup="updateMapNo(this)"></td>\
+							</tr><tr>\
+								<td>\
+									<b>Calc: </b>\
+								</td>\
+								<td>'+sCalc+'</td>\
 							</tr>\
 							<tr>\
 								<td>\
@@ -291,7 +297,7 @@ function updatePreviewPane(oElement)
 							</td>\
 							<td style="width:50%">\
 								<input type="text" style="background-color:FFFFC6" id="'+sCellName+'" originalvalue="'+sCellValue+'" value="'+sCellValue+'" cellguid="'+oHeaderCell.propGet("GUID")+'" style="width:95%" onclick="\
-								highlightRow(this.id)" onblur="\
+								highlightRow(this.id)" srcelement="'+oElement.id+'" onkeyup="\
 								updateColDesc(this.id,this)"/>\
 							</td>\
 							</tr>';	
@@ -303,7 +309,7 @@ function updatePreviewPane(oElement)
 							</td>\
 							<td style="width:50%">\
 								<input type="text" style="background-color:FFFFC6" id="'+sCellName+'" originalvalue="'+sCellValue+'" value="'+sCellValue+'" cellguid="'+oHeaderCell.propGet("GUID")+'" style="width:95%" onclick="\
-								highlightRow(this.id)" onblur="\
+								highlightRow(this.id)" srcelement="'+oElement.id+'" onkeyup="\
 								updateColDesc(this.id,this)"/>\
 							</td>\
 							</tr>';	
@@ -368,7 +374,7 @@ function updatePreviewPane(oElement)
 						</td>\
 						<td style="width:50%">\
 							<input type="text" style="background-color:FFFFC6" id="'+oDescMapCol.number+'" originalvalue="'+sCellValue+'" value="'+sCellValue+'" cellguid="'+oDescMapCol.propGet("GUID")+'" style="width:95%" onclick="\
-							highlightRow(this.id)" onblur="\
+							highlightRow(this.id)" srcelement="'+oElement.id+'" onkeyup="\
 							updateColDesc(this.id,this)"/>\
 						</td>\
 						</tr>';	
@@ -379,7 +385,7 @@ function updatePreviewPane(oElement)
 						</td>\
 						<td style="width:50%">\
 							<input type="text" style="background-color:FFFFC6" id="'+oDescMapCol.number+'" originalvalue="'+sCellValue+'" value="'+sCellValue+'" cellguid="'+oDescMapCol.propGet("GUID")+'" style="width:95%" onclick="\
-							highlightRow(this.id)" onblur="\
+							highlightRow(this.id)" srcelement="'+oElement.id+'" onkeyup="\
 							updateColDesc(this.id,this)"/>\
 						</td>\
 						</tr>';	
