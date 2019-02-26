@@ -916,7 +916,7 @@ function InsertNewRow(oElement,sRefElement)
 						//Attach the text to the node
 						//node.appendChild(textnode);
 						//set onclick event
-						node.setAttribute("onclick","gotoSection(this);highlightElement(this);updatePreviewPane(this)");
+						node.setAttribute("onclick","gotoSection(this);highlightElement(this);updatePreviewPane(this);");
 						node.onclick = function() { gotoSection();highlightElement();updatePreviewPane() };
 						
 						//Make the new item cold to make it stand ouot and easier to find as well as get the users attention
@@ -947,10 +947,11 @@ function InsertNewRow(oElement,sRefElement)
 						node.setAttribute("title","Component: Table row\nRow type: "+sRowType+"\nRow type desc: "+sRowTypeDesc+"\nTable name: "+sTableName+"\nTable type: "+sTableType+"\nTable desc: "+sTableTypeDesc);						
 						node.setAttribute("add","true");
 						node.setAttribute("rowtype",sRowType);
-						var ID = createGuid();
-						var sTempId = "row_"+ID;
-						node.setAttribute("id",sTempId);
-						node.setAttribute("guid","");
+						var sGuid = createGuid();
+						//var sTempId = "row_"+ID;
+						//node.setAttribute("id",sTempId);
+						node.setAttribute("guid",sGuid);
+						node.setAttribute("id","row_"+sGuid);
 						node.setAttribute("name",sElementName);
 						
 						node.style.cursor = 'hand';
@@ -968,7 +969,10 @@ function InsertNewRow(oElement,sRefElement)
 							//var oNewElement = oRefParent.insertBefore(node,oRefElement);
 							var oNewElement = insertAfter(node, oRefElement,oRefParent);
 							if(oNewElement)
+							{
 								highlightElement(oNewElement);
+								updatePreviewPane(oNewElement);
+							}
 						}					
 						oProgBar.updateProgress(1);	
 						oProgBar.setMessage("Row "+x+" / "+iRowToInsert);						

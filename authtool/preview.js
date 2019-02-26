@@ -65,6 +65,11 @@ function updatePreviewPane(oElement)
 				var sCellValue = oElement.getAttribute("name");;
 				var sCalc = "";
 				var sRowType = oElement.rowtype;
+				if(sGuid!="")
+				{
+					//var iRowNumber = getRowNumber(oTable,sGuid);
+					sDisableGuid = "disabled";
+				}				
 			}
 			//Check if input row or header row
 			if(sRowType=="I1"||sRowType=="D1")
@@ -666,13 +671,13 @@ function addCVTableDataToHTMLTable(sCVTableName, sHTMLTableId)
 							var sRowTypeDesc = getRowTypeDesc(sRowType);
 							oHTMLTable.rows[(i-1)].cells[(j-1)].setAttribute("title","Row: "+i+"\nColumn: "+j+"\nRow type: "+sRowType+"\nRow type desc: "+sRowTypeDesc+"\nColumn type: "+sColType+"\nColumn type desc: "+sColTypeDesc);
 							
-							oHTMLTable.rows[(i-1)].cells[(j-1)].innerHTML = sText;//oPara.getText();
+							oHTMLTable.rows[(i-1)].cells[(j-1)].innerHTML ="<div contenteditable='true'>"+sText+"</div>";//oPara.getText();
 							
 							oHTMLTable.rows[(i-1)].cells[(j-1)].style.cursor = "cell";
 							
 							if((sRowType==LINKTOTALSKIP_ROW||sRowType==BALCHK_ROW||sRowType==TOTAL_ROW||sRowType==SUBTOTAL_ROW||sRowType==LINKTOTAL_ROW||sRowType==LINKSUBTOTAL_ROW||sRowType==CALC1_ROW||sRowType==CALC2_ROW||sRowType==CALC3_ROW||sRowType==CALC4_ROW||sRowType==CALC5_ROW||sRowType==CALC6_ROW||sRowType==CALC7_ROW||sRowType==CALC8_ROW||sRowType==CALC9_ROW||sRowType==CALC10_ROW||sRowType==LINKTOTALSKIP_ROW||sRowType==BALCHK_ROW||sRowType==NOTE_ROW||sRowType==CALCB_ROW||sRowType==CALCC_ROW||sRowType==INPUT_ROW||sRowType==TEXTCALC1_ROW||sRowType==INPUTPERCENT_ROW||sRowType==INPUTROLLFORWARD_ROW||sRowType==INPUTDESCNOT_ROW||sRowType==INPUTBULLET_ROW||sRowType==INPUTTOTAL_ROW||sRowType==ACTCALC1_ROW||sRowType==ACTCALC2_ROW)&&(sColType==CALC_COL||sColType==VARIANCE_COL||sColType==TOTAL_COL||sColType==PERCENT_COL))
 							{
-								oHTMLTable.rows[(i-1)].cells[(j-1)].style.textAlign = "right";							
+                                oHTMLTable.rows[(i - 1)].cells[(j - 1)].style.textAlign = "right";	
 							}
 							
 							//if(sRowType==INPUTTOTAL_ROW||sRowType==SUBTOTAL_ROW||sRowType==LINKTOTAL_ROW||sRowType==LINKSUBTOTAL_ROW||sRowType==TOTAL_ROW)

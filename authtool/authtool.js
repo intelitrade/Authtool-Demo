@@ -78,17 +78,17 @@ try{
 		try{
 			//debugger;
 			//debugger;
-			var sCellToUpdate = oElement.id;
-			var oMappingCell = oDoc.cell(sCellToUpdate)
-			if(oMappingCell)
-            {
+			//var sCellToUpdate = oElement.id;
+			//var oMappingCell = oDoc.cell(sCellToUpdate)
+			//if(oMappingCell)
+            //{
                 var oSourceElement = document.getElementById(oElement.srcelement);
 				if(isInputValid(oSourceElement))
 				{
 					var sExpression = "grpdesc('M','"+oElement.value+"',3,"+oDoc.cell("LANGUAGE").value+")";
 					var sNewDesc = oDoc.interpret(sExpression);	
                     //if (isInputValid(sNewDesc)){
-						oSourceElement.innerText = sNewDesc;
+						oSourceElement.innerText= sNewDesc;
 						oSourceElement.description = sNewDesc;
 						oSourceElement.mapping = oElement.value;
 						document.getElementById("PREVIEWDESC_"+oElement.srcelement).innerText = sNewDesc;
@@ -115,7 +115,7 @@ try{
 					//Reload preview pane to have the right properties displaying, otherwise some fields will show wrong data
 					updatePreviewPane(oSrcElement);
 				}*/
-			}
+			//}
 			
 		}catch(e)
 		{

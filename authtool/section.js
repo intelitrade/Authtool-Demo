@@ -460,8 +460,8 @@ function InsertNewSection(oElement,sRefElement)
 					//if(!oRefElement)	
 					for(var x=1;x<=iSectionToInsert;x++)
 					{
-						var ID = createGuid();
-						var sSubSectionId = "UL_"+ID;//oSubSection.index;
+						//var ID = createGuid();
+						var sSubSectionId = "UL_"+createGuid();//oSubSection.index;
 						//create an Unordered list container i.e. UL that will hold all components with data about the new section that needs to be created
 						var oNewSectionNode = document.createElement("UL");
 						//Set the ID

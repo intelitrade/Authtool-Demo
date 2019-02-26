@@ -497,19 +497,33 @@ function getMetaData(sFilePath, sPropertyName)
 function copyElement()
 {
 	try{
+		iTest = iTest+5;
 		//debugger;
 		//debugger;
 		//Check if there is any element or elements that need to be copied in the array that keeps selected elements
-		if(aSelectedItems.length>0)
+		var iLength = aSelectedItems.length;
+		if(iLength>0)
 		{
-			for(var i=0;i<aSelectedItems.length;i++)
+			for(var i=0;i<iLength;i++)
 			{
 				var oElementToCopy = aSelectedItems[i];
-				if(oElementToCopy.component=="section")
-					aCopiedItems[aCopiedItems.length] = oElementToCopy.parentNode.cloneNode(true);
+				if(oElementToCopy.component=="section"){
+					var oDuplicatNode = oElementToCopy.parentNode.cloneNode(true);
+					oDuplicatNode.id = "UL_"+createGuid();
+					//remember to add generic code to change main section, child elements and attributes
+					aCopiedItems[aCopiedItems.length] = oDuplicatNode;
+				}
 				else
-					aCopiedItems[aCopiedItems.length] = oElementToCopy.cloneNode(true);
+				{
+					var oDuplicatNode = oElementToCopy.cloneNode(true);
+					//change the id of the node
+					oDuplicatNode.id = "row_"+createGuid();
+					//oDuplicatNode.jumpcode = oDuplicatNode.jumpcode;
+					aCopiedItems[aCopiedItems.length] = oDuplicatNode;
+				}
 			}
+		}else{
+			alert("You have not selected an item to copy.")
 		}		
 	}catch(e)
 	{
@@ -525,21 +539,22 @@ function pasteElement()
 		//debugger;
 		//debugger;
 		//Check if there is any element or elements that need to be copied in the array that keeps selected elements
-		if(aCopiedItems.length>0)
+		var iLength = aCopiedItems.length;
+		if(iLength>0)
 		{
-			for(var i=0;i<aCopiedItems.length;i++)
+			for(var i=0;i<iLength;i++)
 			{
 				var oElementToPaste = aCopiedItems[i];
 				var oItemToInsertAfter = aSelectedItems[0];
 				if(oElementToPaste.component=="section")
 					oItemToInsertAfter = oItemToInsertAfter.parentNode;
-				
-				//Check if the components are the same
-				//if(oItemToInsertAfter.component!=oItemToInsertAfter.component)
-					//alert("Cannot paste here!");
-				
-				insertAfter(oElementToPaste, oItemToInsertAfter);
+
+				var oNewElement = insertAfter(oElementToPaste, oItemToInsertAfter);
+				if(oNewElement)
+					highlightElement(oNewElement);
 			}
+		}else{
+			alert("There are no items to paste");
 		}		
 	}catch(e)
 	{

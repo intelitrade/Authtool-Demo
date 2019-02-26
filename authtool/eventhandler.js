@@ -1,5 +1,5 @@
 /*
-The following file contains function that handle different types of events
+The following file contains functions that handle different types of events
 */
 //Cancel button event handler
 function cancelButtonClick()
@@ -7,8 +7,9 @@ function cancelButtonClick()
 	try
 	{
 		//close the dialog
-		window.returnValue = 0
-		window.close()
+		//No value needs to be returned;
+		//window.returnValue;
+		window.close();
 	}
 	catch(e)
 	{
