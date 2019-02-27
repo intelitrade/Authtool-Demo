@@ -239,6 +239,12 @@ function deleteItem()
 						//Set an attribute to show that it needs to be deleted
 						document.getElementById(sIdOfElementToDelete).setAttribute("delete","true");
 						document.getElementById(oElementToDelete.getAttribute("id")).setAttribute("delete","true");
+						
+						var aChildElements = oParentElementToDelFrom.getElementsByTagName("LI");
+						for(var j=0;j<aChildElements.length;j++){
+							aChildElements[j].innerHTML = "<strike style='color:red' title='Will be deleted'>"+aChildElements[j].innerHTML+"</strike>";
+							aChildElements[j].setAttribute("delete","true");
+						}
 						//highlightElement(oElementToDelete);	
 						//oElementToDelete.disabled=true;
 					//}
@@ -254,6 +260,12 @@ function deleteItem()
 					oElementToDelete.setAttribute("delete","true");
 					//highlightElement(oElementToDelete);	
 					//oElementToDelete.parentNode.disabled=true;
+					var aChildElements = oElementToDelete.parentNode.getElementsByTagName("LI");
+					for(var j=0;j<aChildElements.length;j++)
+					{
+						aChildElements[j].innerHTML = "<strike style='color:red' title='Will be deleted'>"+aChildElements[j].innerHTML+"</strike>";	
+						aChildElements[j].setAttribute("delete","true");
+					}
 				}
 				else if(isInputValid(oElementToDelete))
 				{
