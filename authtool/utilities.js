@@ -240,7 +240,7 @@ function deleteItem()
 						document.getElementById(sIdOfElementToDelete).setAttribute("delete","true");
 						document.getElementById(oElementToDelete.getAttribute("id")).setAttribute("delete","true");
 						
-						var aChildElements = oParentElementToDelFrom.getElementsByTagName("LI");
+						var aChildElements = oElementToDelete.parentNode.getElementsByTagName("LI");
 						for(var j=0;j<aChildElements.length;j++){
 							aChildElements[j].innerHTML = "<strike style='color:red' title='Will be deleted'>"+aChildElements[j].innerHTML+"</strike>";
 							aChildElements[j].setAttribute("delete","true");
