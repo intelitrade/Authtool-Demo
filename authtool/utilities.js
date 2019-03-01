@@ -246,6 +246,7 @@ function deleteItem()
 							aChildElements[j].style.textDecoration="line-through";//.innerHTML = "<strike style='color:red' title='Will be deleted'>"+aChildElements[j].innerHTML+"</strike>";
 							aChildElements[j].style.color="red";//.setAttribute("text-decoration-color","red");
 							aChildElements[j].setAttribute("delete","true");
+							aDeletedItems[aDeletedItems.length] = aChildElements[j];
 						}
 						//highlightElement(oElementToDelete);	
 						//oElementToDelete.disabled=true;
@@ -270,6 +271,7 @@ function deleteItem()
 						aChildElements[j].style.textDecoration="line-through";//.innerHTML = "<strike style='color:red' title='Will be deleted'>"+aChildElements[j].innerHTML+"</strike>";	
 						aChildElements[j].style.color="red";//.setAttribute("text-decoration-color","red");
 						aChildElements[j].setAttribute("delete","true");
+						aDeletedItems[aDeletedItems.length] = aChildElements[j];
 					}
 				}
 				else if(isInputValid(oElementToDelete))
@@ -599,6 +601,7 @@ function undoLastActionOnElement()
 					aChildElements[j].style.textDecoration="";//.innerHTML = "<strike style='color:red' title='Will be deleted'>"+aChildElements[j].innerHTML+"</strike>";	
 					aChildElements[j].style.color="initial";//.setAttribute("text-decoration-color","red");
 					aChildElements[j].removeAttributeAttribute("delete");//,"true");
+					
 				}				
 			}
 		}
