@@ -589,7 +589,7 @@ function undoLastActionOnElement()
 	try{
 		//debugger;
 		//debugger;
-		var iLength = aDeletedItems.length;
+		/*var iLength = aDeletedItems.length;
 		if(iLength)
 		{
 			for(var i=0;i<iLength;i++)
@@ -600,10 +600,33 @@ function undoLastActionOnElement()
 				{
 					aChildElements[j].style.textDecoration="";//.innerHTML = "<strike style='color:red' title='Will be deleted'>"+aChildElements[j].innerHTML+"</strike>";	
 					aChildElements[j].style.color="initial";//.setAttribute("text-decoration-color","red");
-					aChildElements[j].removeAttributeAttribute("delete");//,"true");
+					aChildElements[j].removeAttribute("delete");//,"true");
 					
 				}				
 			}
+		}*/
+		var iLength = aSelectedItems.length;
+		if(iLength>0)
+		{
+			for(var i=0;i<iLength;i++)
+			{
+				if(aSelectedItems[i].getAttribute("delete")=="true")
+				{
+					aSelectedItems[i].style.textDecoration="";//.innerHTML = "<strike style='color:red' title='Will be deleted'>"+aChildElements[j].innerHTML+"</strike>";	
+					//aSelectedItems[i].style.color="initial";//.setAttribute("text-decoration-color","red");
+					aSelectedItems[i].removeAttribute("delete");//,"true");
+											
+					/*aDeletedItems[i].style.textDecoration = "";
+					var aChildElements = aDeletedItems[i].getElementsByTagName("LI");
+					for(var j=0;j<aChildElements.length;j++)
+					{
+						aChildElements[j].style.textDecoration="";//.innerHTML = "<strike style='color:red' title='Will be deleted'>"+aChildElements[j].innerHTML+"</strike>";	
+						aChildElements[j].style.color="initial";//.setAttribute("text-decoration-color","red");
+						aChildElements[j].removeAttributeAttribute("delete");//,"true");
+						
+					}*/
+				}
+			}		
 		}
 	}catch(e)
 	{
