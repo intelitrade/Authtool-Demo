@@ -230,19 +230,21 @@ function deleteItem()
 				if(oElementToDelete && oElementToDelete.getAttribute("isheader")=="true")
 				{	
 					var sIdOfElementToDelete = oElementToDelete.getAttribute("id").split("_")[1];
-					var oParentElementToDelFrom = document.getElementById(sIdOfElementToDelete).parentNode;//.id
+					//var oParentElementToDelFrom = document.getElementById(sIdOfElementToDelete).parentNode;//.id
 					//if(isInputValid(oParentElementToDelFrom))
 					//{
 						//oParentElementToDelFrom.removeChild(document.getElementById(sIdOfElementToDelete));
 						//document.getElementById(sIdOfElementToDelete).style.display="none";
-						oElementToDelete.innerHTML = "<strike style='color:red' title='Will be deleted'>"+oElementToDelete.innerHTML+"</strike>";
+						oElementToDelete.style.textDecoration="line-through";//.innerHTML = "<strike style='color:red' title='Will be deleted'>"+oElementToDelete.innerHTML+"</strike>";
+						oElementToDelete.style.color="red";//.setAttribute("text-decoration-color","red");
 						//Set an attribute to show that it needs to be deleted
 						document.getElementById(sIdOfElementToDelete).setAttribute("delete","true");
 						document.getElementById(oElementToDelete.getAttribute("id")).setAttribute("delete","true");
-						
+						aDeletedItems[aDeletedItems.length] = oElementToDelete;
 						var aChildElements = oElementToDelete.parentNode.getElementsByTagName("LI");
 						for(var j=0;j<aChildElements.length;j++){
-							aChildElements[j].innerHTML = "<strike style='color:red' title='Will be deleted'>"+aChildElements[j].innerHTML+"</strike>";
+							aChildElements[j].style.textDecoration="line-through";//.innerHTML = "<strike style='color:red' title='Will be deleted'>"+aChildElements[j].innerHTML+"</strike>";
+							aChildElements[j].style.color="red";//.setAttribute("text-decoration-color","red");
 							aChildElements[j].setAttribute("delete","true");
 						}
 						//highlightElement(oElementToDelete);	
@@ -254,7 +256,9 @@ function deleteItem()
 					//var oContainer = document.getElementById("MainContentContainer");
 					//oContainer.innerHTML = "";
 					//oElementToDelete.parentNode.style.display="none";
-					oElementToDelete.parentNode.innerHTML = "<strike style='color:red' title='Will be deleted'>"+oElementToDelete.parentNode.innerHTML+"</strike>";
+					oElementToDelete.parentNode.style.textDecoration="line-through";//.innerHTML = "<strike style='color:red' title='Will be deleted'>"+oElementToDelete.parentNode.innerHTML+"</strike>";
+					aDeletedItems[aDeletedItems.length] = oElementToDelete.parentNode;
+					oElementToDelete.style.color="red";//.setAttribute("text-decoration-color","red");
 					//Set an attribute to show that it needs to be deleted
 					oElementToDelete.parentNode.setAttribute("delete","true");
 					oElementToDelete.setAttribute("delete","true");
@@ -263,20 +267,23 @@ function deleteItem()
 					var aChildElements = oElementToDelete.parentNode.getElementsByTagName("LI");
 					for(var j=0;j<aChildElements.length;j++)
 					{
-						aChildElements[j].innerHTML = "<strike style='color:red' title='Will be deleted'>"+aChildElements[j].innerHTML+"</strike>";	
+						aChildElements[j].style.textDecoration="line-through";//.innerHTML = "<strike style='color:red' title='Will be deleted'>"+aChildElements[j].innerHTML+"</strike>";	
+						aChildElements[j].style.color="red";//.setAttribute("text-decoration-color","red");
 						aChildElements[j].setAttribute("delete","true");
 					}
 				}
 				else if(isInputValid(oElementToDelete))
 				{
-					var oParentElementToDelFrom = oElementToDelete.parentNode;
+					//var oParentElementToDelFrom = oElementToDelete.parentNode;
 					//if(isInputValid(oParentElementToDelFrom))
 					//{
 						//oParentElementToDelFrom.removeChild(oElementToDelete);
 						//oElementToDelete.style.display="none";
-						oElementToDelete.innerHTML = "<strike style='color:red' title='Will be deleted'>"+oElementToDelete.innerHTML+"</strike>";
+						oElementToDelete.style.textDecoration="line-through";//.innerHTML = "<strike style='color:red' title='Will be deleted'>"+oElementToDelete.innerHTML+"</strike>";
+						oElementToDelete.style.color="red";//setAttribute("text-decoration-color","red");
 						//Set an attribute to show that it needs to be deleted
-						oElementToDelete.setAttribute("delete","true");	
+						oElementToDelete.setAttribute("delete","true");
+						aDeletedItems[aDeletedItems.length] = oElementToDelete;						
 						//highlightElement(oElementToDelete);
 						//oElementToDelete.disabled=true;						
 					//}
@@ -509,7 +516,6 @@ function getMetaData(sFilePath, sPropertyName)
 function copyElement()
 {
 	try{
-		iTest = iTest+5;
 		//debugger;
 		//debugger;
 		//Check if there is any element or elements that need to be copied in the array that keeps selected elements
@@ -574,6 +580,34 @@ function pasteElement()
 	}finally{
 		
 	}	
+}
+
+function undoLastActionOnElement()
+{
+	try{
+		//debugger;
+		//debugger;
+		var iLength = aDeletedItems.length;
+		if(iLength)
+		{
+			for(var i=0;i<iLength;i++)
+			{
+				aDeletedItems[i].style.textDecoration = "";
+				var aChildElements = aDeletedItems[i].getElementsByTagName("LI");
+				for(var j=0;j<aChildElements.length;j++)
+				{
+					aChildElements[j].style.textDecoration="";//.innerHTML = "<strike style='color:red' title='Will be deleted'>"+aChildElements[j].innerHTML+"</strike>";	
+					aChildElements[j].style.color="initial";//.setAttribute("text-decoration-color","red");
+					aChildElements[j].removeAttributeAttribute("delete");//,"true");
+				}				
+			}
+		}
+	}catch(e)
+	{
+		alert(e.description);
+	}finally{
+		
+	}
 }
 /*
 function convertLetterToNumber(str) {

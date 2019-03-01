@@ -76,8 +76,18 @@ try{
 	function updateMapNo(oElement)
 	{
 		try{
-			//debugger;
-			//debugger;
+			
+			
+			
+			/*debugger;
+			debugger;
+			
+			var sStr = 'grp(c1,TOKEN(HEADER,1,"|"),entity(TOKEN(HEADER,2,"|"),TOKEN(rc(-7),1,"|")+TOKEN(COLL3,1,"|")))+grp(c1,TOKEN(HEADER,1,"|"),entity(TOKEN(HEADER,2,"|"),TOKEN(rc(-7),1,"|")+TOKEN(COLL3,2,"|")))+grp(c1,TOKEN(HEADER,1,"|"),entity(TOKEN(HEADER,2,"|"),TOKEN(rc(-7),2,"|")+TOKEN(COLL3,1,"|")))+grp(c1,TOKEN(HEADER,1,"|"),entity(TOKEN(HEADER,2,"|"),TOKEN(rc(-7),2,"|")+TOKEN(COLL3,2,"|")))';
+			
+			var sRegExp = new RegExp("rc(-7)","gi");
+			sStr = sStr.replace(sRegExp,"'1.1.100.100'");
+			debugger;
+			debugger;*/
 			//var sCellToUpdate = oElement.id;
 			//var oMappingCell = oDoc.cell(sCellToUpdate)
 			//if(oMappingCell)
@@ -88,10 +98,11 @@ try{
 					var sExpression = "grpdesc('M','"+oElement.value+"',3,"+oDoc.cell("LANGUAGE").value+")";
 					var sNewDesc = oDoc.interpret(sExpression);	
                     //if (isInputValid(sNewDesc)){
-						oSourceElement.innerText= sNewDesc;
-						oSourceElement.description = sNewDesc;
-						oSourceElement.mapping = oElement.value;
-						document.getElementById("PREVIEWDESC_"+oElement.srcelement).innerText = sNewDesc;
+						 document.getElementById("PREVIEWDESC_"+oElement.srcelement).innerText = oSourceElement.description = oSourceElement.innerText = sNewDesc;
+						 oSourceElement.mapping = oElement.value;
+						//oSourceElement.description = sNewDesc;
+						
+						//document.getElementById("PREVIEWDESC_"+oElement.srcelement).innerText = sNewDesc;
 					//}
 				}
 				
