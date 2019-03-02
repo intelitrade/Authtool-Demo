@@ -590,7 +590,8 @@ function onMouseDownSections(sId)
 					//document.getElementById("insertoptions").innerHTML = sElementId+" "+oRefElement.typeofsection+" "+oSectionElement.sectiontype;
 					
 					//document.getElementById("results").innerHTML = oSectionElement.style.left;	
-					if(isInputValid(sElementId) && sElementId.search("HEADER_")!=-1 && (oRefElement.typeofsection==oSectionElement.sectiontype||oRefElement.typeofsection=="NOTECONTROL"&&oSectionElement.sectiontype!="NOTECONTROL")||((oRefElement.component=="section"||oRefElement.component=="row")&&oSectionElement.sectiontype=="SUBNOTECONTROL"))// && sElementId.search("row_")!=-1||sElementUse=="tablecontainer")
+					//if(isInputValid(sElementId) && sElementId.search("HEADER_")!=-1 && (oRefElement.typeofsection==oSectionElement.sectiontype||oRefElement.typeofsection=="NOTECONTROL"&&oSectionElement.sectiontype!="NOTECONTROL")||((oRefElement.component=="section"||oRefElement.component=="row")&&oSectionElement.sectiontype=="SUBNOTECONTROL"))// && sElementId.search("row_")!=-1||sElementUse=="tablecontainer")
+					if(isInputValid(sElementId))
 					{
 						//debugger;
 						//debugger;
