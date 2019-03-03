@@ -293,6 +293,7 @@ function deleteItem()
 				oProgBar.updateProgress(1);	
 			}
 			oProgBar.destroyProgressBar();
+			highlightElement(aSelectedItems[aSelectedItems.length-1]);
 			aSelectedItems = [];
 			//Clear preview pane
 			//document.getElementById("editorPane").innerHTML = "";
@@ -617,14 +618,21 @@ function undoLastActionOnElement()
 					aSelectedItems[i].removeAttribute("delete");//,"true");
 											
 					/*aDeletedItems[i].style.textDecoration = "";
-					var aChildElements = aDeletedItems[i].getElementsByTagName("LI");
+					var aChildElements = aDeletedItems[i].getElementsByTagName("LI");*/
+					if(aSelectedItems[i].getAttribute("ismainsection")=="true"||aSelectedItems[i].getAttribute("isheader")=="true")
+						var aChildElements = aSelectedItems[i].parentNode.getElementsByTagName("LI");
+					else
+						var aChildElements = aSelectedItems[i].getElementsByTagName("LI");
+						
+					
+					//var aChildElements = aSelectedItems[i].getElementsByTagName("LI");
 					for(var j=0;j<aChildElements.length;j++)
 					{
 						aChildElements[j].style.textDecoration="";//.innerHTML = "<strike style='color:red' title='Will be deleted'>"+aChildElements[j].innerHTML+"</strike>";	
-						aChildElements[j].style.color="initial";//.setAttribute("text-decoration-color","red");
-						aChildElements[j].removeAttributeAttribute("delete");//,"true");
+						//aChildElements[j].style.color="initial";//.setAttribute("text-decoration-color","red");
+						aChildElements[j].removeAttribute("delete");//,"true");
 						
-					}*/
+					}
 				}
 			}		
 		}
@@ -635,6 +643,18 @@ function undoLastActionOnElement()
 		
 	}
 }
+
+function toTitleCase(str) {
+	return str.replace(
+		/\w\S*/g,
+		function(txt) {
+			return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+		}
+	);
+}
+
+
+
 /*
 function convertLetterToNumber(str) {
   var out = 0, len = str.length;

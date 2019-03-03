@@ -191,8 +191,30 @@ function buildTreeViewEx(sSectionLabel,oDoc)//,oProgBar)
 											var sStr = getTableData(oDoc,oSubSection);
 											if(sStr=="")
 												continue;
+											
 											var sTableTypeDesc = getTableTypeDesc(sCtypeVal);
-											oChildNode.innerHTML = sStr;
+											
+											/*
+											//Create a list item that will act as the header of the section or keep all data about the new section being added
+											var oNewSectionListItemNode = document.createElement("LI");
+											//Set the text the users will see on screen
+											oNewSectionListItemNode.innerHTML=sElementName+"<sup style='color:red;'>New*</sup>";
+											//Set background color to Wheat
+											oNewSectionListItemNode.style.backgroundColor = "#F5DEB3";
+											//Make the text bold
+											oNewSectionListItemNode.style.fontWeight = "bold";
+											//Set padding on all sides i.e. left, right, top and bottom to 10px i.e. space between the text and the borders surrounding it
+											oNewSectionListItemNode.style.padding="10px";	
+											//set the id for the LI item element
+											oNewSectionListItemNode.setAttribute("id","HEADER_"+sSubSectionId);
+											//Set the attribute isHeader to indicate that this li item is a header for the section and not one of the items that need to be inserted
+											//this store the name of the section and other details
+											oNewSectionListItemNode.setAttribute("isheader","true");											
+											var sTableHeader = "<li style='font-weight:bold;background-color:#F5DEB3;'></li>"
+											node.setAttribute("onclick","gotoSection(this);highlightElement(this);updatePreviewPane(this);");
+											node.onclick = function() { gotoSection();highlightElement();updatePreviewPane() };
+											*/
+											oChildNode.innerHTML = "<li id='HEADER_"+iSubSectionId+"' style='font-weight:bold;background-color:#BDB76B;padding:10px' onclick='gotoSection(this);highlightElement(this);updatePreviewPane(this);' isheader='true' jumpcode='"+sSubSection+"'>Table ("+toTitleCase(sCtypeVal)+")</li>"+sStr;
 											oChildNode.setAttribute("title","Component: Section\nSection name: "+sSectionTitle+"\nSection label: "+sSubSection+"\nSection GUID: "+oSubSection.propGet("GUID")+"\nVersion: "+oSubSection.propGet("CVERSION")+"\nTable Type: "+sCtypeVal+"\nTable type desc: "+sTableTypeDesc+"\nUse: Table container"+"\nSection type: "+oSubSection.propGet("CTYPE"));
 											oChildNode.setAttribute("use","tablecontainer");
 											var aTableName = getTableinSection("",oDoc,oSubSection.index);
