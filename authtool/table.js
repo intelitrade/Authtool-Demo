@@ -850,12 +850,15 @@ function InsertNewTable(oElement,sRefElement)
 						oNewTableListItemNode.style.backgroundColor = "#BDB76B";//"#F5DEB3";
 						oNewTableListItemNode.style.fontWeight = "bold";
 						oNewTableListItemNode.style.padding="10px";
-						oNewTableListItemNode.style.cursor = 'not-allowed';
+						//oNewTableListItemNode.style.cursor = 'not-allowed';
 						
 						//Append to the parent element oRefElement.parentNode.parentNode.id
 						oNewTableNode.appendChild(oNewTableListItemNode);
 
-						var oNewElement = insertTable(oNewTableNode, oRefElement.parentNode);
+						if(oRefElement.component=="table")
+							var oNewElement = insertAfter(oNewTableNode, oRefElement.parentNode);
+						else
+							var oNewElement = insertTable(oNewTableNode, oRefElement.parentNode);
 						
 						if(oNewElement)
 						{
@@ -967,7 +970,7 @@ function InsertNewRow(oElement,sRefElement)
 						}else{
 							//insert the new element in the html dialog
 							//var oNewElement = oRefParent.insertBefore(node,oRefElement);
-							var oNewElement = insertAfter(node, oRefElement,oRefParent);
+							var oNewElement = insertAfter(node, oRefElement)//,oRefParent);
 							if(oNewElement)
 							{
 								highlightElement(oNewElement);

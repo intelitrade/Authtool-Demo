@@ -214,11 +214,19 @@ function buildTreeViewEx(sSectionLabel,oDoc)//,oProgBar)
 											node.setAttribute("onclick","gotoSection(this);highlightElement(this);updatePreviewPane(this);");
 											node.onclick = function() { gotoSection();highlightElement();updatePreviewPane() };
 											*/
-											oChildNode.innerHTML = "<li id='HEADER_"+iSubSectionId+"' style='font-weight:bold;background-color:#BDB76B;padding:10px' onclick='gotoSection(this);highlightElement(this);updatePreviewPane(this);' isheader='true' jumpcode='"+sSubSection+"'>Table ("+toTitleCase(sCtypeVal)+")</li>"+sStr;
+											oChildNode.innerHTML = "<li id='HEADER_"+iSubSectionId+"' style='font-weight:bold;background-color:#BDB76B;padding:10px' onclick='gotoSection(this);highlightElement(this);updatePreviewPane(this);' isheader='true' jumpcode='"+sSubSection+"' id=row_'"+createGuid()+"' component='table' objecttype='table'>Table ("+toTitleCase(sCtypeVal)+")</li>"+sStr;
 											oChildNode.setAttribute("title","Component: Section\nSection name: "+sSectionTitle+"\nSection label: "+sSubSection+"\nSection GUID: "+oSubSection.propGet("GUID")+"\nVersion: "+oSubSection.propGet("CVERSION")+"\nTable Type: "+sCtypeVal+"\nTable type desc: "+sTableTypeDesc+"\nUse: Table container"+"\nSection type: "+oSubSection.propGet("CTYPE"));
 											oChildNode.setAttribute("use","tablecontainer");
 											var aTableName = getTableinSection("",oDoc,oSubSection.index);
 											oChildNode.setAttribute("tablename",aTableName[0]);
+											//oNewTableNode.setAttribute("use","tablecontainer");
+											oChildNode.setAttribute("sectiontype",sCtypeVal);
+											oChildNode.setAttribute("typeofsection",sCtypeVal);
+											
+											//var sID = createGuid();
+											//var sMyTableId = "table_"+sID;	
+											//oChildNode.setAttribute("id",sMyTableId);											
+									
 										}
 										
 										//The following block is for input text wrapped around a section and not in a table row, that is why the component and object type is set to section

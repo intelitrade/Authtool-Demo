@@ -236,7 +236,7 @@ function deleteItem()
 						//oParentElementToDelFrom.removeChild(document.getElementById(sIdOfElementToDelete));
 						//document.getElementById(sIdOfElementToDelete).style.display="none";
 						oElementToDelete.style.textDecoration="line-through";//.innerHTML = "<strike style='color:red' title='Will be deleted'>"+oElementToDelete.innerHTML+"</strike>";
-						oElementToDelete.style.color="red";//.setAttribute("text-decoration-color","red");
+						//oElementToDelete.style.color="red";//.setAttribute("text-decoration-color","red");
 						//Set an attribute to show that it needs to be deleted
 						document.getElementById(sIdOfElementToDelete).setAttribute("delete","true");
 						document.getElementById(oElementToDelete.getAttribute("id")).setAttribute("delete","true");
@@ -244,7 +244,7 @@ function deleteItem()
 						var aChildElements = oElementToDelete.parentNode.getElementsByTagName("LI");
 						for(var j=0;j<aChildElements.length;j++){
 							aChildElements[j].style.textDecoration="line-through";//.innerHTML = "<strike style='color:red' title='Will be deleted'>"+aChildElements[j].innerHTML+"</strike>";
-							aChildElements[j].style.color="red";//.setAttribute("text-decoration-color","red");
+							//aChildElements[j].style.color="red";//.setAttribute("text-decoration-color","red");
 							aChildElements[j].setAttribute("delete","true");
 							aDeletedItems[aDeletedItems.length] = aChildElements[j];
 						}
@@ -259,7 +259,7 @@ function deleteItem()
 					//oElementToDelete.parentNode.style.display="none";
 					oElementToDelete.parentNode.style.textDecoration="line-through";//.innerHTML = "<strike style='color:red' title='Will be deleted'>"+oElementToDelete.parentNode.innerHTML+"</strike>";
 					aDeletedItems[aDeletedItems.length] = oElementToDelete.parentNode;
-					oElementToDelete.style.color="red";//.setAttribute("text-decoration-color","red");
+					//oElementToDelete.style.color="red";//.setAttribute("text-decoration-color","red");
 					//Set an attribute to show that it needs to be deleted
 					oElementToDelete.parentNode.setAttribute("delete","true");
 					oElementToDelete.setAttribute("delete","true");
@@ -269,7 +269,7 @@ function deleteItem()
 					for(var j=0;j<aChildElements.length;j++)
 					{
 						aChildElements[j].style.textDecoration="line-through";//.innerHTML = "<strike style='color:red' title='Will be deleted'>"+aChildElements[j].innerHTML+"</strike>";	
-						aChildElements[j].style.color="red";//.setAttribute("text-decoration-color","red");
+						//aChildElements[j].style.color="red";//.setAttribute("text-decoration-color","red");
 						aChildElements[j].setAttribute("delete","true");
 						aDeletedItems[aDeletedItems.length] = aChildElements[j];
 					}
@@ -282,7 +282,7 @@ function deleteItem()
 						//oParentElementToDelFrom.removeChild(oElementToDelete);
 						//oElementToDelete.style.display="none";
 						oElementToDelete.style.textDecoration="line-through";//.innerHTML = "<strike style='color:red' title='Will be deleted'>"+oElementToDelete.innerHTML+"</strike>";
-						oElementToDelete.style.color="red";//setAttribute("text-decoration-color","red");
+						//oElementToDelete.style.color="red";//setAttribute("text-decoration-color","red");
 						//Set an attribute to show that it needs to be deleted
 						oElementToDelete.setAttribute("delete","true");
 						aDeletedItems[aDeletedItems.length] = oElementToDelete;						
