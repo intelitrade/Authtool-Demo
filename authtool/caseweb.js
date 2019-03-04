@@ -214,11 +214,13 @@ function buildTreeViewEx(sSectionLabel,oDoc)//,oProgBar)
 											node.setAttribute("onclick","gotoSection(this);highlightElement(this);updatePreviewPane(this);");
 											node.onclick = function() { gotoSection();highlightElement();updatePreviewPane() };
 											*/
-											oChildNode.innerHTML = "<li id='HEADER_"+iSubSectionId+"' style='font-weight:bold;background-color:#BDB76B;padding:10px' onclick='gotoSection(this);highlightElement(this);updatePreviewPane(this);' isheader='true' jumpcode='"+sSubSection+"' id=row_'"+createGuid()+"' component='table' objecttype='table'>Table ("+toTitleCase(sCtypeVal)+")</li>"+sStr;
+											var aTableName = getTableinSection("",oDoc,oSubSection.index);
+											var sTableName = aTableName[0];
+											oChildNode.innerHTML = "<li id='HEADER_"+iSubSectionId+"' style='font-weight:bold;background-color:#BDB76B;padding:10px' onclick='gotoSection(this);highlightElement(this);updatePreviewPane(this);' isheader='true' jumpcode='"+sSubSection+"' id=row_'"+createGuid()+"' component='table' objecttype='table' tablename='"+sTableName+"' guid='"+oDoc.tableByName(sTableName).propGet("GUID")+"'>Table ("+toTitleCase(sCtypeVal)+")</li>"+sStr;
 											oChildNode.setAttribute("title","Component: Section\nSection name: "+sSectionTitle+"\nSection label: "+sSubSection+"\nSection GUID: "+oSubSection.propGet("GUID")+"\nVersion: "+oSubSection.propGet("CVERSION")+"\nTable Type: "+sCtypeVal+"\nTable type desc: "+sTableTypeDesc+"\nUse: Table container"+"\nSection type: "+oSubSection.propGet("CTYPE"));
 											oChildNode.setAttribute("use","tablecontainer");
-											var aTableName = getTableinSection("",oDoc,oSubSection.index);
-											oChildNode.setAttribute("tablename",aTableName[0]);
+											
+											oChildNode.setAttribute("tablename",sTableName);
 											//oNewTableNode.setAttribute("use","tablecontainer");
 											oChildNode.setAttribute("sectiontype",sCtypeVal);
 											oChildNode.setAttribute("typeofsection",sCtypeVal);

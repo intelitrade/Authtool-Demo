@@ -37,8 +37,8 @@ function getParaData(oDoc,oSubSection)
 function InsertNewParagraph(oElement,sRefElement)
 {
 	try{
-		debugger;
-		debugger;
+		//debugger;
+		//debugger;
 
 		if (oElement && isInputValid(sRefElement)) {
 			//Check if the element need to be added or note

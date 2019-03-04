@@ -235,11 +235,13 @@ function deleteItem()
 					//{
 						//oParentElementToDelFrom.removeChild(document.getElementById(sIdOfElementToDelete));
 						//document.getElementById(sIdOfElementToDelete).style.display="none";
-						oElementToDelete.style.textDecoration="line-through";//.innerHTML = "<strike style='color:red' title='Will be deleted'>"+oElementToDelete.innerHTML+"</strike>";
+						//oElementToDelete.style.textDecoration="line-through";//.innerHTML = "<strike style='color:red' title='Will be deleted'>"+oElementToDelete.innerHTML+"</strike>";
 						//oElementToDelete.style.color="red";//.setAttribute("text-decoration-color","red");
 						//Set an attribute to show that it needs to be deleted
-						document.getElementById(sIdOfElementToDelete).setAttribute("delete","true");
-						document.getElementById(oElementToDelete.getAttribute("id")).setAttribute("delete","true");
+						//oElementToDelete.setAttribute("delete","true");
+						//document.getElementById(sIdOfElementToDelete).setAttribute("delete","true");
+						oElementToDelete.parentNode.setAttribute("delete","true");
+						//document.getElementById(oElementToDelete.getAttribute("id")).setAttribute("delete","true");
 						aDeletedItems[aDeletedItems.length] = oElementToDelete;
 						var aChildElements = oElementToDelete.parentNode.getElementsByTagName("LI");
 						for(var j=0;j<aChildElements.length;j++){
@@ -588,24 +590,7 @@ function pasteElement()
 function undoLastActionOnElement()
 {
 	try{
-		//debugger;
-		//debugger;
-		/*var iLength = aDeletedItems.length;
-		if(iLength)
-		{
-			for(var i=0;i<iLength;i++)
-			{
-				aDeletedItems[i].style.textDecoration = "";
-				var aChildElements = aDeletedItems[i].getElementsByTagName("LI");
-				for(var j=0;j<aChildElements.length;j++)
-				{
-					aChildElements[j].style.textDecoration="";//.innerHTML = "<strike style='color:red' title='Will be deleted'>"+aChildElements[j].innerHTML+"</strike>";	
-					aChildElements[j].style.color="initial";//.setAttribute("text-decoration-color","red");
-					aChildElements[j].removeAttribute("delete");//,"true");
-					
-				}				
-			}
-		}*/
+
 		var iLength = aSelectedItems.length;
 		if(iLength>0)
 		{
@@ -613,25 +598,18 @@ function undoLastActionOnElement()
 			{
 				if(aSelectedItems[i].getAttribute("delete")=="true")
 				{
-					aSelectedItems[i].style.textDecoration="";//.innerHTML = "<strike style='color:red' title='Will be deleted'>"+aChildElements[j].innerHTML+"</strike>";	
-					//aSelectedItems[i].style.color="initial";//.setAttribute("text-decoration-color","red");
-					aSelectedItems[i].removeAttribute("delete");//,"true");
-											
-					/*aDeletedItems[i].style.textDecoration = "";
-					var aChildElements = aDeletedItems[i].getElementsByTagName("LI");*/
+					aSelectedItems[i].style.textDecoration="";
+					aSelectedItems[i].removeAttribute("delete");
+
 					if(aSelectedItems[i].getAttribute("ismainsection")=="true"||aSelectedItems[i].getAttribute("isheader")=="true")
 						var aChildElements = aSelectedItems[i].parentNode.getElementsByTagName("LI");
 					else
 						var aChildElements = aSelectedItems[i].getElementsByTagName("LI");
 						
-					
-					//var aChildElements = aSelectedItems[i].getElementsByTagName("LI");
 					for(var j=0;j<aChildElements.length;j++)
 					{
-						aChildElements[j].style.textDecoration="";//.innerHTML = "<strike style='color:red' title='Will be deleted'>"+aChildElements[j].innerHTML+"</strike>";	
-						//aChildElements[j].style.color="initial";//.setAttribute("text-decoration-color","red");
-						aChildElements[j].removeAttribute("delete");//,"true");
-						
+						aChildElements[j].style.textDecoration="";
+						aChildElements[j].removeAttribute("delete");//,"true");	
 					}
 				}
 			}		
@@ -653,9 +631,6 @@ function toTitleCase(str) {
 	);
 }
 
-
-
-/*
 function convertLetterToNumber(str) {
   var out = 0, len = str.length;
   for (pos = 0; pos < len; pos++) {
@@ -663,7 +638,7 @@ function convertLetterToNumber(str) {
   }
   return out;
 }
-
+/*
 var testCase = ["A","B","C","Z","AA","AB","BY"];
 
 var converted = testCase.map(function(obj) {

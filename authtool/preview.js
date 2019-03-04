@@ -18,9 +18,15 @@ function updatePreviewPane(oElement)
 		var sElement = oElement.getAttribute("component");
         var sTable = oElement.getAttribute("tablename");
 		//
-		var sPreviewControlDiv = '<div style="width:900px;">'
-        //Show table control
-        var sShowTableStr = sPreviewControlDiv+'<br><input type="button" value="Update" disabled tablename="' + sTable + '" onClick=""/> <input type="button" value="Preview" tablename="' + sTable + '" onClick="previewDocument(this.tablename)"/></div><br>';
+		if(sElement=="row"||sElement=="table")
+		{
+			var sPreviewControlDiv = '<div style="width:900px;">'
+			//Show table control
+			var sShowTableStr = sPreviewControlDiv+'<br><input type="button" value="Update" disabled tablename="' + sTable + '" onClick=""/> <input type="button" value="Preview" tablename="' + sTable + '" onClick="previewDocument(this.tablename)"/></div><br>';
+		}else{
+			var sShowTableStr = "";
+			var sPreviewControlDiv = "";
+		}
 		
 		if(sElement==="row")
 		{
@@ -235,26 +241,44 @@ function updatePreviewPane(oElement)
 			sStr = sPreviewControlDiv + sStr+"</div><br>";			
 		}else if(sElement==="table")
 		{
-			var sTableIdentifier = sTable;//oElement.getAttribute("tablename");
-			sStr='<span style="display:table-cell;">Identifier:</span><span style="display:table-cell;width:100%;">'+sTableIdentifier+'</span><b><br><input type="checkbox"></b><span display:table-cell;:table-cell;width:100%;">Enable wide-table printing</span><br>';
-			sStr=	'<table>\
+			//debugger;
+			//debugger;
+			if(!isInputValid(sTable))
+			{
+				//alert("Can not preview new tables at the moment");
+				return;
+			}
+			
+			var oTable = oDoc.tableByName(sTable);
+			var sGuid = oTable.propGet("GUID");
+			var sTableType = oTable.propGet("CTABLETYPE");
+			sStr= sShowTableStr+'<table>\
 						<tr>\
-							<td style="width:35%">\
-								<b>Component Type: </b>\
-							</td>\
-							<td>Table</td>\
-						</tr>\
-						<tr>\
-							<td colspan=2>\
+							<td colspan=2 width:100%>\
 								<b>Properties</b>\
 							</td>\
 						</tr>\
 						<tr>\
-							<td colspan="2">\
-								<input type="checkbox">Enable wide-table printing\
+							<td style="width:35%">\
+								<b>Description: </b>\
 							</td>\
+							<td style="width:65%;font-weight:bold" id="PREVIEWDESC_'+oElement.id+'">'+getTableTypeDesc(sTableType)+'</td>\
 						</tr>\
-					</table>';	
+						<tr>\
+							<td>\
+								<b>Table type: </b>\
+							</td>\
+							<td>'+sTableType+'</td>\
+						</tr><tr>\
+							<td>\
+								<b>Table name: </b>\
+							</td>\
+							<td>'+sTable+'</td>\
+						</tr><tr>\
+							<td>\
+								<b>GUID: </b>\
+							</td>\
+							<td><input type="text" id="guidrow" disabled style="width:80%" value="'+sGuid+'"> <input '+sDisableGuid+' type="button" value="Generate..." style="width:15%" tempguid="'+sTempGuid+'" tablename="'+sTable+'" onClick="addGUIDToRow(this)" disabled></td></tr></table>';
 			sStr = sPreviewControlDiv + sStr+"</div><br>";
 			highlightTable(sTable,oTable);
 		}else if(sElement==="column")
@@ -478,6 +502,7 @@ function updatePreviewPane(oElement)
 			{
 				var sGuid = oSection.propGet("GUID");//oElement.getAttribute("guid");
 				var sSectionName = getSectionName(oDoc, sSection);
+				var sSectionType = oSection.propGet("CTYPE");
 			}else{
 				var sGuid = "";
 				var sSectionName = oElement.innerHTML;//getAttribute("cellnumber");//getSectionName(oDoc, sSection);
@@ -501,7 +526,7 @@ function updatePreviewPane(oElement)
 							<td style="width:35%">\
 								<b>Description: </b>\
 							</td>\
-							<td style="width:65%"><b>'+sSectionName+'</b></td>\
+							<td style="width:65%;font-weight:bold" id="PREVIEWDESC_'+oElement.id+'">'+sSectionName+'</td>\
 						</tr>\
 						<tr>\
 							<td>\
@@ -512,7 +537,12 @@ function updatePreviewPane(oElement)
 							<td>\
 								<b>Description: </b>\
 							</td>\
-							<td><input type="text" style="background-color:#FFFFC6;width:100%" value="'+sSectionName+'" desccell="'+sCellNumber+'" id="'+sCellNumber+'" srcelement="'+oElement.id+'" sectionlabel="'+sSection+'" onblur="updateSectionHeader(this)"></td>\
+							<td><input type="text" style="background-color:#FFFFC6;width:100%" value="'+sSectionName+'" desccell="'+sCellNumber+'" id="'+sCellNumber+'" srcelement="'+oElement.id+'" sectionlabel="'+sSection+'" onkeyup="updateSectionHeader(this)"></td>\
+						</tr>\<tr>\
+							<td>\
+								<b>Section type: </b>\
+							</td>\
+							<td>'+sSectionType+'</td>\
 						</tr>\
 						<tr>\
 							<td>\

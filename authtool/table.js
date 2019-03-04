@@ -840,18 +840,23 @@ function InsertNewTable(oElement,sRefElement)
 						oNewTableNode.setAttribute("use","tablecontainer");
 						oNewTableNode.setAttribute("sectiontype",oElement.tabletype);
 						oNewTableNode.setAttribute("typeofsection",oElement.tabletype);
+						
 						//oNewTableNode.setAttribute("title","Component: Table\nTable name: "+sElementName+"\nTable label: "+sSubSectionId+"\nTable index: \nVersion: \nTable type: "+oElement.sectiontype);
 						//use="tablecontainer" typeofsection="SUMMARYTABLE" tablename="MFF"
 						var oNewTableListItemNode = document.createElement("LI");
 						var sRowId = "row_"+ID;
 						oNewTableListItemNode.setAttribute("id",sRowId);
+						oNewTableListItemNode.setAttribute("component","table");
+						oNewTableListItemNode.setAttribute("objecttype","table");
 	
 						oNewTableListItemNode.innerHTML=sElementName+"<sup style='color:red;'>New*</sup>";
 						oNewTableListItemNode.style.backgroundColor = "#BDB76B";//"#F5DEB3";
 						oNewTableListItemNode.style.fontWeight = "bold";
 						oNewTableListItemNode.style.padding="10px";
+						oNewTableListItemNode.setAttribute("isheader","true");
 						//oNewTableListItemNode.style.cursor = 'not-allowed';
-						
+						oNewTableListItemNode.setAttribute("onclick","gotoSection(this);highlightElement(this);updatePreviewPane(this);");
+						oNewTableListItemNode.onclick = function() { gotoSection();highlightElement();updatePreviewPane() };						
 						//Append to the parent element oRefElement.parentNode.parentNode.id
 						oNewTableNode.appendChild(oNewTableListItemNode);
 

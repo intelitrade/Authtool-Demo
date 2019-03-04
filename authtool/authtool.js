@@ -141,10 +141,10 @@ try{
 		try{
 			//debugger;
 			//debugger;
-			var sDescCell = oElement.getAttribute("desccell");
-			oDescCell = oDoc.cell(sDescCell);
-			if(oDescCell)
-			{
+			//var sDescCell = oElement.getAttribute("desccell");
+			//oDescCell = oDoc.cell(sDescCell);
+			//if(oDescCell)
+			//{
                 var oSourceElement = document.getElementById(oElement.srcelement);
 				if(isInputValid(oSourceElement))
 				{
@@ -166,7 +166,7 @@ try{
 					//Reload preview pane to have the right properties displaying, otherwise some fields will show wrong data
 					updatePreviewPane(oSrcElement);
 				}*/
-			}
+			//}
 		}catch(e)
 		{
 			alert(e.description);

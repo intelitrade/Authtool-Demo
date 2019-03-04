@@ -78,6 +78,7 @@ function getClosestSectionWithCtype(sSection)
 			//return sSectionName;
 		}else{
 			var aOuterSections = getSectionFamilyTreeLib(sSection,oDoc);
+			var aOuterSections2 = getOuterSections(sSection,oDoc)
 			if(isInputValid(aOuterSections))
 			{
 				for(var i=aOuterSections.length;i>=0;i--)
@@ -177,7 +178,17 @@ function updateSectionHeader(oElement)
 	try{
 		//debugger;
 		//debugger;
-		var sSection = oElement.getAttribute("sectionlabel");
+		var oSourceElement = document.getElementById(oElement.srcelement);
+		if(isInputValid(oSourceElement))
+		{
+			var sNewDesc = oElement.value;
+			//if (isInputValid(sNewDesc)){
+				oSourceElement.innerText = sNewDesc;
+				oSourceElement.description = sNewDesc;
+				document.getElementById("PREVIEWDESC_"+oElement.srcelement).innerText = sNewDesc;
+			//}
+		}		
+		/*var sSection = oElement.getAttribute("sectionlabel");
 		var aTable = getTableinSection(sSection,oDoc);
 		var sCellName = "";
 		if(isInputValid(aTable))
@@ -194,7 +205,7 @@ function updateSectionHeader(oElement)
 					break;
 				}
 			}
-		}			
+		}	*/		
 	}catch(e)
 	{
 		alert(e.description);
