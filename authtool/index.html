@@ -153,25 +153,25 @@
 	<script src="platform.js"></script>
 	<!--<script type="text/vbscript" src="ex.vbs"></script>-->
 	<SCRIPT type="text/vbscript" src="utilities.vbs"></SCRIPT>
-	
+	<SCRIPT language="javascript" src="languagetranslate.js"></SCRIPT>
 	<!--<script language="javascript" src="https://intelitrade.github.io/caseweb/authtool/caseweb.js"></script>-->
 	<!--<script language="javascript" src="http://localhost:8085/authtool/caseweb.js"></script>-->
 	<script>
 		//Attach onmouse up event
 		document.onmouseup = mouseUp;
 		window.onerror = function (msg, url, line, col, error){
-			debugger;
-			debugger;
+			//debugger;
+			//debugger;
 		}
 	</script>
 </head>
 <body onLoad="onLoad()" onunload="clearAllHighlighting()" scroll="no" style="margin:0px">
 	<div id="header" align="center" width="100%" style="border: 1px solid #008CBA;background-color: #008CBA;color:#FFF;padding:0px;margin:0px">
 		<table><tr><td><div id="" style="padding:0px;margin:0px"><h1 style="padding:5px;margin:5px"><b>Authoring Tool (Beta)</b></h1></div></td><td align="right"><div>
-		<span><img title="Undo" id="" src="undo.png" style="width:50px;height:50px;" align="right;margin-right:55%"></span>
+		<span><img title="Undo" id="" src="undo.png" style="width:50px;height:50px;" align="right;margin-right:55%" onclick="undoLastActionOnElement()"></span>
 		<span><img title="Open project" id="" src="open.png" style="width:50px;height:50px;" align="right;margin-right:55%"></span>
 		<span><img title="Save project" id="" src="saveicon.png" style="width:50px;height:50px;" align="right;margin-right:55%" onclick="saveProject()"></span> 
-		<!--<span><img title="Preview (Currently available for specific tables - Beta)" id="" src="Document-Preview-icon.png" style="width:50px;height:50px;" align="right;margin-right:55%" onclick="previewDocument();"></span>-->
+		<span><img title="Print" id="" src="printer.png" style="width:50px;height:50px;" align="right;margin-right:55%" onclick="printDocument()"></span> <!--<span><img title="Preview (Currently available for specific tables - Beta)" id="" src="Document-Preview-icon.png" style="width:50px;height:50px;" align="right;margin-right:55%" onclick="previewDocument();"></span>-->
 		<span><img title="Make copy of selected item (Table rows only)" id="copy" src="makecopyof.png" style="width:50px;height:50px;" align="right;margin-right:55%" onclick="copyElement()"></span> 
 		<span><img title="Paste" id="paste" src="paste-icon-1500.png" style="width:50px;height:50px;" align="right;margin-right:55%" onclick="pasteElement()"></span> 
 		<span><img title="Delete slected item(s)" id="bin" src="bin.png" style="width:50px;height:50px;" align="right;margin-right:50%" onClick="deleteItem()"/></span>
@@ -185,8 +185,8 @@
 						Insert Options<br>
 						Drag & drop options into edit pane
 					</div>				
-					<div id="insertoptionsmain" style="overflow-y: auto;height:500px;width:100%">
-						<ul class="categorytitle"><li style='padding:10px;'><b>Sections</b></li></ul>
+					<div id="insertoptionsmain" style="overflow-y: auto;height:500px;width:100%" ismenu="true">
+						<ul class="categorytitle" ismenu="true"><li style='padding:10px;' ismenu="true"><b>Sections</b></li></ul>
 						<ul style='margin-top:0px;margin-bottom:10px' title="New and available in this beta release">
 							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownSections(this.id)" id="NOTECONTROL" name="Note control" sectiontype="NOTECONTROL" component="section" objecttype="section" ismenu="true">Note control</li>
 							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownSections(this.id)" id="SUBNOTECONTROL" name="Sub note control" sectiontype="SUBNOTECONTROL" component="section" objecttype="section" ismenu="true">Sub note control</li>
@@ -194,48 +194,48 @@
 							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownSections(this.id)" id="EXPANDCOLLAPSE" name="Expand collapse" sectiontype="EXPANDCOLLAPSE" component="section" objecttype="section" ismenu="true">Expand collapse</li>
 							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownSections(this.id)" id="EXPANDCOLLAPSECOMPANY3RDYEAR" name="Expand collapse (Company 3yr)" sectiontype="EXPANDCOLLAPSECOMPANY3RDYEAR" component="section" objecttype="section" ismenu="true">Expand collapse (Company 3yr)</li>
 						</ul>						
-						<ul class="categorytitle" title="Not available for this beta release">
-							<li style='padding:10px;'><b>Table types</b></li>
+						<ul class="categorytitle" title="Not available for this beta release" ismenu="true">
+							<li style='padding:10px;' ismenu="true"><b>Table types</b></li>
 						</ul>
 						<ul style='margin-top:0px;margin-bottom:10px;' title="Not available for this beta release">
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="CONTROLTABLE" name="Control table" tabletype="CONTROLTABLE" component="table" objecttype="table">Control table</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="STATEMENTTABLE" name="Statement table" tabletype="STATEMENTTABLE" component="table" objecttype="table">Statement table</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="MODIFIABLETABLE" name="Modifiable table" tabletype="MODIFIABLETABLE" component="table" objecttype="table">Modifiable table</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="NOTETABLE" name="Note table" tabletype="NOTETABLE" component="table" objecttype="table">Note table</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="STD6COLUMNTABLE" name="Std 6 Column table" tabletype="STD6COLUMNTABLE" component="table" objecttype="table">Std 6 column table</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="SUMMARYTABLE" name="Summary table" tabletype="SUMMARYTABLE" component="table" objecttype="table">Summary table</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="SUMMARYTABLEGROUP" name="Summary table (Group)" tabletype="SUMMARYTABLEGROUP" component="table" objecttype="table">Summary table (Group)</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="RECONTABLE" name="Recon table" tabletype="RECONTABLE" component="table" objecttype="table">Recon table</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="RADIOBUTTONTABLE" name="Radio button table" tabletype="RADIOBUTTONTABLE" component="table" objecttype="table">Radio button table</li>		
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="CONTROLTABLE" name="Control table" tabletype="CONTROLTABLE" component="table" objecttype="table" ismenu="true">Control table</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="STATEMENTTABLE" name="Statement table" tabletype="STATEMENTTABLE" component="table" objecttype="table" ismenu="true">Statement table</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="MODIFIABLETABLE" name="Modifiable table" tabletype="MODIFIABLETABLE" component="table" objecttype="table" ismenu="true">Modifiable table</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="NOTETABLE" name="Note table" tabletype="NOTETABLE" component="table" objecttype="table" ismenu="true">Note table</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="STD6COLUMNTABLE" name="Std 6 Column table" tabletype="STD6COLUMNTABLE" component="table" objecttype="table" ismenu="true">Std 6 column table</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="SUMMARYTABLE" name="Summary table" tabletype="SUMMARYTABLE" component="table" objecttype="table" ismenu="true">Summary table</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="SUMMARYTABLEGROUP" name="Summary table (Group)" tabletype="SUMMARYTABLEGROUP" component="table" objecttype="table" ismenu="true">Summary table (Group)</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="RECONTABLE" name="Recon table" tabletype="RECONTABLE" component="table" objecttype="table" ismenu="true">Recon table</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="RADIOBUTTONTABLE" name="Radio button table" tabletype="RADIOBUTTONTABLE" component="table" objecttype="table" ismenu="true">Radio button table</li>		
 						</ul>
-						<ul class="categorytitle">
-							<li style='padding:10px;' onClick="testIt()"><b>Row types</b></li>
+						<ul class="categorytitle" ismenu="true">
+							<li style='padding:10px;' onClick="testIt()" ismenu="true"><b>Row types</b></li>
 						</ul>
-						<ul style='margin-top:0px;margin-bottom:10px;'>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="C1" name="Link to map row" rowtype="C1" component="row" objecttype="row">Link to map row</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="C2" name="Negative link to map row" rowtype="C2" component="row" objecttype="row">Negative link to map row</li>	
-							<li class="menulinespacer" onmousedown="onMouseDownRows(this.id)" id="C3" name="Link to map (Debits only)" rowtype="C3" component="row" objecttype="row">Link to map (Debits only)</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="G3" name="Link to map (Credits only)" rowtype="G3" component="row" objecttype="row">Link to map (Credits only)</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="C4" name="Negative link to map (Debits only)" rowtype="C4" component="row" objecttype="row">Negative link to map (Debits only)</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="C4" name="Negative link to map (Credits only)" rowtype="G4" component="row" objecttype="row">Negative link to map (Credits only)</li>	
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="A1" name="Link to account" rowtype="A1" component="row" objecttype="row">Link to account</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="A2" name="Negative link to account" rowtype="A2">Negative link to account</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="I1" name="Input row" rowtype="I1" component="row" objecttype="row">Input row</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="D1" name="Heading row" rowtype="D1" component="row" objecttype="row">Heading row</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="SUBTOTAL" name="Sub-total row" rowtype="S1" component="row" objecttype="row">Sub-total row</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="L1" name="Heading row" rowtype="L1" component="row" objecttype="row">Thin line</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="L2" name="Heading row" rowtype="L2" component="row" objecttype="row">Thick line</li>
+						<ul style='margin-top:0px;margin-bottom:10px;' ismenu="true">
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="C1" name="Link to map row" rowtype="C1" component="row" objecttype="row" ismenu="true">Link to map row</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="C2" name="Negative link to map row" rowtype="C2" component="row" objecttype="row" ismenu="true">Negative link to map row</li>	
+							<li class="menulinespacer" onmousedown="onMouseDownRows(this.id)" id="C3" name="Link to map (Debits only)" rowtype="C3" component="row" objecttype="row" ismenu="true">Link to map (Debits only)</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="G3" name="Link to map (Credits only)" rowtype="G3" component="row" objecttype="row" ismenu="true">Link to map (Credits only)</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="C4" name="Negative link to map (Debits only)" rowtype="C4" component="row" objecttype="row" ismenu="true">Negative link to map (Debits only)</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="C4" name="Negative link to map (Credits only)" rowtype="G4" component="row" objecttype="row" ismenu="true">Negative link to map (Credits only)</li>	
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="A1" name="Link to account" rowtype="A1" component="row" objecttype="row" ismenu="true">Link to account</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="A2" name="Negative link to account" rowtype="A2" ismenu="true">Negative link to account</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="I1" name="Input row" rowtype="I1" component="row" objecttype="row" ismenu="true">Input row</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="D1" name="Heading row" rowtype="D1" component="row" objecttype="row" ismenu="true">Heading row</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="SUBTOTAL" name="Sub-total row" rowtype="S1" component="row" objecttype="row" ismenu="true">Sub-total row</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="L1" name="Heading row" rowtype="L1" component="row" objecttype="row" ismenu="true">Thin line</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="L2" name="Heading row" rowtype="L2" component="row" objecttype="row" ismenu="true">Thick line</li>
 						</ul>
-						<ul class="categorytitle" title="Not available for this beta release"><li style='padding:10px;'><b>Paragraph</b></li></ul>
-						<ul style='margin-top:0px;margin-bottom:10px;' title="Not available for this beta release">
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownPara(this.id)" id="PARAGRAPH" name="Paragraph" paratype="PARAGRAPH" component="para" objecttype="para">Input paragraph</li>
+						<ul class="categorytitle" title="Not available for this beta release" ismenu="true"><li style='padding:10px;' ismenu="true"><b>Paragraph</b></li></ul>
+						<ul style='margin-top:0px;margin-bottom:10px;' title="Not available for this beta release" ismenu="true">
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownPara(this.id)" id="PARAGRAPH" name="Paragraph" paratype="PARAGRAPH" component="para" objecttype="para" ismenu="true">Input paragraph</li>
 							<!--<li class="menulinespacer" onmousedown="onMouseDownPara(this.id)" id="BULLETPARAGRAPH" name="Bullet paragraph" paratype="BULLETPRARGRAPH" component="para" objecttype="para">Bullet input paragraph</li>-->
 						</ul>
-						<ul class="categorytitle" disabled title="Not available for this beta release"><li style='padding:10px;'><b>Subdocument</b></li></ul>
-						<ul style='margin-top:0px;margin-bottom:10px;' disabled title="Not available for this beta release">
-							<li class="menulinespacer" style="cursor:move" component="subdocument" objecttype="subdocument">Header</li>
-							<li class="menulinespacer" style="cursor:move" component="subdocument" objecttype="subdocument">Footer</li>
-							<li class="menulinespacer" style="cursor:move" component="subdocument" objecttype="subdocument">External document</li>
+						<ul class="categorytitle" disabled title="Not available for this beta release" ismenu="true"><li style='padding:10px;' ismenu="true"><b>Subdocument</b></li></ul>
+						<ul style='margin-top:0px;margin-bottom:10px;' disabled title="Not available for this beta release" ismenu="true">
+							<li class="menulinespacer" style="cursor:move" component="subdocument" objecttype="subdocument" ismenu="true">Header</li>
+							<li class="menulinespacer" style="cursor:move" component="subdocument" objecttype="subdocument" ismenu="true">Footer</li>
+							<li class="menulinespacer" style="cursor:move" component="subdocument" objecttype="subdocument" ismenu="true">External document</li>
 						</ul>						
 					</div>
 				</td>			
@@ -332,6 +332,13 @@
 		}
 		return sSectionLabel;
 	}	
-	
-	
+	//textAPI = "Note control";//document.documentElement.innerText;
+	//textAPI.translate();
+	//debugger;
+	//debugger;
+	/*textAPI = document.documentElement.innerText;
+	langAPI = "af";
+	translateAPI(textAPI,langAPI);
+	debugger;
+	debugger;	*/
 </script>

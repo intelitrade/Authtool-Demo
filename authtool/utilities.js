@@ -638,6 +638,29 @@ function convertLetterToNumber(str) {
   }
   return out;
 }
+
+function print(content)
+{
+	try{
+		//debugger;
+		//debugger;
+		var content = "editorPane"
+		var divName = content;
+		var printContents = document.getElementById(divName).innerHTML;
+		var originalContents = document.body.innerHTML;
+
+		document.body.innerHTML = printContents;
+
+		window.print();
+
+		document.body.innerHTML = originalContents;		
+	}catch(e)
+	{
+		alert(e.description);
+	}finally{
+		
+	}
+}
 /*
 var testCase = ["A","B","C","Z","AA","AB","BY"];
 

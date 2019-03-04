@@ -578,7 +578,7 @@ function previewDocument(sCVTableName)
 		//debugger;
 		//debugger;
 		//Clear the document first before adding any data to italics
-		document.getElementById("editorPane").innerHTML = "";
+		//document.getElementById("editorPane").innerHTML = "";
 		
 		if(!isInputValid(sCVTableName))
 			var sCVTableName = "HBD";
@@ -593,7 +593,11 @@ function previewDocument(sCVTableName)
 			if(isInputValid(oHTMLTable))
 			{
 				//var sHTMLStr = document.getElementById("editorPane").innerHTML="Preview of Table HBD";
+				if(document.getElementById("sCVTableName"))
+					document.getElementById("editorPane").removeChild(document.getElementById("sCVTableName"));
+				
 				document.getElementById("editorPane").appendChild(oHTMLTable);
+				
 				var sHTMLTableId = oHTMLTable.id;
 				//Set the name of the table
 				oHTMLTable.setAttribute("title","Table name: "+sCVTableName+"\nTable id:"+sHTMLTableId+"\nTable GUID:"+oTable.propGet("GUID")+"\nColumns: "+iColumns+"\nRows: "+iRows);
