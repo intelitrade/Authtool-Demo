@@ -495,6 +495,8 @@ function updatePreviewPane(oElement)
 			sStr = sStr +'</table>';
 			sStr = sPreviewControlDiv + sStr+"</div><br>";
 		}else if(sElement==="sectionheader" || sElement==="section"){
+			//debugger;
+			//debugger;
 			//Get the section label
 			var sSection = oElement.getAttribute("jumpcode");
 			var oSection = oDoc.sectionByName(sSection);
@@ -504,8 +506,9 @@ function updatePreviewPane(oElement)
 				var sSectionName = getSectionName(oDoc, sSection);
 				var sSectionType = oSection.propGet("CTYPE");
 			}else{
-				var sGuid = "";
-				var sSectionName = oElement.innerHTML;//getAttribute("cellnumber");//getSectionName(oDoc, sSection);
+				var sGuid = oElement.guid//"";
+				var sSectionName = oElement.innerText.replace("New*","");//getAttribute("cellnumber");//getSectionName(oDoc, sSection);
+				var sSectionType = oElement.typeofsection;
 			}
 			//var sCellNumber = oElement.getAttribute("cellnumber");
 			//var sColumn = oElement.getAttribute("mapcolumn");
