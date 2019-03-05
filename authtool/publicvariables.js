@@ -91,7 +91,7 @@ var BALCHK_ROW			= "BL";	// Balance check row
 var CHEADDEFAULTPRINT		= "CHEADDEFAULTPRINT"
 var CHEADSKIPDEFAULT		= "CHEADSKIPDEFAULT"
 var CACCPOLLINK			= "CACCPOLLINK" //sets which accouting policies are associated with this note
-var HEADING_ROW			= "HEADING_ROW" //Heading row
+//var HEADING_ROW			= "HEADING_ROW" //Heading row
 var COL_MAPPING_ROW		= "COL_MAPPING_ROW"	//Columng mapping row
 
 // Table custom properties

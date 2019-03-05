@@ -173,11 +173,11 @@ function getRowTypeDesc(sRowType)
 
 		switch(sRowType)
 		{
+			case HEADING_ROW:
+				sDescription = "Heading row";
+				break;
 			case CONTROL_ROW:
 				sDescription = "Control row";
-				break;
-			case HEADING_ROW:
-				sDescription = "Generic schedules table";
 				break;
 			case SUBHEADING_ROW:
 				sDescription = "Subheading row";
@@ -293,9 +293,6 @@ function getRowTypeDesc(sRowType)
 				break;
 			case CACCPOLLINK:
 				sDescription = "sets which accouting policies are associated with this note";
-				break;
-			case HEADING_ROW:
-				sDescription = "Heading row";
 				break;
 		}
 		return sDescription;

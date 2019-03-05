@@ -580,8 +580,8 @@ function previewDocument(sCVTableName)
 		//Clear the document first before adding any data to italics
 		//document.getElementById("editorPane").innerHTML = "";
 		
-		if(!isInputValid(sCVTableName))
-			var sCVTableName = "HBD";
+		//if(!isInputValid(sCVTableName))
+		//	var sCVTableName = "HBD";
 		//var sCVTableName = "MFG";
 		var oTable = oDoc.tableByName(sCVTableName);
 		if(isInputValid(oTable))
@@ -604,6 +604,9 @@ function previewDocument(sCVTableName)
 				//debugger;
 				//debugger;
 				addCVTableDataToHTMLTable(sCVTableName, sHTMLTableId);
+				
+				//applyChangesToTable(sCVTableName,sHTMLTableId)
+				
 			}
 		}
 	}catch(e)
@@ -670,7 +673,12 @@ function addCVTableDataToHTMLTable(sCVTableName, sHTMLTableId)
 						var sRowType = oRow.propGet(CROWTYPE);
 						var sGUID = oRow.propGet("GUID");
 						if(sGUID!="")
-							oHTMLTable.rows[(i-1)].setAttribute("GUID",sGUID);
+                            oHTMLTable.rows[(i - 1)].setAttribute("GUID", sGUID);
+						
+						//Set an id for the table row
+						//oHTMLTable.rows[(i - 1)].setAttribute("id", "HTMLROW_"+sGUID);
+
+						oHTMLTable.rows[(i-1)].setAttribute("rowtype",sRowType);
 						
 						if(sRowType==LINKTOTALSKIP_ROW||sRowType==BALCHK_ROW||sRowType==TOTAL_ROW||sRowType==LINKTOTAL_ROW||sRowType==LINKSUBTOTAL_ROW||sRowType==YEARHEADER_ROW||sRowType==SUBTOTAL_ROW||sRowType==HEADING_ROW||sRowType==SUBHEADING_ROW||sRowType==CONTROL_ROW)
 						{
@@ -707,6 +715,8 @@ function addCVTableDataToHTMLTable(sCVTableName, sHTMLTableId)
 							var sColTypeDesc = getColumnTypeDesc(sColType);
 							var sRowTypeDesc = getRowTypeDesc(sRowType);
 							oHTMLTable.rows[(i-1)].cells[(j-1)].setAttribute("title","Row: "+i+"\nColumn: "+j+"\nRow type: "+sRowType+"\nRow type desc: "+sRowTypeDesc+"\nColumn type: "+sColType+"\nColumn type desc: "+sColTypeDesc);
+							
+							oHTMLTable.rows[(i-1)].cells[(j-1)].setAttribute("columntype",sColType);
 							
 							oHTMLTable.rows[(i-1)].cells[(j-1)].innerHTML ="<div contenteditable='true'>"+sText+"</div>";//oPara.getText();
 							
@@ -755,6 +765,31 @@ function addCVTableDataToHTMLTable(sCVTableName, sHTMLTableId)
 	}catch(e)
 	{
 		alert(e.description);
+	}finally{
+		
+	}
+}
+
+function applyChangesToTable(sTable)
+{
+	try{
+		debugger;
+		debugger;
+		var JSONReturnValue = createReturnValue();
+	
+		var aRowsToDelete = JSON.parse(JSONReturnValue).deleteItem.row;
+		var iRowsToDelete = aRowsToDelete.length;
+		if(iRowsToDelete>0)
+		{
+			for(var i=0;i<iRowsToDelete;i++)
+			{
+				var sRowId = aRowsToDelete[i].id;
+				document.getElementById(sRowId).style.display = "none";
+			}
+		}
+	}catch(e)
+	{
+		
 	}finally{
 		
 	}

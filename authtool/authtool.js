@@ -30,10 +30,79 @@ try{
 		try{
 			//debugger;
 			//debugger;
+			document.getElementById("editorPane").innerHTML="";
+			var oSection = oDoc.sectionByName(sSectionLabel)//;"NOTES_002");
+			var iFirstPara = oSection.firstParaIndex;
+			var iLastPara = oSection.lastParaIndex;
+			var sStr = "";
+			var aTables = [];
+			for(var i=iFirstPara;i<=iLastPara;i++)
+			{
+				var oTable = oDoc.tableByParaIndex(i);
+				if(oTable)
+				{
+					var iColumns = oTable.nColumns();
+					var iRows = oTable.nRows();
+					var oHTMLTable = createHTMLTable(iRows,iColumns);	
+					if(isInputValid(oHTMLTable))
+					{
+						//var sHTMLStr = document.getElementById("editorPane").innerHTML="Preview of Table HBD";
+						//if(document.getElementById("sCVTableName"))
+							//document.getElementById("editorPane").removeChild(document.getElementById("sCVTableName"));
+						
+						//document.getElementById("editorPane").appendChild(oHTMLTable);
+
+						document.getElementById("editorPane").appendChild(oHTMLTable);
+						addCVTableDataToHTMLTable(oTable.getLabel(), oHTMLTable.id);
+						
+						//if(sStr=="")
+							//sStr = sStr + "<p>"+oHTMLTable.innerHTML+"</p>";
+						//else
+							//sStr = sStr+"<p>"+oHTMLTable.innerHTML+"</p>";	
+						
+						//aTables[aTables.length] = [oTable.label,oHTMLTable.id];
+						//oHTMLTable.parentNode.removeChild(oHTMLTable);
+						//addCVTableDataToHTMLTable(sCVTableName, sHTMLTableId);					
+					}
+					i=oTable.lastParaIndex;
+				}else if(isInputValid(oDoc.para(i).getText())){
+					
+					var oPara = document.createElement("p");
+					var oNode = document.createTextNode(oDoc.para(i).getText());
+					oPara.appendChild(oNode);
+					//"<p>"+oDoc.para(i).getText()+"</p>";
+					document.getElementById("editorPane").appendChild(para);
+					/*if(sStr=="")
+						sStr = sStr+oDoc.para(i).getText();
+					else
+						sStr = sStr+"<p>"+oDoc.para(i).getText()+"</p>";*/
+				}
+			}
+			
 			//Get values to be returned, return in JSON format
-			var JSONReturnValue = createReturnValue();
-			window.returnValue = JSONReturnValue;
-			window.close();
+			//var oDuplicatNode = document.getElementById("MainContentContainer").cloneNode(true);
+           //document.getElementById("editorPane").innerHTML = sStr;
+			//document.getElementById("editorPane").appendChild(oDuplicatNode);
+	
+			//var JSONReturnValue = createReturnValue();
+			/*window.returnValue = JSONReturnValue;
+			window.close();*/
+			
+			/*var aRowsToDelete = JSON.parse(JSONReturnValue).deleteItem.row;
+			var iRowsToDelete = aRowsToDelete.length;
+			if(iRowsToDelete>0)
+			{
+				for(var i=0;i<iRowsToDelete;i++)
+				{
+					var sRowId = aRowsToDelete[i].id;
+					document.getElementById(sRowId).style.display = "none";
+				}
+			}
+			var sCVTableName = "MFG";
+			previewDocument(sCVTableName);
+			*/
+			//debugger;
+			//debugger;
 			//oDoc.recalculate(0);	
 		}catch(e)
 		{

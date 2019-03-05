@@ -77,6 +77,19 @@ function mouseUp()
 	}
 }
 
+function insertBefore(oNewNode, oReferenceNode,oParentNode)
+{
+	try{
+		var oNewElement = oParentNode.insertBefore(oNewNode, oReferenceNode);
+		return oNewElement;
+	}catch(e)
+	{
+		alert(e.description);
+	}finally{
+		
+	}	
+}
+
 function insertAfter(oNewNode, oReferenceNode)
 {
 	try{
@@ -127,19 +140,6 @@ function insertPara(oNewNode, oReferenceNode)
 	}finally{
 		
 	}
-}
-
-function insertBefore(oNewNode, oReferenceNode,oParentNode)
-{
-	try{
-		var oNewElement = oParentNode.insertBefore(oNewNode, oReferenceNode);
-		return oNewElement;
-	}catch(e)
-	{
-		alert(e.description);
-	}finally{
-		
-	}	
 }
 
 function updateCurrentSelection(oCurrentElement)
@@ -654,6 +654,40 @@ function print(content)
 		window.print();
 
 		document.body.innerHTML = originalContents;		
+	}catch(e)
+	{
+		alert(e.description);
+	}finally{
+		
+	}
+}
+
+function sortElements(sSortType)
+{
+	try{
+		//debugger;
+		//debugger;
+		//Check if any item has been selected
+		if(aSelectedItems.length==1)
+		{
+			var oElement = aSelectedItems[0];
+			if(oElement.isheader=="true")
+				oElement = oElement.parentNode;
+			
+			//Get the parent node
+			if(oElement.parentNode && oElement.previousSibling && sSortType=="up"){
+				
+				if(oElement.previousSibling.isheader=="true")
+					return;
+				
+				insertBefore(oElement, oElement.previousSibling,oElement.parentNode);
+			
+			}else if(oElement.parentNode && oElement.nextSibling && sSortType=="down"){
+			
+				insertAfter(oElement, oElement.nextSibling);
+			
+			}
+		}
 	}catch(e)
 	{
 		alert(e.description);
