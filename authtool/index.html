@@ -168,13 +168,12 @@
 <body onLoad="onLoad()" onunload="clearAllHighlighting()" style="margin:0px;">
 	<div id="header" align="center" width="100%" style="border: 1px solid #008CBA;background-color: #008CBA;color:#FFF;padding:0px;margin:0px">
 		<table><tr><td><div id="" style="padding:0px;margin:0px"><h1 style="padding:5px;margin:5px"><b>Authoring Tool (Beta)</b></h1></div></td><td align="right"><div>
-		<span><img title="Sort(Move Up)" id="" src="sortup.png" style="width:50px;height:50px;" align="right;margin-right:55%" sorttype="up" onclick="sortElements(this.sorttype)"></span>
-		<span><img title="Sort(Move Down)" id="" src="sortdown.png" style="width:50px;height:50px;" align="right;margin-right:55%" sorttype="down" onclick="sortElements(this.sorttype)"></span>
+		<span><img title="Sort(Move Up)" id="sortup" src="sortup.png" style="width:50px;height:50px;" align="right;margin-right:55%" sorttype="up" onclick="sortElements(this.sorttype)"></span>
+		<span><img title="Sort(Move Down)" id="sortdown" src="sortdown.png" style="width:50px;height:50px;" align="right;margin-right:55%" sorttype="down" onclick="sortElements(this.sorttype)"></span>
 		<span><img title="Undo" id="" src="undo.png" style="width:50px;height:50px;" align="right;margin-right:55%" onclick="undoLastActionOnElement()"></span>
-		<span><img title="Open project" id="" src="open.png" style="width:50px;height:50px;" align="right;margin-right:55%"></span>
-		<span><img title="Save project" id="" src="saveicon.png" style="width:50px;height:50px;" align="right;margin-right:55%" onclick="saveProject()"></span> 
-		<span><img title="Print" id="" src="printer.png" style="width:50px;height:50px;" align="right;margin-right:55%" onclick="printDocument()"></span> <!--<span><img title="Preview (Currently available for specific tables - Beta)" id="" src="Document-Preview-icon.png" style="width:50px;height:50px;" align="right;margin-right:55%" onclick="previewDocument();"></span>-->
-		<span><img title="Make copy of selected item (Table rows only)" id="copy" src="makecopyof.png" style="width:50px;height:50px;" align="right;margin-right:55%" onclick="copyElement()"></span> 
+		<span><img title="Open project" id="openproject" src="open.png" style="width:50px;height:50px;" align="right;margin-right:55%"></span>
+		<span><img title="Save project" id="saveproject" src="saveicon.png" style="width:50px;height:50px;" align="right;margin-right:55%" onclick="saveProject()"></span> 
+		<span><img title="Print" id="printer" src="printer.png" style="width:50px;height:50px;" align="right;margin-right:55%" onclick="printDocument()"></span> <span><img title="Make copy of selected item (Table rows only)" id="copy" src="makecopyof.png" style="width:50px;height:50px;" align="right;margin-right:55%" onclick="copyElement()"></span> 
 		<span><img title="Paste" id="paste" src="paste-icon-1500.png" style="width:50px;height:50px;" align="right;margin-right:55%" onclick="pasteElement()"></span> 
 		<span><img title="Delete slected item(s)" id="bin" src="bin.png" style="width:50px;height:50px;" align="right;margin-right:50%" onClick="deleteItem()"/></span>
 		<span><img id="help" src="help.png" style="width:50px;height:50px;" align="right;margin-right:50%;" onClick="platformInfo()" title="Info" /></span></div></td></tr></table>

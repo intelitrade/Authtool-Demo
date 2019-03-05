@@ -665,8 +665,6 @@ function print(content)
 function sortElements(sSortType)
 {
 	try{
-		//debugger;
-		//debugger;
 		//Check if any item has been selected
 		if(aSelectedItems.length==1)
 		{
@@ -694,6 +692,77 @@ function sortElements(sSortType)
 	}finally{
 		
 	}
+}
+
+function getAllMapNoAndDesc()
+{
+	//Get the client object
+	var cwClient = oDoc.cwClient;
+	//Get the Mappings collection
+	var mappings = cwClient.mappings;
+	var oEnumerator = new Enumerator(mappings);
+	//enumerate the mapping database
+	var aMapping = [];
+	for (;!oEnumerator.atEnd(); oEnumerator.moveNext())
+	{
+		//Get an item from the collection
+		var mapItem = oEnumerator.item();
+        var sMapNoFromMappingDbase = mapItem.ID;
+        if (!isInputValid(sMapNoFromMappingDbase))
+            continue;
+				
+		if(isInputValid(mapItem.Name))
+		{
+			var sMapDesc = mapItem.Name;
+			if(sMapDesc.search("(Filtered)")!=-1)
+				continue;
+		}	
+				
+		aMapping[aMapping.length] = [mapItem.ID, mapItem.Name];
+    }
+    aMapping.sort();
+	var iLength = aMapping.length;
+	sStr = "";
+	for(var i=0;i<iLength;i++)
+	{
+	sStr = sStr+"<li mapno='"+aMapping[i][0]+"' description='"+aMapping[i][1]+"' style='width:100%'><table style='border:1px solid black;width:100%'><tr><td>"+aMapping[i][1]+"</td><td style='width:30%;align:left'>"+aMapping[i][0]+"</td></tr></table></li>";
+	}
+	return "<ul style='width:100%'>"+sStr+"</ul>";
+}
+
+function sortList(b) {
+	debugger;
+	debugger;
+  var list, i, switching, b, shouldSwitch;
+  list = document.getElementById("editorPane");
+  switching = true;
+  /* Make a loop that will continue until
+  no switching has been done: */
+  while (switching) {
+    // Start by saying: no switching is done:
+    switching = false;
+    //b = list.getElementsByTagName("LI");
+    // Loop through all list items:
+    for (i = 0; i < (b.length - 1); i++) {
+      // Start by saying there should be no switching:
+      shouldSwitch = false;
+      /* Check if the next item should
+      switch place with the current item: */
+      //if (b[i].innerHTML.toLowerCase() > b[i + 1].innerHTML.toLowerCase()) {
+		if (b[i].innerHTML > b[i + 1].innerHTML) {
+        /* If next item is alphabetically lower than current item,
+        mark as a switch and break the loop: */
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      /* If a switch has been marked, make the switch
+      and mark the switch as done: */
+      b[i].parentNode.insertBefore(b[i + 1], b[i]);
+      switching = true;
+    }
+  }
 }
 /*
 var testCase = ["A","B","C","Z","AA","AB","BY"];
