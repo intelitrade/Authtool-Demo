@@ -13,6 +13,7 @@ var bMultiSelect = false;//Tracks if multiple items have been selected
 var aSelectedItems = [];
 var aCopiedItems = [];
 var aDeletedItems = [];
+var sMappingString = "";
 var iTest = 1;
 /*var oElement;
 var oRefElement;

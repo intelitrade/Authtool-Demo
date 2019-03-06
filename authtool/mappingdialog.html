@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html style="width:1000px;Height:500px">
+<head>
+	
+	<title>Mapping</title>
+	<!--<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10"/>-->
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />	
+	<LINK REL="stylesheet" TYPE="text/css" HREF="authtool.css" />	
+	<style>
+	* {box-sizing: border-box}
+	body {font-family: Verdana, sans-serif; margin:0;padding: 5px;}
+
+	body {
+		font-family: Roboto, sans-serif;
+		color: #58595b;
+		font-weight: 300;
+		font-size: 16px;
+		padding: 5px
+	}
+
+	.active, .dot:hover {
+	  background-color: #717171;
+	}
+
+	.hideElement{
+		display:none;
+	}
+	
+	html{
+		overflow-x: auto; 
+		overflow-y: auto;
+	}
+	
+	ul{
+		list-style-type: none;
+		margin-left:0px;
+		line-height: 1em;
+	}	
+	
+	p{
+		line-height: 2.5;
+	}
+	select{
+		width:100%;
+	}
+	table{
+		width:100%;
+	}
+	tr{
+		width:100%;
+	}	
+	
+	li:hover {background-color: #ddd;}
+
+	</style>
+	<script>
+		//debugger;
+		//debugger;
+		var params_list = new VBArray(window.dialogArguments);
+		var params = params_list.toArray();
+		var oDoc =  params[0];
+		var oCWApplication = params[1];
+		var sTempMappingString = params[2];
+
+		//var oSortGroups = new ActiveXObject("Scripting.Dictionary");				
+		/*	
+			Force window to come to the fore/front
+			This should resolve the issue of the window being in the background when it has loaded
+		*/
+
+	</script>
+	<SCRIPT language="javascript" src="publicvariables.js"></SCRIPT>
+	<SCRIPT language="javascript" src="table.js"></SCRIPT>
+	<SCRIPT language="javascript" src="authtool.js"></SCRIPT>
+	<SCRIPT language="javascript" src="dragndrop.js"></SCRIPT>
+	<SCRIPT language="javascript" src="utilities.js"></SCRIPT>
+	<SCRIPT language="javascript" src="style.js"></SCRIPT>	
+	<SCRIPT language="javascript" src="onload.js"></SCRIPT>
+	<SCRIPT language="javascript" src="preview.js"></SCRIPT>
+	<SCRIPT language="javascript" src="highlight.js"></SCRIPT>
+	<SCRIPT language="javascript" src="section.js"></SCRIPT>	
+	<SCRIPT language="javascript" src="paragraph.js"></SCRIPT>
+	<SCRIPT language="javascript" src="cell.js"></SCRIPT>
+	<SCRIPT language="javascript" src="storage.js"></SCRIPT>
+	<SCRIPT language="javascript" src="eventhandler.js"></SCRIPT>
+	<SCRIPT language="javascript" src="caseweb.js"></script>
+	<SCRIPT language="javascript" src="json3.js"></script>
+	<script src="platform.js"></script>
+	<!--<script type="text/vbscript" src="ex.vbs"></script>-->
+	<SCRIPT type="text/vbscript" src="utilities.vbs"></SCRIPT>
+	<SCRIPT language="javascript" src="languagetranslate.js"></SCRIPT>
+	<!--<script language="javascript" src="https://intelitrade.github.io/caseweb/authtool/caseweb.js"></script>-->
+	<!--<script language="javascript" src="http://localhost:8085/authtool/caseweb.js"></script>-->
+	<script>
+		//Attach onmouse up event
+		document.onmouseup = mouseUp;
+		window.onerror = function (msg, url, line, col, error){
+			//debugger;
+			//debugger;
+		}
+	</script>	
+</head>
+<body onLoad="onLoad()" onunload="clearAllHighlighting()" style="margin:0px;align:center;background-color:#F5DEB3">
+	<div id="serachbox" style="width:90%;border: 1px solid #008CBA;background-color: #008CBA;color:#FFF;width:100%;align:right">
+		<table>	
+			<tr>
+				<td align="center" onclick="searchUnorderedList()" style="cursor:hand">
+				<img src="search.png" style="width:50px;height:50px"></image><sup><b>Click here to Search...</b></sup>
+				</td>
+			</tr>
+			<tr>
+				<td align="center"><input type="text" id="searchbox" style="width:80%;text-align: center"/></td>
+			</tr>				
+		</table>
+	</div>
+	<div id="maincontainer" style="width:98%;background-color:#FFFFFF;margin-top:5px;margin-left:10px;">
+
+	</div>	
+</body>
+</html>
+<script>
+	//debugger;
+	//debugger;
+	//window.focus();
+	if(sTempMappingString=="")
+	{
+		sMappingString = getAllMapNoAndDesc();
+		if(document.getElementById("maincontainer"))
+			document.getElementById("maincontainer").innerHTML = sMappingString;
+	}else{
+		if(document.getElementById("maincontainer"))
+			document.getElementById("maincontainer").innerHTML = sTempMappingString;	
+	}
+	//debugger;
+	//debugger;	
+	
+	//window.focus();
+</script>

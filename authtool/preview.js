@@ -170,7 +170,7 @@ function updatePreviewPane(oElement)
 								<td>\
 									<b>Map number: </b>\
 								</td>\
-								<td><input type="text" style="background-color:#FFFFC6;width:100%" value="'+sMapNo+'" desccell="'+sCellNumber+'" id="'+sMapCell+'" srcelement="'+oElement.id+'" onkeyup="updateMapNo(this)"></td>\
+								<td><input type="text" style="background-color:#FFFFC6;width:96%" value="'+sMapNo+'" desccell="'+sCellNumber+'" id="'+sMapCell+'" srcelement="'+oElement.id+'" onkeyup="updateMapNo(this)"> <span style="color:green;font-weight:bold;cursor:pointer" onclick="showMappingDialog()">?</span></td>\
 							</tr><tr>\
 								<td>\
 									<b>Calc: </b>\
