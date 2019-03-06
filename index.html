@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html style="width:1700px;Height:730px">
+<head>
+	
+	<title>Authoring Tool (Beta)</title>
+	<!--<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10"/>-->
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />	
+	<LINK REL="stylesheet" TYPE="text/css" HREF="authtool.css" />	
+	<style>
+	* {box-sizing: border-box}
+	body {font-family: Verdana, sans-serif; margin:0;padding: 5px;}
+
+	body {
+		font-family: Roboto, sans-serif;
+		color: #58595b;
+		font-weight: 300;
+		font-size: 16px;
+		padding: 5px
+	}
+
+	.active, .dot:hover {
+	  background-color: #717171;
+	}
+
+	.hideElement{
+		display:none;
+	}
+	
+	html{
+		overflow-x: auto; 
+		overflow-y: auto;
+	}
+	
+	ul{
+		list-style-type: none;
+		margin-left:0px;
+		padding-left:0px;
+		line-height: 1em;
+	}	
+	
+	p{
+		line-height: 2.5;
+	}
+	select{
+		width:100%;
+	}
+	table{
+		width:100%;
+	}
+	tr{
+		width:100%;
+	}
+	
+	.linespacer{
+		margin-left:25px;
+		margin-top:3px; 
+	}
+
+	.menulinespacer{
+		padding-left:25px;
+		margin-top:3px; 
+	}
+	
+	.categorytitle{
+		margin-bottom:5px;
+		margin-top:5px;
+		background-color:#F5DEB3;	
+		color:#A52A2A;
+	}
+	
+	.contentdetail{
+		margin-top:0px;
+		margin-bottom:10px;
+	}
+	
+	
+	
+	ul, li { list-style: none; }
+	
+	li {
+	  border: 1px dotted black;
+	  border-width: 0 0 1px 1px; 
+	}
+	/* Main Level */
+	ul{
+		margin-left:5px;
+		padding-left:0px;
+		list-style: none;
+		border: 1px dotted red;
+		border-width: 0 0 0px 1px;				  
+	}
+
+	/* Second Level */
+	ul ul{
+	  margin-left:15px;			 
+	}
+
+	/* Third Level */
+	ul ul ul{
+	  margin-left:15px;
+	}
+	
+	/* Fourth Level */
+	ul ul ul ul{
+	  margin-left:15px;
+	}
+	
+	li{
+		margin-top: 3px;
+		padding-left:5px;
+		border: 1px dotted red;
+		border-width: 0 0 1px 0px;				
+		/*border:1px solid grey;*/
+	}
+	
+	li:hover {background-color: #ddd;}
+	
+
+	
+
+	</style>
+	<script>
+		//debugger;
+		//debugger;
+		window.focus();
+		var params_list = new VBArray(window.dialogArguments);
+		var params = params_list.toArray();
+		var oDoc =  params[0];
+		var oCWApplication = params[1];
+		var sClosestSection = params[2];
+		var sCType = params[3];
+		//var oSortGroups = new ActiveXObject("Scripting.Dictionary");				
+		/*	
+			Force window to come to the fore/front
+			This should resolve the issue of the window being in the background when it has loaded
+		*/
+
+	</script>
+	<SCRIPT language="javascript" src="publicvariables.js"></SCRIPT>
+	<SCRIPT language="javascript" src="table.js"></SCRIPT>
+	<SCRIPT language="javascript" src="authtool.js"></SCRIPT>
+	<SCRIPT language="javascript" src="dragndrop.js"></SCRIPT>
+	<SCRIPT language="javascript" src="utilities.js"></SCRIPT>
+	<SCRIPT language="javascript" src="style.js"></SCRIPT>	
+	<SCRIPT language="javascript" src="onload.js"></SCRIPT>
+	<SCRIPT language="javascript" src="preview.js"></SCRIPT>
+	<SCRIPT language="javascript" src="highlight.js"></SCRIPT>
+	<SCRIPT language="javascript" src="section.js"></SCRIPT>	
+	<SCRIPT language="javascript" src="paragraph.js"></SCRIPT>
+	<SCRIPT language="javascript" src="cell.js"></SCRIPT>
+	<SCRIPT language="javascript" src="storage.js"></SCRIPT>
+	<SCRIPT language="javascript" src="eventhandler.js"></SCRIPT>
+	<SCRIPT language="javascript" src="caseweb.js"></script>
+	<SCRIPT language="javascript" src="json3.js"></script>
+	<script src="platform.js"></script>
+	<!--<script type="text/vbscript" src="ex.vbs"></script>-->
+	<SCRIPT type="text/vbscript" src="utilities.vbs"></SCRIPT>
+	<SCRIPT language="javascript" src="languagetranslate.js"></SCRIPT>
+	<!--<script language="javascript" src="https://intelitrade.github.io/caseweb/authtool/caseweb.js"></script>-->
+	<!--<script language="javascript" src="http://localhost:8085/authtool/caseweb.js"></script>-->
+	<script>
+		//Attach onmouse up event
+		document.onmouseup = mouseUp;
+		window.onerror = function (msg, url, line, col, error){
+			//debugger;
+			//debugger;
+		}
+	</script>
+</head>
+<body onLoad="onLoad()" onunload="clearAllHighlighting()" style="margin:0px;">
+	<div id="header" align="center" width="100%" style="border: 1px solid #008CBA;background-color: #008CBA;color:#FFF;padding:0px;margin:0px">
+		<table><tr><td><div id="" style="padding:0px;margin:0px"><h1 style="padding:5px;margin:5px"><b>Authoring Tool (Beta)</b></h1></div></td><td align="right"><div>
+		<span><img title="Sort(Move Up)" id="sortup" src="sortup.png" style="width:50px;height:50px;" align="right;margin-right:55%" sorttype="up" onclick="sortElements(this.sorttype)"></span>
+		<span><img title="Sort(Move Down)" id="sortdown" src="sortdown.png" style="width:50px;height:50px;" align="right;margin-right:55%" sorttype="down" onclick="sortElements(this.sorttype)"></span>
+		<span><img title="Undo" id="" src="undo.png" style="width:50px;height:50px;" align="right;margin-right:55%" onclick="undoLastActionOnElement()"></span>
+		<span><img title="Open project" id="openproject" src="open.png" style="width:50px;height:50px;" align="right;margin-right:55%"></span>
+		<span><img title="Save project" id="saveproject" src="saveicon.png" style="width:50px;height:50px;" align="right;margin-right:55%" onclick="saveProject()"></span> 
+		<span><img title="Print" id="printer" src="printer.png" style="width:50px;height:50px;" align="right;margin-right:55%" onclick="printDocument()"></span> <span><img title="Make copy of selected item (Table rows only)" id="copy" src="makecopyof.png" style="width:50px;height:50px;" align="right;margin-right:55%" onclick="copyElement()"></span> 
+		<span><img title="Paste" id="paste" src="paste-icon-1500.png" style="width:50px;height:50px;" align="right;margin-right:55%" onclick="pasteElement()"></span> 
+		<span><img title="Delete slected item(s)" id="bin" src="bin.png" style="width:50px;height:50px;" align="right;margin-right:50%" onClick="deleteItem()"/></span>
+		<span><img id="help" src="help.png" style="width:50px;height:50px;" align="right;margin-right:50%;" onClick="platformInfo()" title="Info" /></span></div></td></tr></table>
+	</div>
+	<div style="border: 1px solid #008CBA;margin-top:5px;">
+		<table width="100%">
+			<tr width="100%">
+				<td width="20%">
+					<div id="insertoptions" style="background-color:#008CBA;color:#FFFFFF;width:100%;font-weight: bold;height:40px;text-align:center">
+						Insert Options<br>
+						Drag & drop options into edit pane
+					</div>				
+					<div id="insertoptionsmain" style="overflow-y: auto;height:500px;width:100%" ismenu="true">
+						<ul class="categorytitle" ismenu="true"><li style='padding:10px;' ismenu="true"><b>Sections</b></li></ul>
+						<ul style='margin-top:0px;margin-bottom:10px' title="New and available in this beta release">
+							<li class="menulinespacer" style="cursor:move" id="NOTECONTROL" name="Note control" sectiontype="PAGE" component="page" objecttype="page" ismenu="true">Page</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownSections(this.id)" id="NOTECONTROL" name="Note control" sectiontype="NOTECONTROL" component="section" objecttype="section" ismenu="true">Note control</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownSections(this.id)" id="SUBNOTECONTROL" name="Sub note control" sectiontype="SUBNOTECONTROL" component="section" objecttype="section" ismenu="true">Sub note control</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownSections(this.id)" id="SUBNOTECONTROLGROUP" name="Sub note control (Group)" sectiontype="SUBNOTECONTROLGROUP" component="section" objecttype="section"ismenu="true">Sub note control (Group)</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownSections(this.id)" id="EXPANDCOLLAPSE" name="Expand collapse" sectiontype="EXPANDCOLLAPSE" component="section" objecttype="section" ismenu="true">Expand collapse</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownSections(this.id)" id="EXPANDCOLLAPSECOMPANY3RDYEAR" name="Expand collapse (Company 3yr)" sectiontype="EXPANDCOLLAPSECOMPANY3RDYEAR" component="section" objecttype="section" ismenu="true">Expand collapse (Company 3yr)</li>
+						</ul>						
+						<ul class="categorytitle" title="Not available for this beta release" ismenu="true">
+							<li style='padding:10px;' ismenu="true"><b>Table types</b></li>
+						</ul>
+						<ul style='margin-top:0px;margin-bottom:10px;' title="Not available for this beta release">
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="CONTROLTABLE" name="Control table" tabletype="CONTROLTABLE" component="table" objecttype="table" ismenu="true">Control table</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="STATEMENTTABLE" name="Statement table" tabletype="STATEMENTTABLE" component="table" objecttype="table" ismenu="true">Statement table</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="MODIFIABLETABLE" name="Modifiable table" tabletype="MODIFIABLETABLE" component="table" objecttype="table" ismenu="true">Modifiable table</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="NOTETABLE" name="Note table" tabletype="NOTETABLE" component="table" objecttype="table" ismenu="true">Note table</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="STD6COLUMNTABLE" name="Std 6 Column table" tabletype="STD6COLUMNTABLE" component="table" objecttype="table" ismenu="true">Std 6 column table</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="SUMMARYTABLE" name="Summary table" tabletype="SUMMARYTABLE" component="table" objecttype="table" ismenu="true">Summary table</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="SUMMARYTABLEGROUP" name="Summary table (Group)" tabletype="SUMMARYTABLEGROUP" component="table" objecttype="table" ismenu="true">Summary table (Group)</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="RECONTABLE" name="Recon table" tabletype="RECONTABLE" component="table" objecttype="table" ismenu="true">Recon table</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="RADIOBUTTONTABLE" name="Radio button table" tabletype="RADIOBUTTONTABLE" component="table" objecttype="table" ismenu="true">Radio button table</li>		
+						</ul>
+						<ul class="categorytitle" ismenu="true">
+							<li style='padding:10px;' onClick="testIt()" ismenu="true"><b>Row types</b></li>
+						</ul>
+						<ul style='margin-top:0px;margin-bottom:10px;' ismenu="true">
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="C1" name="Link to map row" rowtype="C1" component="row" objecttype="row" ismenu="true">Link to map row</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="C2" name="Negative link to map row" rowtype="C2" component="row" objecttype="row" ismenu="true">Negative link to map row</li>	
+							<li class="menulinespacer" onmousedown="onMouseDownRows(this.id)" id="C3" name="Link to map (Debits only)" rowtype="C3" component="row" objecttype="row" ismenu="true">Link to map (Debits only)</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="G3" name="Link to map (Credits only)" rowtype="G3" component="row" objecttype="row" ismenu="true">Link to map (Credits only)</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="C4" name="Negative link to map (Debits only)" rowtype="C4" component="row" objecttype="row" ismenu="true">Negative link to map (Debits only)</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="C4" name="Negative link to map (Credits only)" rowtype="G4" component="row" objecttype="row" ismenu="true">Negative link to map (Credits only)</li>	
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="A1" name="Link to account" rowtype="A1" component="row" objecttype="row" ismenu="true">Link to account</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="A2" name="Negative link to account" rowtype="A2" ismenu="true">Negative link to account</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="I1" name="Input row" rowtype="I1" component="row" objecttype="row" ismenu="true">Input row</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="D1" name="Heading row" rowtype="D1" component="row" objecttype="row" ismenu="true">Heading row</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="SUBTOTAL" name="Sub-total row" rowtype="S1" component="row" objecttype="row" ismenu="true">Sub-total row</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="L1" name="Heading row" rowtype="L1" component="row" objecttype="row" ismenu="true">Thin line</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="L2" name="Heading row" rowtype="L2" component="row" objecttype="row" ismenu="true">Thick line</li>
+						</ul>
+						<ul class="categorytitle" title="Not available for this beta release" ismenu="true"><li style='padding:10px;' ismenu="true"><b>Paragraph</b></li></ul>
+						<ul style='margin-top:0px;margin-bottom:10px;' title="Not available for this beta release" ismenu="true">
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownPara(this.id)" id="PARAGRAPH" name="Paragraph" paratype="PARAGRAPH" component="para" objecttype="para" ismenu="true">Input paragraph</li>
+							<!--<li class="menulinespacer" onmousedown="onMouseDownPara(this.id)" id="BULLETPARAGRAPH" name="Bullet paragraph" paratype="BULLETPRARGRAPH" component="para" objecttype="para">Bullet input paragraph</li>-->
+						</ul>
+						<ul class="categorytitle" disabled title="Not available for this beta release" ismenu="true"><li style='padding:10px;' ismenu="true"><b>Subdocument</b></li></ul>
+						<ul style='margin-top:0px;margin-bottom:10px;' disabled title="Not available for this beta release" ismenu="true">
+							<li class="menulinespacer" style="cursor:move" component="subdocument" objecttype="subdocument" ismenu="true">Header</li>
+							<li class="menulinespacer" style="cursor:move" component="subdocument" objecttype="subdocument" ismenu="true">Footer</li>
+							<li class="menulinespacer" style="cursor:move" component="subdocument" objecttype="subdocument" ismenu="true">External document</li>
+						</ul>						
+					</div>
+				</td>			
+				<td width="20%" style="border-left: 1px solid #008CBA;">
+					<div id="docmapheading" style="background-color:#008CBA;color:#FFFFFF;width:100%;font-weight: bold;height:40px;text-align:center">
+					</div>				
+					<div id="MainContentContainer" style="overflow-y: auto;height:500px;width:100%">
+					</div>
+				</td>
+				<td width="50%" style="border-left: 1px solid #008CBA;">
+					<div id="" style="background-color:#008CBA;color:#FFFFFF;width:100%;font-weight:bold;text-align:center;height:40px">
+						Details / Preview<br>Select an item in the "Edit options" panel to view / modify its properties
+					</div>	
+					<div style="overflow: auto;height:500px;width:100%;padding-left:5px;vertical-align: top;">
+						<table width="100%" height="100%" style="vertical-align: top;">
+							<tr>
+								<td width="100%" height="100%" id="editorPane" style="vertical-align: top;">
+									<!--<object width="100%" height="400" data="Demo Company Financial Statements 2013 - Financial statements - IFRS.pdf"></object>-->
+								</td>
+							</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="footer" id="results">
+		<p style="margin-top:0; margin-bottom:0; line-height:.5"><br/></p>
+		<table style="width: 100%">
+			<tbody>
+				<tr id="Buttons">
+					<td align="right">
+						<input align="left" class="button" id="ButtonOK" name="ButtonUpdate" onclick="okButtonClick()" type="button" value="OK" style="font-weight:bold" disabled title="Disabled for beta"/>
+						<input align="left" class="button" id="ButtonApply" name="ButtonUpdate" onclick="ApplyButtonClick()" type="button" value="Apply" style="font-weight:bold"/>
+						<input align="left" class="button" id="ButtonCancel" name="ButtonCancel" onclick="cancelButtonClick()" type="button" value="Cancel" style="font-weight:bold"/>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>	
+</body>
+</html>
+<script language="JavaScript">
+	try{
+	//window.focus();
+	
+	//var iLoadProgBar = 1
+	var oProgBar = oDoc.createProgressBar("Loading data...",1,1);
+	
+		if(sCType=="NOTECONTROL"||sCType=="SUBNOTECONTROL"||sCType=="EXPANDCOLLAPSE"||sCType=="SUBNOTECONTROLGROUP"||sCType=="EXPANDCOLLAPSECOMPANY3RDYEAR")
+		{
+			var sSectionLabel = sClosestSection;			
+		}else{
+			var sSectionLabel = sClosestSection = getCorrectContainer(sClosestSection);
+		}
+		buildTreeViewEx(sSectionLabel,oDoc);
+	oProgBar.updateProgress(1);	
+	oProgBar.destroyProgressBar();	
+	}catch(e)
+	{
+		alert(e.description);
+	}finally
+	{
+
+	}
+	
+	//debugger;
+	//debugger;
+	
+	function getCorrectContainer(sSectionLabel)
+	{
+		//get the family tree of the section and start going up the tree to get the name
+		//this might not be the case with content that has just been added
+		var aOuterSections = getOuterSections(sSectionLabel,oDoc);
+		if(isInputValid(aOuterSections))
+		{
+			for(var i=aOuterSections.length;i>=0;i--)
+			{
+				var sOuterSection = aOuterSections[i];
+				var oOuterSection = oDoc.sectionByName(sOuterSection);
+				if(oOuterSection)
+				{
+					var sOuterSectionCtype = oOuterSection.propGet("CTYPE");
+					if(sOuterSectionCtype=="NOTECONTROL"||sOuterSectionCtype=="SUBNOTECONTROL"||sOuterSectionCtype=="EXPANDCOLLAPSE"||sOuterSectionCtype=="SUBNOTECONTROLGROUP"||sOuterSectionCtype=="EXPANDCOLLAPSECOMPANY3RDYEAR")
+					{
+						sSectionLabel = sOuterSection;
+						//debugger;
+						//debugger;
+						//aSection.unshift(oOuterSection);
+						break;
+					}
+				}
+			}
+		}
+		return sSectionLabel;
+	}	
+	//textAPI = "Note control";//document.documentElement.innerText;
+	//textAPI.translate();
+	//debugger;
+	//debugger;
+	/*textAPI = document.documentElement.innerText;
+	langAPI = "af";
+	translateAPI(textAPI,langAPI);
+	debugger;
+	debugger;	*/
+</script>
