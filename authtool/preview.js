@@ -170,7 +170,7 @@ function updatePreviewPane(oElement)
 								<td>\
 									<b>Map number: </b>\
 								</td>\
-								<td><input type="text" style="background-color:#FFFFC6;width:96%" value="'+sMapNo+'" desccell="'+sCellNumber+'" id="'+sMapCell+'" srcelement="'+oElement.id+'" onkeyup="updateMapNo(this)"> <span style="color:green;font-weight:bold;cursor:pointer" onclick="showMappingDialog()">?</span></td>\
+								<td><input type="text" style="background-color:#FFFFC6;width:96%" value="'+sMapNo+'" desccell="'+sCellNumber+'" id="'+sMapCell+'" srcelement="'+oElement.id+'" onkeyup="updateMapNo(this)"> <span style="color:green;font-weight:bold;cursor:pointer" onclick="showMappingDialog(this.srcelement)" srcelement="'+sMapCell+'">?</span></td>\
 							</tr><tr>\
 								<td>\
 									<b>Calc: </b>\
@@ -623,6 +623,8 @@ function addCVTableDataToHTMLTable(sCVTableName, sHTMLTableId)
 	try{
 		//debugger;
 		//debugger;
+		//document.getElementById("editboard").style.display="none";
+		//document.getElementById("componentboard").style.display="none";
 		if(oDoc)
 		{
 			var oCVTable = oDoc.tableByName(sCVTableName);
@@ -654,7 +656,7 @@ function addCVTableDataToHTMLTable(sCVTableName, sHTMLTableId)
 						}
 						
 						if(i%2==0)
-							oHTMLTable.rows[(i-1)].style.backgroundColor = "#F5DEB3";
+							//oHTMLTable.rows[(i-1)].style.backgroundColor = "#F5DEB3";
 						
 						iColorCounter++;
 						
@@ -685,6 +687,14 @@ function addCVTableDataToHTMLTable(sCVTableName, sHTMLTableId)
 							oHTMLTable.rows[(i-1)].style.fontWeight="bold";
 							//oHTMLTable.rows[(i-1)].style.borderBottomWidth="2px";
 						}
+						
+						if(sRowType==TEXTONLY_ROW){
+							oHTMLTable.rows[(i-1)].style.backgroundColor="#CCFFCC";
+						}
+						
+						if(sRowType==INPUT_ROW || sRowType==HEADING_ROW){
+							oHTMLTable.rows[(i-1)].style.backgroundColor="#FFFFC6";
+						}						
 						
 						if(sRowType==THINLINE_ROW){
 							//oHTMLTable.rows[(i-1)].style.borderBottom = "thin solid black";
@@ -742,6 +752,11 @@ function addCVTableDataToHTMLTable(sCVTableName, sHTMLTableId)
 							if(sRowType==THINKLINE_ROW){
 								oHTMLTable.rows[(i-1)].cells[(j-1)].innerHTML="<hr style='border-width:5px;border-color:black;'/>";
 							}
+							
+							if(sColType==MAP_COL && (sRowType==CALC1_ROW||sRowType==CALC2_ROW||sRowType==CALC3_ROW||sRowType==CALC4_ROW||sRowType==CALC5_ROW||sRowType==CALC6_ROW||sRowType==CALC7_ROW||sRowType==CALC8_ROW||sRowType==CALC9_ROW||sRowType==CALC10_ROW))
+								oHTMLTable.rows[(i-1)].cells[(j-1)].style.backgroundColor="#FFFFC6";
+							
+								
 						}
 						oProgBar.updateProgress(1);
 					}
@@ -773,8 +788,8 @@ function addCVTableDataToHTMLTable(sCVTableName, sHTMLTableId)
 function applyChangesToTable(sTable)
 {
 	try{
-		debugger;
-		debugger;
+		//debugger;
+		//debugger;
 		var JSONReturnValue = createReturnValue();
 	
 		var aRowsToDelete = JSON.parse(JSONReturnValue).deleteItem.row;
@@ -906,5 +921,123 @@ function showProperties(oElement)
 	}catch(e)
 	{
 		alert(e.description);
+	}
+}
+
+function previewSubDoc()
+{
+		try{
+			//debugger;
+			//debugger;
+			var oFreezeText = oDoc;//.freezeText();
+			if(oFreezeText)
+			{
+				var oEiditorBoard = document.getElementById("editorPane").innerHTML="";
+				//var oSection = oDoc.sectionByName(sSectionLabel);//;"NOTES_002");
+				var iFirstPara = 1;
+				var iLastPara = oFreezeText.paraCount();
+				var sStr = "";
+				var aTables = [];
+				for(var i=iFirstPara;i<=iLastPara;i++)
+				{
+					var oTable = oFreezeText.tableByParaIndex(i);
+					if(oTable)
+					{
+						var iColumns = oTable.nColumns();
+						var iRows = oTable.nRows();
+						var oHTMLTable = createHTMLTable(iRows,iColumns);	
+						if(isInputValid(oHTMLTable))
+						{
+							document.getElementById("editorPane").appendChild(oHTMLTable);
+							populateTable(oTable.getLabel(), oHTMLTable.id,oFreezeText);
+							//addCVTableDataToHTMLTable(oTable.getLabel(), oHTMLTable.id);
+						}
+						i=oTable.lastParaIndex;
+					}else if(isInputValid(oFreezeText.para(i).getText())){
+						
+						var oPara = document.createElement("p");
+						var oNode = document.createTextNode(oFreezeText.para(i).getText());
+						oPara.appendChild(oNode);
+						document.getElementById("editorPane").appendChild(oPara);
+					}
+				}
+			}
+		}catch(e)
+		{
+			alert(e.description);
+		}
+}
+
+function populateTable(sCVTableName,sHTMLTableId,oMyDoc)
+{
+	try{
+			if(!isInputValid(oMyDoc))
+				oMyDoc = oDoc;
+			
+			var oCVTable = oMyDoc.tableByName(sCVTableName);
+			var oHTMLTable = document.getElementById(sHTMLTableId);
+			var iColorCounter = 0;
+			if(oCVTable && oHTMLTable)
+			{
+				var iRows = oCVTable.nRows();
+				var iColumns = oCVTable.nColumns();				
+				//Make sure they both have the same structure i.e. same columns and same rows
+				if(oHTMLTable.rows.length == iRows && oHTMLTable.rows[0].cells.length == iColumns)
+				{
+					var iRows = oCVTable.nRows();
+					var iColumns = oCVTable.nColumns();
+					var oProgBar = oDoc.createProgressBar("Loading data...",iRows,1);
+					for(var i = 1; i <= iRows; i++)
+					{
+						/*var oRow = oCVTable.getRow(i);
+						if(oRow.evaluateSkip()==1 && oRow.evaluateHide()==1)
+							oHTMLTable.rows[(i-1)].style.color="red";*/
+						
+						if(i%2==0)
+							oHTMLTable.rows[(i-1)].style.backgroundColor = "#F5DEB3";
+						
+						iColorCounter++;
+						
+						oHTMLTable.rows[(i-1)].style.fontSize = "small";
+						var sRowHasData = false;
+						for(var j = 1; j <= iColumns; j++)
+						{
+							//get the table cell in CaseView Table
+							//var oCVTableCell = oCVTable.getCell(j,i);
+							//check if there are any cells in the table
+							var iTableCellFirstPara = oCVTable.cellFirstParaIndex(i, j);
+							//var iTableCellLastPara = oCVTable.cellLastParaIndex(i, j);						
+							var oPara = oDoc.para(iTableCellFirstPara);
+							var sText = oPara.getText();
+							if(!isInputValid(sText))
+								sText = "&nbsp;";	
+
+							oHTMLTable.rows[(i-1)].cells[(j-1)].innerHTML ="<div contenteditable='true'>"+sText+"</div>";//oPara.getText();
+							
+							oHTMLTable.rows[(i-1)].cells[(j-1)].style.cursor = "cell";
+						}
+						oProgBar.updateProgress(1);
+					}
+					oProgBar.destroyProgressBar();
+					//debugger;
+					//debugger;
+					/*var oProgBar = oDoc.createProgressBar("Clean up...",iRows,1);
+					//Turn hide columns that do no need to be shown
+					for(var i=1;i<=iColumns;i++)
+					{
+						var sColType = oCVTable.getColumn(i).propGet(CCOLTYPE);
+						if(sColType==PRINT_CONT_COL||sColType==SPACE_COL||sColType==HIDDEN_COL||sColType==CTRLCELLCOL||(oCVTable.getColumn(i).evaluateHide==1&&oCVTable.getColumn(i).evaluateSkip==1))
+							hideCol(sHTMLTableId,i);
+						
+						oProgBar.updateProgress(1);
+					}
+					oProgBar.destroyProgressBar();*/
+				}
+			}		
+	}catch(e)
+	{
+		alert(e.description);
+	}finally
+	{
 	}
 }

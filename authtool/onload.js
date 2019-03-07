@@ -38,7 +38,7 @@ function loadDocMapDataEx()
 		var sMainSectionName = getMainSectionHeaderName();
 		if(isInputValid(sMainSectionName))
 		{
-			document.getElementById("docmapheading").innerHTML = "Edit options<br>"+sMainSectionName;
+			document.getElementById("docmapheading").innerHTML = "Edit Board<br>"+sMainSectionName;
 		}				
 
 		var sStr = "";

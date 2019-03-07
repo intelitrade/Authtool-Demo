@@ -67,7 +67,7 @@ function buildTreeViewEx(sSectionLabel,oDoc)//,oProgBar)
 					oParentListItemNode.style.cursor = sTableLineItemCursor;
 					
 					if(document.getElementById("docmapheading"))
-						document.getElementById("docmapheading").innerHTML = "Edit options<br>"+sSectionTitle;
+						document.getElementById("docmapheading").innerHTML = "Edit Board<br>"+sSectionTitle;
 
 					var iSectionSkipCond = oSection.evaluateSkip();
 					var iSectionHideCond = oSection.evaluateHide();

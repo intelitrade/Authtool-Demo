@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html style="width:1000px;Height:500px">
+<html style="width:1000px;Height:570px">
 <head>
 	
 	<title>Mapping</title>
@@ -53,7 +53,12 @@
 	}	
 	
 	li:hover {background-color: #ddd;}
-
+	
+	.testit{
+		display:none;
+		/*color:orange;*/
+	}
+	
 	</style>
 	<script>
 		//debugger;
@@ -100,14 +105,39 @@
 			//debugger;
 			//debugger;
 		}
+		
+		function okButtonClick()
+		{
+			try{
+				//debugger;
+				//debugger;
+				var sResult = "";
+				var iLength = aSelectedItems.length;
+				for(var i=0;i<iLength;i++)
+				{
+					if(sResult=="")
+						sResult = aSelectedItems[i].mapno;
+					else
+						sResult = sResult + "|" + aSelectedItems[i].mapno;
+						
+					window.returnValue = sResult;
+					window.close();
+				}
+			}catch(e)
+			{
+				alert(e.description);
+			}finally{
+			
+			}
+		}
 	</script>	
 </head>
-<body onLoad="onLoad()" onunload="clearAllHighlighting()" style="margin:0px;align:center;background-color:#F5DEB3">
-	<div id="serachbox" style="width:90%;border: 1px solid #008CBA;background-color: #008CBA;color:#FFF;width:100%;align:right">
+<body onLoad="onLoad()" onunload="clearAllHighlighting()" style="margin:0px;align:center;" scroll="no" style="overflow: hidden">
+	<div id="serachbox" style="position:fixed;top: 0;right: 0;border: 1px solid #008CBA;background-color: #008CBA;color:#FFF;width:100%;align:right">
 		<table>	
 			<tr>
-				<td align="center" onclick="searchUnorderedList()" style="cursor:hand">
-				<img src="search.png" style="width:50px;height:50px"></image><sup><b>Click here to Search...</b></sup>
+				<td align="center" onclick="searchUnorderedList()" style="cursor:hand;color:#FFFFFF">
+					<img src="search.png" style="width:50px;height:50px"><sup><b>Click here to Search...</b></sup>
 				</td>
 			</tr>
 			<tr>
@@ -115,9 +145,32 @@
 			</tr>				
 		</table>
 	</div>
-	<div id="maincontainer" style="width:98%;background-color:#FFFFFF;margin-top:5px;margin-left:10px;">
+	<div id="maincontainer" style="position:absolute;height:400px;overflow: auto;background-color:#FFFFFF;top:100px;right:10px;left:10px">
 
-	</div>	
+	</div>
+	<div style="position:fixed;bottom: 0;right: 0; background-color:#FFFFFF;">
+		<table>
+			<tr id="Buttons" style="width:100%;">
+				<td align="right" style="width:100%;">
+					<input align="left" class="button" id="ButtonOK" name="ButtonUpdate" onclick="okButtonClick()" type="button" value="OK" style="font-weight:bold"/>
+					<!--<input align="left" class="button" id="ButtonApply" name="ButtonUpdate" onclick="ApplyButtonClick()" type="button" value="Apply" style="font-weight:bold"/>-->
+					<input align="left" class="button" id="ButtonCancel" name="ButtonCancel" onclick="cancelButtonClick()" type="button" value="Cancel" style="font-weight:bold"/>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<!--<div class="footer" id="results" style="width:1000px;">
+		<p style="margin-top:0; margin-bottom:0; line-height:.5"><br/></p>
+		<table style="width: 1000px">
+			<tr id="Buttons" style="width:100%;">
+				<td align="right" style="width:100%;">
+					<input align="left" class="button" id="ButtonOK" name="ButtonUpdate" onclick="okButtonClick()" type="button" value="OK" style="font-weight:bold" disabled title="Disabled for beta"/>
+					<input align="left" class="button" id="ButtonApply" name="ButtonUpdate" onclick="ApplyButtonClick()" type="button" value="Apply" style="font-weight:bold"/>
+					<input align="left" class="button" id="ButtonCancel" name="ButtonCancel" onclick="cancelButtonClick()" type="button" value="Cancel" style="font-weight:bold"/>
+				</td>
+			</tr>
+		</table>
+	</div>	-->
 </body>
 </html>
 <script>

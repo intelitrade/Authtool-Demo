@@ -116,6 +116,9 @@
 	}
 	
 	li:hover {background-color: #ddd;}
+	
+
+	
 
 	</style>
 	<script>
@@ -167,25 +170,33 @@
 	</script>
 </head>
 <body onLoad="onLoad()" onunload="clearAllHighlighting()" style="margin:0px;">
-	<div id="header" align="center" width="100%" style="border: 1px solid #008CBA;background-color: #008CBA;color:#FFF;padding:0px;margin:0px">
-		<table><tr><td><div id="" style="padding:0px;margin:0px"><h1 style="padding:5px;margin:5px"><b>Authoring Tool (Beta)</b></h1></div></td><td align="right"><div>
-		<span><img title="Sort(Move Up)" id="sortup" src="sortup.png" style="width:50px;height:50px;" align="right;margin-right:55%" sorttype="up" onclick="sortElements(this.sorttype)"></span>
-		<span><img title="Sort(Move Down)" id="sortdown" src="sortdown.png" style="width:50px;height:50px;" align="right;margin-right:55%" sorttype="down" onclick="sortElements(this.sorttype)"></span>
-		<span><img title="Undo" id="" src="undo.png" style="width:50px;height:50px;" align="right;margin-right:55%" onclick="undoLastActionOnElement()"></span>
-		<span><img title="Open project" id="openproject" src="open.png" style="width:50px;height:50px;" align="right;margin-right:55%"></span>
-		<span><img title="Save project" id="saveproject" src="saveicon.png" style="width:50px;height:50px;" align="right;margin-right:55%" onclick="saveProject()"></span> 
-		<span><img title="Print" id="printer" src="printer.png" style="width:50px;height:50px;" align="right;margin-right:55%" onclick="printDocument()"></span> <span><img title="Make copy of selected item (Table rows only)" id="copy" src="makecopyof.png" style="width:50px;height:50px;" align="right;margin-right:55%" onclick="copyElement()"></span> 
-		<span><img title="Paste" id="paste" src="paste-icon-1500.png" style="width:50px;height:50px;" align="right;margin-right:55%" onclick="pasteElement()"></span> 
-		<span><img title="Delete slected item(s)" id="bin" src="bin.png" style="width:50px;height:50px;" align="right;margin-right:50%" onClick="deleteItem()"/></span>
-		<span><img id="help" src="help.png" style="width:50px;height:50px;" align="right;margin-right:50%;" onClick="platformInfo()" title="Info" /></span></div></td></tr></table>
+	<div id="header" align="center" width="100%" style="border: 1px solid #008CBA;background-color: #008CBA;color:#FFF;padding:0px;margin:0px;cursor:hand">
+		<table width="100%"><tr><td>
+		
+			<div id="" style="padding:0px;margin:0px">
+			<h1 style="padding:5px;margin:5px"><b>Authoring Tool (Beta)</b></h1></div></td><td align="right" style="width:50%"><div style="text-align:center;font-size:12px;font-weight:bold">
+			<div style="float: right;" onClick="platformInfo()"><img id="help" src="help.png" style="width:50px;height:50px;" align="right;margin-right:50%;"title="Info" /><br><u>Info</u></div>	
+			<div style="float: right;" onClick="deleteItem()"><img title="Delete slected item(s)" id="bin" src="bin.png" style="width:50px;height:50px;" align="right;margin-right:50%" /><br><u>Delete</u></div> 
+			<div style="float: right;" onclick="undoLastActionOnElement()"><img title="Undo" id="" src="undo.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u>Undo</u></div>
+			<div style="float: right;" onclick="sortElements(this.sorttype)"><img title="Sort(Move Up)" id="sortup" src="sortup.png" style="width:50px;height:50px;" align="right;margin-right:55%" sorttype="up"><br><u>Up</u></div> <div style="float: right;"><img title="Sort(Move Down)" id="sortdown" src="sortdown.png" style="width:50px;height:50px;" align="right;margin-right:55%" sorttype="down" onclick="sortElements(this.sorttype)"><br><u>Down</u></div>
+			<div style="float: right;" onclick="pasteElement()"><img title="Paste" id="paste" src="paste-icon-1500.png" style="width:50px;height:50px;" align="right;margin-right:55%" ><br><u>Paste</u></div>
+			<div style="float: right;" onclick="copyElement()"><img title="Copy" id="copy" src="makecopyof.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u>Copy</u></div> 
+			<div style="float: right;" onclick="sendToPrinter()"><img title="Print" id="printer" src="printer.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u>Print</u></div> 
+			<div style="float: right;" onclick="saveProject()"><img title="Save project" id="saveproject" src="saveicon.png" style="width:50px;height:50px;" align="right;margin-right:55%" ><br><u>Save</u></div> 		
+			<div style="float: right;"><img title="Open project" id="openproject" src="open.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u>Open</u></div> 
+			<div style="float: right;" onclick="toggleboard('reviewboard')"><img title="Edit board" id="editor" src="47162_check_256x256.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u>Review</u></div> 			
+			<div style="float: right;" onclick="toggleboard('editboard')"><img title="Edit board" id="editor" src="edit.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u>Edit</u></div>
+			<div style="float: right;" onclick="toggleboard('componentboard')"><img title="Component board" id="components" src="iconmaniac_icon_26.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u>Components</u></div>			
+		
+		</div></td></tr></table>
 	</div>
 	<div style="border: 1px solid #008CBA;margin-top:5px;">
 		<table width="100%">
 			<tr width="100%">
-				<td width="20%">
+				<td width="20%" id="componentboard">
 					<div id="insertoptions" style="background-color:#008CBA;color:#FFFFFF;width:100%;font-weight: bold;height:40px;text-align:center">
-						Insert Options<br>
-						Drag & drop options into edit pane
+						Component Board<br>
+						Drag & Drop Components onto the Edit Board
 					</div>				
 					<div id="insertoptionsmain" style="overflow-y: auto;height:500px;width:100%" ismenu="true">
 						<ul class="categorytitle" ismenu="true"><li style='padding:10px;' ismenu="true"><b>Sections</b></li></ul>
@@ -234,29 +245,30 @@
 							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownPara(this.id)" id="PARAGRAPH" name="Paragraph" paratype="PARAGRAPH" component="para" objecttype="para" ismenu="true">Input paragraph</li>
 							<!--<li class="menulinespacer" onmousedown="onMouseDownPara(this.id)" id="BULLETPARAGRAPH" name="Bullet paragraph" paratype="BULLETPRARGRAPH" component="para" objecttype="para">Bullet input paragraph</li>-->
 						</ul>
-						<ul class="categorytitle" disabled title="Not available for this beta release" ismenu="true"><li style='padding:10px;' ismenu="true"><b>Subdocument</b></li></ul>
-						<ul style='margin-top:0px;margin-bottom:10px;' disabled title="Not available for this beta release" ismenu="true">
-							<li class="menulinespacer" style="cursor:move" component="subdocument" objecttype="subdocument" ismenu="true">Header</li>
-							<li class="menulinespacer" style="cursor:move" component="subdocument" objecttype="subdocument" ismenu="true">Footer</li>
-							<li class="menulinespacer" style="cursor:move" component="subdocument" objecttype="subdocument" ismenu="true">External document</li>
+						<ul class="categorytitle" ismenu="true"><li style='padding:10px;' ismenu="true"><b>Subdocument</b></li></ul>
+						<ul style='margin-top:0px;margin-bottom:10px;' title="Not available for this beta release" ismenu="true">
+							<li class="menulinespacer" id="freeze" style="cursor:hand" component="subdocument" objecttype="subdocument" ismenu="true" onclick="previewSubDoc()">Freeze</li>
+							<li class="menulinespacer" disabled style="cursor:move" component="subdocument" objecttype="subdocument" ismenu="true">Header</li>
+							<li class="menulinespacer" disabled style="cursor:move" component="subdocument" objecttype="subdocument" ismenu="true">Footer</li>
+							<li class="menulinespacer"  disabled style="cursor:move" component="subdocument" objecttype="subdocument" ismenu="true">External document</li>
 						</ul>						
 					</div>
 				</td>			
-				<td width="20%" style="border-left: 1px solid #008CBA;">
+				<td width="20%" style="border-left: 1px solid #008CBA;" id="editboard">
 					<div id="docmapheading" style="background-color:#008CBA;color:#FFFFFF;width:100%;font-weight: bold;height:40px;text-align:center">
 					</div>				
 					<div id="MainContentContainer" style="overflow-y: auto;height:500px;width:100%">
 					</div>
 				</td>
-				<td width="50%" style="border-left: 1px solid #008CBA;">
-					<div id="" style="background-color:#008CBA;color:#FFFFFF;width:100%;font-weight:bold;text-align:center;height:40px">
-						Details / Preview<br>Select an item in the "Edit options" panel to view / modify its properties
+				<td width="50%" style="border-left: 1px solid #008CBA;" id="reviewboard">
+					<div id="" style="background-color:#008CBA;color:#FFFFFF;width:100%;font-weight:bold;text-align:center;height:40px" >
+						Planning, Design, Edit & Preview Board<br>Select a Component in the "Edit Board" to View / Modify its Properties
 					</div>	
 					<div style="overflow: auto;height:500px;width:100%;padding-left:5px;vertical-align: top;">
 						<table width="100%" height="100%" style="vertical-align: top;">
 							<tr>
 								<td width="100%" height="100%" id="editorPane" style="vertical-align: top;">
-									<!--<object width="100%" height="400" data="Demo Company Financial Statements 2013 - Financial statements - IFRS.pdf"></object>-->
+
 								</td>
 							</tr>
 						</table>
@@ -265,7 +277,7 @@
 			</tr>
 		</table>
 	</div>
-	<div class="footer" id="results">
+	<div class="footer" id="results" style="bottom: 0;right: 0;">
 		<p style="margin-top:0; margin-bottom:0; line-height:.5"><br/></p>
 		<table style="width: 100%">
 			<tbody>

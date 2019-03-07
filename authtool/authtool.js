@@ -54,7 +54,9 @@ try{
 
 						document.getElementById("editorPane").appendChild(oHTMLTable);
 						addCVTableDataToHTMLTable(oTable.getLabel(), oHTMLTable.id);
-						
+						var oPara = document.createElement("p");
+						oPara.style.margin = "10px";
+						document.getElementById("editorPane").appendChild(oPara);
 						//if(sStr=="")
 							//sStr = sStr + "<p>"+oHTMLTable.innerHTML+"</p>";
 						//else
@@ -70,8 +72,10 @@ try{
 					var oPara = document.createElement("p");
 					var oNode = document.createTextNode(oDoc.para(i).getText());
 					oPara.appendChild(oNode);
+					oPara.style.backgroundColor = "#CCFFCC";
+					oPara.style.margin = "0px";
 					//"<p>"+oDoc.para(i).getText()+"</p>";
-					document.getElementById("editorPane").appendChild(para);
+					document.getElementById("editorPane").appendChild(oPara);
 					/*if(sStr=="")
 						sStr = sStr+oDoc.para(i).getText();
 					else

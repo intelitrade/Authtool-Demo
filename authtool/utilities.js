@@ -639,12 +639,12 @@ function convertLetterToNumber(str) {
   return out;
 }
 
-function print(content)
+function sendToPrinter(content)
 {
 	try{
 		//debugger;
 		//debugger;
-		var content = "editorPane"
+		var content = "editorPane";
 		var divName = content;
 		var printContents = document.getElementById(divName).innerHTML;
 		var originalContents = document.body.innerHTML;
@@ -701,13 +701,15 @@ function sortElements(sSortType)
 function getAllMapNoAndDesc()
 {
 	try{
-		//debugger;
-		//debugger;
+	
 		//Get the client object
 		var cwClient = oDoc.cwClient;
 		//Get the Mappings collection
 		var mappings = cwClient.mappings;
 		var oEnumerator = new Enumerator(mappings);
+		
+		var iLength = mappings.Count;
+		var oProgBar = oDoc.createProgressBar("Loading mapping...",iLength,1);	
 		//enumerate the mapping database
 		var aMappingList = [];
 		for (;!oEnumerator.atEnd(); oEnumerator.moveNext())
@@ -726,16 +728,21 @@ function getAllMapNoAndDesc()
 			}	
 					
 			aMappingList[aMappingList.length] = [mapItem.ID, mapItem.Name];
+			oProgBar.updateProgress(1);
 		}
+		oProgBar.destroyProgressBar();
 		aMappingList.sort();
 		var iLength = aMappingList.length;
 		sStr = "";
+		var oProgBar = oDoc.createProgressBar("Creating mapping list...",iLength,1);
 		for(var i=0;i<iLength;i++)
 		{
-			sStr = sStr+"<li mapno='"+aMappingList[i][0]+"' description='"+aMappingList[i][1]+"' style='width:100%'><table style='border:1px solid black;width:100%'><tr><td>"+aMappingList[i][1]+"</td><td style='width:30%;align:left'>"+aMappingList[i][0]+"</td></tr></table></li>";
+			sStr = sStr+"<li mapno='"+aMappingList[i][0]+"' description='"+aMappingList[i][1]+"' style='width:100%' onclick='highlightElement(this)'><table style='border:1px solid black;width:100%'><tr><td>"+aMappingList[i][1]+"</td><td style='width:30%;align:left'>"+aMappingList[i][0]+"</td></tr></table></li>";
+			oProgBar.updateProgress(1);
 			//sStr = sStr+"<li mapno='"+aMapping[i][0]+"' description='"+aMapping[i][1]+"' style='width:100%'>"+aMapping[i][1]+" | "+aMapping[i][0]+"</li>";
 		}
-		return "<ul id='mappinglist' style=' style='width: 400px; height: 100px; overflow: auto'>"+sStr+"</ul>";
+		oProgBar.destroyProgressBar();
+		return "<ul id='mappinglist'><li style='width:100%'><table style='border:1px solid black;width:100%;font-weight:bold'><tr><td>Description</td><td style='width:30%;align:left'>Map no.</td></tr></table></li>"+sStr+"</ul>";
 	}catch(e)
 	{
 		alert(e.description);
@@ -745,11 +752,12 @@ function getAllMapNoAndDesc()
 		mappings = null;
 		oEnumerator = null;
 		//enumerate the mapping database
-		aMapping = null;		
+		aMapping = null;
+		oProgBar = null;		
 	}
 }
 
-function showMappingDialog()
+function showMappingDialog(sElement)
 {
 	//debugger;
 	//debugger;
@@ -760,12 +768,19 @@ function showMappingDialog()
 			sMappingString = getAllMapNoAndDesc();
 		//launch custom script interface
 		var sResult = oCWApplication.runHTMLDialog2(sHTMLPath, 1, oDoc,oCWApplication,sMappingString);
-
+		//debugger;
+		//debugger;		
+		if(isInputValid(sResult))
+		{	
+			var oElement = document.getElementById(sElement);
+			oElement.value=sResult;		
+			updateMapNo(oElement);
+		}
 		//debugger;
 		//debugger;
 	}catch(e)
 	{
-		
+		alert(e.description);
 	}finally{
 		
 	}
@@ -800,12 +815,19 @@ function searchUnorderedList() {
 	// Loop through all list items, and hide those who don't match the search query
 	for (var i = 0; i < iLength; i++) 
 	{
-		var oItem = aListItem[i];//.getElementsByTagName("a")[0];
+		var el = oItem = aListItem[i];//.getElementsByTagName("a")[0];
 		//var txtValue = oItem.mapno || oItem.description;
-		if (oItem.mapno.toUpperCase().indexOf(sFilter) > -1||oItem.description.toUpperCase().indexOf(sFilter) > -1) {
-			aListItem[i].style.display = "";
+		if(!isInputValid(oItem.mapno))
+			continue;
+		
+		if (oItem.mapno.toUpperCase().search(sFilter)!=-1||oItem.description.toUpperCase().search(sFilter)!= -1) {
+			//aListItem[i].style.display = "";
+			//aListItem[i].setAttribute("class")
+			removeClass(el, "testit");
 		} else {
-			aListItem[i].style.display = "none";
+			//aListItem[i].style.display = "none";
+			addClass(el, "testit");
+			
 		}
 		oProgBar.updateProgress(1);
 	}
@@ -819,6 +841,17 @@ function searchUnorderedList() {
   
 }
 
+function addClass(el, classNameToAdd){
+    el.className += ' ' + classNameToAdd;   
+}
+
+function removeClass(el, classNameToRemove){
+    var elClass = ' ' + el.className + ' ';
+    while(elClass.indexOf(' ' + classNameToRemove + ' ') !== -1){
+         elClass = elClass.replace(' ' + classNameToRemove + ' ', '');
+    }
+    el.className = elClass;
+}
 
 function sortList(b) {
 	//debugger;
@@ -852,6 +885,25 @@ function sortList(b) {
 	  b[i].parentNode.insertBefore(b[i + 1], b[i]);
 	  switching = true;
 	}
+	}
+}
+
+function toggleboard(sElementId)
+{
+	try{
+		//debugger;
+		//debugger;
+		var oElement = document.getElementById(sElementId);
+		if(oElement){
+			if(oElement.style.display!="none")
+				oElement.style.display="none";
+			else
+				oElement.style.display="block";
+		}
+	}catch(e)
+	{
+		alert(e.description);
+	}finally{
 	}
 }
 /*
