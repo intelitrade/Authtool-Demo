@@ -888,6 +888,248 @@ function sortList(b) {
 	}
 }
 
+function exporttoexcel(sTable,sExcelSaveFilePath,oMyDoc)
+{
+	try{
+		debugger;
+		debugger;
+        var Excel = new ActiveXObject("Excel.Application");
+        //Excel.Visible = true;
+		var sExcelSaveFilePath = "C:\\Program Files (x86)\\CaseWare\\Scripts\\SA IFRS\\HTML\\authtool\\test.xlsx";
+		var sTable = "MFG";
+        var oExcelWorkBook = Excel.Workbooks.Add();//Open("C:\\Program Files (x86)\\CaseWare\\Scripts\\SA IFRS\\HTML\\authtool\\test.xlsx");
+		if(oExcelWorkBook)
+		{
+			var oCaseViewTable = oDoc.tableByName(sTable);
+			//get the table
+			populateExcelWorkSheet(oExcelWorkBook,oCaseViewTable)
+			//oExcelWorkBook.ActiveSheet.Cells(1,1).Value = "Test";
+			oExcelWorkBook.SaveAs(sExcelSaveFilePath);
+			Excel.Visible = true;
+			//Excel.Quit();	// Close Excel with the Quit method on the Application object.
+		}	
+	}catch(e)
+	{
+		alert(e.description);
+	}finally{
+	}
+}
+
+function populateCVTableExcelWorkSheet(oExcelWorkBook,oCaseViewTable)
+{
+	try{
+			if(oExcelWorkBook && oCaseViewTable)
+			{
+				var iRows = oCaseViewTable.nRows();
+				var iColumns = oCaseViewTable.nColumns();				
+
+				var iRows = oCaseViewTable.nRows();
+				var iColumns = oCaseViewTable.nColumns();
+				var oProgBar = oDoc.createProgressBar("Exporting data...",iRows,1);
+				for(var i = 1; i <= iRows; i++)
+				{
+					for(var j = 1; j <= iColumns; j++)
+					{
+						//get the table cell in CaseView Table
+						//check if there are any cells in the table
+						var iTableCellFirstPara = oCaseViewTable.cellFirstParaIndex(i, j);
+						//var iTableCellLastPara = oCVTable.cellLastParaIndex(i, j);						
+						var oPara = oDoc.para(iTableCellFirstPara);
+						var sText = oPara.getText();
+						if(!isInputValid(sText))
+							continue;	
+
+						oExcelWorkBook.ActiveSheet.Cells(i,j).Value = sText;
+					}
+					oProgBar.updateProgress(1);
+				}
+				oProgBar.destroyProgressBar();
+			}			
+	}catch(e)
+	{
+		alert(e.description);
+	}finally{
+		
+	}
+}
+
+function exportCaseViewDataToExcel()
+{
+	try{
+		debugger;
+		debugger;
+		
+		var oSection = oDoc.sectionByName(sSectionLabel)//;"NOTES_002");
+		var iFirstPara = oSection.firstParaIndex;
+		var iLastPara = oSection.lastParaIndex;
+		var sStr = "";
+		var aTables = [];
+        var Excel = new ActiveXObject("Excel.Application");
+        //Excel.Visible = true;
+		var sExcelSaveFilePath = "C:\\Program Files (x86)\\CaseWare\\Scripts\\SA IFRS\\HTML\\authtool\\test.xlsx";
+		//var sTable = "MFG";
+        var oExcelWorkBook = Excel.Workbooks.Add();
+		var iExcelPointer = 1;
+		if(oExcelWorkBook)// && oCaseViewTable)
+		{		
+			for(var i=iFirstPara;i<=iLastPara;i++)
+			{			
+				var oProgBar = oDoc.createProgressBar("Exporting data...",iLastPara,1);
+				
+				var oCaseViewTable = oDoc.tableByParaIndex(i);
+				if(oCaseViewTable)
+				{
+					var iRows = oCaseViewTable.nRows();
+					var iColumns = oCaseViewTable.nColumns();					
+					for(var k = 1; k <= iRows; k++)
+					{
+						var bDataExported = false;					
+						for(var j = 1; j <= iColumns; j++)
+						{
+							//get the table cell in CaseView Table
+							//check if there are any cells in the table
+							var iTableCellFirstPara = oCaseViewTable.cellFirstParaIndex(k, j);
+							//var iTableCellLastPara = oCVTable.cellLastParaIndex(i, j);						
+							var oPara = oDoc.para(iTableCellFirstPara);
+							var sText = oPara.getText();
+							if(!isInputValid(sText))
+								continue;	
+							
+							oExcelWorkBook.ActiveSheet.Cells(iExcelPointer,j).Value = sText;
+							bDataExported = true;
+						}
+						if(bDataExported)
+							iExcelPointer++;
+					}
+					i=oCaseViewTable.lastParaIndex;
+				}else{
+					
+					oExcelWorkBook.ActiveSheet.Cells(iExcelPointer,1).Value = oDoc.para(i).getText();
+					iExcelPointer++;
+				}	
+				oProgBar.updateProgress(1);
+			}
+			oProgBar.destroyProgressBar();
+			oExcelWorkBook.SaveAs(sExcelSaveFilePath);
+			Excel.Visible = true;
+		}
+	}catch(e)
+	{
+		alert(e.description);
+	}finally{
+	}
+}
+
+function exportCaseViewDataToWord()
+{
+	try{
+		debugger;
+		debugger;
+		
+		var oSection = oDoc.sectionByName(sSectionLabel)//;"NOTES_002");
+		var iFirstPara = oSection.firstParaIndex;
+		var iLastPara = oSection.lastParaIndex;
+		var sStr = "";
+		var aTables = [];
+        var Word = new ActiveXObject("Word.Application");
+        //Excel.Visible = true;
+		var sWordSaveFilePath = "C:\\Program Files (x86)\\CaseWare\\Scripts\\SA IFRS\\HTML\\authtool\\test11.docx";
+		//var sTable = "MFG";
+		var oWordDocument = Word.Documents.Add();//Open(sWordSaveFilePath);
+		//oWordDocument.Content.insertParagraph("This is the first text with a custom style.","End");
+		//Word.Selection.TypeText("Hello world!\n787");
+		//oWordDocument.SaveAs(sWordSaveFilePath);
+		//Word.Visible = true;
+		//debugger;
+		//debugger;
+		//var iLength = 1000000;
+		 //for(var il = 1;il<=iLength;il++)
+			// v=il;
+		//debugger;
+		//debugger
+		//return;
+		var sText = "";
+        //var oWord = Excel.Workbooks.Add();
+		var iExcelPointer = 1;
+		if(oWordDocument)// && oCaseViewTable)
+		{		
+			var iFirstPara = 1;
+			var iLastPara = oDoc.paraCount();
+			var oProgBar = oDoc.createProgressBar("Exporting data...",iLastPara,1);
+			for(var k=iFirstPara;k<=iLastPara;k++)
+			{							
+				var oCaseViewTable = oDoc.tableByParaIndex(i);
+				if(oCaseViewTable)
+				{
+					var oCaseViewTable = oDoc.tableByName("MFG");
+					var iRows = oCaseViewTable.nRows();
+					var iColumns = oCaseViewTable.nColumns();
+					
+					var oTable = Word.Selection.Tables.Add(Word.Selection.Range,iRows,iColumns);
+					for(var i=1;i<=iRows;i++)
+					{
+						for(var j=1;j<=iColumns;j++)
+						{
+							//oDoc.para(oCaseViewTable.cellFirstParaIndex(j, i)).getText();
+							oTable.Cell(i, j).Range.InsertAfter(oDoc.para(oCaseViewTable.cellFirstParaIndex(i, j)).getText());
+						}
+					}					
+					/*var iRows = oCaseViewTable.nRows();
+					var iColumns = oCaseViewTable.nColumns();					
+					for(var k = 1; k <= iRows; k++)
+					{
+						var bDataExported = false;					
+						for(var j = 1; j <= iColumns; j++)
+						{
+							//get the table cell in CaseView Table
+							//check if there are any cells in the table
+							var iTableCellFirstPara = oCaseViewTable.cellFirstParaIndex(k, j);
+							//var iTableCellLastPara = oCVTable.cellLastParaIndex(i, j);						
+							var oPara = oDoc.para(iTableCellFirstPara);
+							var sText = oPara.getText();
+							if(!isInputValid(sText))
+								continue;	
+							
+							oExcelWorkBook.ActiveSheet.Cells(iExcelPointer,j).Value = sText;
+							bDataExported = true;
+						}
+						if(bDataExported)
+							iExcelPointer++;
+					}*/
+					k=oCaseViewTable.lastParaIndex;
+				}else{
+					
+					
+					//Word.Selection.TypeText("\n"+oDoc.para(i).getText());
+					//oExcelWorkBook.ActiveSheet.Cells(iExcelPointer,1).Value = oDoc.para(i).getText();
+					if(sText=="")
+						sText = oDoc.para(i).getText();
+					else
+						sText = sText + "\n" + oDoc.para(i).getText();
+						
+					//iExcelPointer++;
+				}	
+				
+				
+				oProgBar.updateProgress(1);
+			}
+			debugger;
+			debugger;
+
+           // var oCell = oTable.Cell(1, 1);
+            //oCell.Range.InsertAfter("Chim");
+			//Word.Selection.TypeText(sText);
+			oProgBar.destroyProgressBar();
+			oWordDocument.SaveAs(sWordSaveFilePath);
+			Word.Visible = true;
+		}
+	}catch(e)
+	{
+		alert(e.description);
+	}finally{
+	}
+}
+
 function toggleboard(sElementId)
 {
 	try{
@@ -905,6 +1147,34 @@ function toggleboard(sElementId)
 		alert(e.description);
 	}finally{
 	}
+}
+
+function sanitize(szInput)  
+{ 
+   // var szInput = myDiv.innerHTML; 
+    var szStaticHTML = toStaticHTML(szInput); 
+   /* ResultComment = "\ntoStaticHTML sanitized the HTML fragment as follows:\n" 
+        + "Original Content:\n" + szInput + "\n" 
+        + "Static Content:\n" + szStaticHTML + "\n"; 
+    myDiv.innerText = ResultComment; */
+	return szStaticHTML;
+}
+
+function copyStringToClipboard (str) {
+   // Create new element
+   var el = document.createElement('textarea');
+   // Set value (string to be copied)
+   el.value = str;
+   // Set non-editable to avoid focus and move outside of view
+   el.setAttribute('readonly', '');
+   el.style = {position: 'absolute', left: '-9999px'};
+   document.body.appendChild(el);
+   // Select text inside element
+   el.select();
+   // Copy text to clipboard
+   document.execCommand('copy');
+   // Remove temporary element
+   document.body.removeChild(el);
 }
 /*
 var testCase = ["A","B","C","Z","AA","AB","BY"];

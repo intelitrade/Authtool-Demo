@@ -158,6 +158,7 @@
 	<!--<script type="text/vbscript" src="ex.vbs"></script>-->
 	<SCRIPT type="text/vbscript" src="utilities.vbs"></SCRIPT>
 	<SCRIPT language="javascript" src="languagetranslate.js"></SCRIPT>
+	
 	<!--<script language="javascript" src="https://intelitrade.github.io/caseweb/authtool/caseweb.js"></script>-->
 	<!--<script language="javascript" src="http://localhost:8085/authtool/caseweb.js"></script>-->
 	<script>
@@ -178,13 +179,15 @@
 			<div style="float: right;" onClick="platformInfo()"><img id="help" src="help.png" style="width:50px;height:50px;" align="right;margin-right:50%;"title="Info" /><br><u>Info</u></div>	
 			<div style="float: right;" onClick="deleteItem()"><img title="Delete slected item(s)" id="bin" src="bin.png" style="width:50px;height:50px;" align="right;margin-right:50%" /><br><u>Delete</u></div> 
 			<div style="float: right;" onclick="undoLastActionOnElement()"><img title="Undo" id="" src="undo.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u>Undo</u></div>
+			<div style="float: right;" onclick="exportCaseViewDataToExcel()"><img title="Export to Excel" id="" src="excel-icon.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u>Excel</u></div>	
+			<div style="float: right;" onclick="exportCaseViewDataToWord()"><img title="Export to Word" id="" src="word.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u>Word</u></div>				
 			<div style="float: right;" onclick="sortElements(this.sorttype)"><img title="Sort(Move Up)" id="sortup" src="sortup.png" style="width:50px;height:50px;" align="right;margin-right:55%" sorttype="up"><br><u>Up</u></div> <div style="float: right;"><img title="Sort(Move Down)" id="sortdown" src="sortdown.png" style="width:50px;height:50px;" align="right;margin-right:55%" sorttype="down" onclick="sortElements(this.sorttype)"><br><u>Down</u></div>
 			<div style="float: right;" onclick="pasteElement()"><img title="Paste" id="paste" src="paste-icon-1500.png" style="width:50px;height:50px;" align="right;margin-right:55%" ><br><u>Paste</u></div>
 			<div style="float: right;" onclick="copyElement()"><img title="Copy" id="copy" src="makecopyof.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u>Copy</u></div> 
 			<div style="float: right;" onclick="sendToPrinter()"><img title="Print" id="printer" src="printer.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u>Print</u></div> 
 			<div style="float: right;" onclick="saveProject()"><img title="Save project" id="saveproject" src="saveicon.png" style="width:50px;height:50px;" align="right;margin-right:55%" ><br><u>Save</u></div> 		
 			<div style="float: right;"><img title="Open project" id="openproject" src="open.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u>Open</u></div> 
-			<div style="float: right;" onclick="toggleboard('reviewboard')"><img title="Edit board" id="editor" src="47162_check_256x256.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u>Review</u></div> 			
+			<div style="float: right;" onclick="ApplyButtonClick()"><img title="Edit board" id="editor" src="47162_check_256x256.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u>Review</u></div> 			
 			<div style="float: right;" onclick="toggleboard('editboard')"><img title="Edit board" id="editor" src="edit.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u>Edit</u></div>
 			<div style="float: right;" onclick="toggleboard('componentboard')"><img title="Component board" id="components" src="iconmaniac_icon_26.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u>Components</u></div>			
 		
@@ -194,9 +197,9 @@
 		<table width="100%">
 			<tr width="100%">
 				<td width="20%" id="componentboard">
-					<div id="insertoptions" style="background-color:#008CBA;color:#FFFFFF;width:100%;font-weight: bold;height:40px;text-align:center">
-						Component Board<br>
-						Drag & Drop Components onto the Edit Board
+					<div id="insertoptions" style="background-color:#008CBA;color:#FFFFFF;width:100%;height:40px;text-align:center">
+						<b>Component Board</b><br>
+						(Drag Components to Edit Board)
 					</div>				
 					<div id="insertoptionsmain" style="overflow-y: auto;height:500px;width:100%" ismenu="true">
 						<ul class="categorytitle" ismenu="true"><li style='padding:10px;' ismenu="true"><b>Sections</b></li></ul>
@@ -255,14 +258,14 @@
 					</div>
 				</td>			
 				<td width="20%" style="border-left: 1px solid #008CBA;" id="editboard">
-					<div id="docmapheading" style="background-color:#008CBA;color:#FFFFFF;width:100%;font-weight: bold;height:40px;text-align:center">
+					<div id="docmapheading" style="background-color:#008CBA;color:#FFFFFF;width:100%;height:40px;text-align:center">
 					</div>				
 					<div id="MainContentContainer" style="overflow-y: auto;height:500px;width:100%">
 					</div>
 				</td>
 				<td width="50%" style="border-left: 1px solid #008CBA;" id="reviewboard">
-					<div id="" style="background-color:#008CBA;color:#FFFFFF;width:100%;font-weight:bold;text-align:center;height:40px" >
-						Planning, Design, Edit & Preview Board<br>Select a Component in the "Edit Board" to View / Modify its Properties
+					<div id="" style="background-color:#008CBA;color:#FFFFFF;width:100%;text-align:center;height:40px" >
+						<b>Planning, Design, Edit & Preview Board</b><br>(Select Component in Edit Board to View Properties)
 					</div>	
 					<div style="overflow: auto;height:500px;width:100%;padding-left:5px;vertical-align: top;">
 						<table width="100%" height="100%" style="vertical-align: top;">

@@ -524,24 +524,18 @@ function updatePreviewPane(oElement)
 							<td colspan=2 width:100%>\
 								<b>Properties</b>\
 							</td>\
-						</tr>\
-						<tr>\
-							<td style="width:35%">\
-								<b>Description: </b>\
-							</td>\
-							<td style="width:65%;font-weight:bold" id="PREVIEWDESC_'+oElement.id+'">'+sSectionName+'</td>\
-						</tr>\
-						<tr>\
+						</tr><tr>\
 							<td>\
 								<b>Section name: </b>\
 							</td>\
-							<td>'+sSection+'</td>\
-						</tr><tr>\
-							<td>\
-								<b>Description: </b>\
-							</td>\
 							<td><input type="text" style="background-color:#FFFFC6;width:100%" value="'+sSectionName+'" desccell="'+sCellNumber+'" id="'+sCellNumber+'" srcelement="'+oElement.id+'" sectionlabel="'+sSection+'" onkeyup="updateSectionHeader(this)"></td>\
-						</tr>\<tr>\
+						</tr>\
+						<tr>\
+							<td>\
+								<b>Section label: </b>\
+							</td>\
+							<td><input type="text" style="background-color:#FFFFC6;width:100%" value="'+sSection+'"></td>\
+						</tr><tr>\
 							<td>\
 								<b>Section type: </b>\
 							</td>\

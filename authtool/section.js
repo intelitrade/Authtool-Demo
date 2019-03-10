@@ -185,7 +185,7 @@ function updateSectionHeader(oElement)
 			//if (isInputValid(sNewDesc)){
 				oSourceElement.innerText = sNewDesc;
 				oSourceElement.description = sNewDesc;
-				document.getElementById("PREVIEWDESC_"+oElement.srcelement).innerText = sNewDesc;
+				//document.getElementById("PREVIEWDESC_"+oElement.srcelement).innerText = sNewDesc;
 			//}
 		}		
 		/*var sSection = oElement.getAttribute("sectionlabel");

@@ -28,8 +28,10 @@ try{
 	function ApplyButtonClick()
 	{
 		try{
-			//debugger;
-			//debugger;
+			debugger;
+			debugger;
+			
+			//return;
 			document.getElementById("editorPane").innerHTML="";
 			var oSection = oDoc.sectionByName(sSectionLabel)//;"NOTES_002");
 			var iFirstPara = oSection.firstParaIndex;
@@ -225,7 +227,7 @@ try{
 					//if (isInputValid(sNewDesc)){
 						oSourceElement.innerText = sNewDesc;
 						oSourceElement.description = sNewDesc;
-						document.getElementById("PREVIEWDESC_"+oElement.srcelement).innerText = sNewDesc;
+						//document.getElementById("PREVIEWDESC_"+oElement.srcelement).innerText = sNewDesc;
 					//}
 				}				
 				
