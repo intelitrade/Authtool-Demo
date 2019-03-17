@@ -1198,9 +1198,9 @@ function newwindow()
 function refreshDoc()
 {
 	try{
-		debugger;
-		debugger
-		oChild = newwindow();
+		//debugger;
+		//debugger
+		/*oChild = newwindow();
 		oChild.document.body;
 		return;
 		window.location.replace("https://translate.google.com/#view=home&op=translate&sl=en&tl=af&text=hello%20everyone");
@@ -1208,7 +1208,7 @@ function refreshDoc()
 		//var oReturn = shell.run("Firefox http://www.google.com");
 		var oReturn = shell.run("Chrome https://translate.google.com/#view=home&op=translate&sl=en&tl=af&text=hello%20everyone");
 		x=1;
-		return;
+		return;*/
 		var aScript = document.getElementsByTagName('script');
 		var iChildren = aScript.length;
 		for(var i=0;i<iChildren;i++){
