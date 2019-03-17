@@ -1,4 +1,6 @@
 var iPos = 0;//Tracks position of a list item
+var iTracking = 0;
+var iUndoPosition = "";
 var sAction = "";
 var sCurrentlyElementSelected = "";
 var sObjectType = ""
@@ -13,8 +15,13 @@ var bMultiSelect = false;//Tracks if multiple items have been selected
 var aSelectedItems = [];
 var aCopiedItems = [];
 var aDeletedItems = [];
+var aLog = [];
 var sMappingString = "";
+var sOriginalContent = "";
 var iTest = 1;
+var sLanguageCode = "";
+var sLanguage = "English";
+var sDefaultLanguage="en";
 /*var oElement;
 var oRefElement;
 var sRefElement = "";

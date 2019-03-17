@@ -1,7 +1,8 @@
 function updatePreviewPane(oElement)
 {
 	try{
-
+		//debugger;
+		//debugger;
 		var sStr = "";
 	
 		if(!oElement)	
@@ -542,6 +543,54 @@ function updatePreviewPane(oElement)
 							<td>'+sSectionType+'</td>\
 						</tr>\
 						<tr>\
+							<td>\
+								<b>GUID: </b>\
+							</td>\
+							<td><input type="text" disabled style="width:75%" id="guidrow" value="'+sGuid+'"> <input '+sDisableGuid+' type="button" value="Generate..." style="width:20%" tempguid="'+sTempGuid+'" tablename="'+sTable+'"></td></tr></table>';
+			sStr = sShowTableStr+sStr +'</table>';	
+			sStr = sPreviewControlDiv + sStr+"</div><br>";
+		}else if(sElement==="page"){
+			//debugger;
+			//debugger;
+			//Get the section label
+			var sSection = oElement.getAttribute("jumpcode");
+			var oSection = oDoc.sectionByName(sSection);
+			if(isInputValid(oSection))
+			{
+				var sGuid = oSection.propGet("GUID");//oElement.getAttribute("guid");
+				var sSectionName = getSectionName(oDoc, sSection);
+				var sSectionType = oSection.propGet("CTYPE");
+			}else{
+				var sGuid = oElement.guid//"";
+				var sSectionName = oElement.innerText.replace("New*","");//getAttribute("cellnumber");//getSectionName(oDoc, sSection);
+				var sSectionType = oElement.typeofsection;
+			}
+			//var sCellNumber = oElement.getAttribute("cellnumber");
+			//var sColumn = oElement.getAttribute("mapcolumn");
+			var sDisableGuid = "";
+			var sTempGuid = "";
+			if(sGuid!="")
+				sDisableGuid = "disabled";
+			
+			var sCellNumber = "";
+			var sTable = "";
+			sStr= '<table>\
+						<tr>\
+							<td colspan=2 width:100%>\
+								<b>Properties</b>\
+							</td>\
+						</tr><tr>\
+							<td>\
+								<b>Page name: </b>\
+							</td>\
+							<td><input type="text" style="background-color:#FFFFC6;width:100%" value="'+sSectionName+'" desccell="'+sCellNumber+'" id="'+sCellNumber+'" srcelement="'+oElement.id+'" sectionlabel="'+sSection+'" onkeyup="updateSectionHeader(this)"></td>\
+						</tr>\
+						<tr>\
+							<td>\
+								<b>Label: </b>\
+							</td>\
+							<td><input type="text" style="background-color:#FFFFC6;width:100%" value="'+sSection+'"></td>\
+						</tr><tr>\
 							<td>\
 								<b>GUID: </b>\
 							</td>\

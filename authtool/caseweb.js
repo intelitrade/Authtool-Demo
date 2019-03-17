@@ -67,9 +67,11 @@ function buildTreeViewEx(sSectionLabel,oDoc)//,oProgBar)
 					oParentListItemNode.style.cursor = sTableLineItemCursor;
 					
 					if(document.getElementById("docmapheading"))
-						document.getElementById("docmapheading").innerHTML = "<b>Edit Board</b><br>("+getSectionName(oDoc,oDoc.interpret('cvdocpos("CFORMAT")'))+")";
+					{
+						var sTheTitle = getSectionName(oDoc,oDoc.interpret('cvdocpos("CFORMAT")'));
+						document.getElementById("docmapheading").innerHTML = "<b data-translate='Edit Board'>Edit Board</b><br><span data-translate='"+sTheTitle+"'>"+sTheTitle+"</span>";
 						//document.getElementById("docmapheading").innerHTML = "Edit Board<br>"+sSectionTitle;
-
+					}
 					var iSectionSkipCond = oSection.evaluateSkip();
 					var iSectionHideCond = oSection.evaluateHide();
 					

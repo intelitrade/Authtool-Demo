@@ -1,5 +1,6 @@
 function onLoad() 
 {
+	var sOriginalContent = document.documentElement.innerHTML;
 	//load controls
 	//loadDocMapDataEx();
 	//window.focus();

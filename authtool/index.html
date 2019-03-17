@@ -117,7 +117,9 @@
 	
 	li:hover {background-color: #ddd;}
 	
-
+	.spacer-left{
+		padding-left:5px;
+	}
 	
 
 	</style>
@@ -138,6 +140,8 @@
 		*/
 
 	</script>
+	
+	
 	<SCRIPT language="javascript" src="publicvariables.js"></SCRIPT>
 	<SCRIPT language="javascript" src="table.js"></SCRIPT>
 	<SCRIPT language="javascript" src="authtool.js"></SCRIPT>
@@ -154,10 +158,45 @@
 	<SCRIPT language="javascript" src="eventhandler.js"></SCRIPT>
 	<SCRIPT language="javascript" src="caseweb.js"></script>
 	<SCRIPT language="javascript" src="json3.js"></script>
+	<SCRIPT language="javascript" src="page.js"></script>
 	<script src="platform.js"></script>
 	<!--<script type="text/vbscript" src="ex.vbs"></script>-->
 	<SCRIPT type="text/vbscript" src="utilities.vbs"></SCRIPT>
 	<SCRIPT language="javascript" src="languagetranslate.js"></SCRIPT>
+	
+	<!--<script language="javascript" src="translator.js"></script>
+	<script language="javascript" src="dictionary.js"></script>-->
+	
+	<script language="javascript" src="translator.js"></script>
+	<script language="javascript" src="dictionary.js"></script>
+		<script>
+			/*var dictionary = {
+				'en' : {
+					//'Jugar' : 'Play',
+					//'Traducir a' : 'Translate to',
+					'Outeur hulpmiddel (Beta)' : 'Authoring Tool (Beta)',
+					'Verwyder' : 'Delete'
+				}
+			};
+			var translator = Translator({
+				language : 'en',
+				dictionary : dictionary,
+				//autostart : true,
+				htmlfriendly : true
+			});
+			function dictionaryExample(){
+				var myDict = [];
+				myDict['Jugar'] = 'Spielen';
+				myDict['Traducir a'] = 'Übersetzen in';
+				translator.addTranslation('de',myDict);
+			}
+			function translationExample(){
+				//translator.addTranslation('fr','Jugar','Jeux');
+				//translator.addTranslation('fr','Traducir a','Traduire en');
+				//'Outeur hulpmiddel (Beta)' : 'Authoring Tool (Beta)'
+			}*/
+		</script>
+	
 	
 	<!--<script language="javascript" src="https://intelitrade.github.io/caseweb/authtool/caseweb.js"></script>-->
 	<!--<script language="javascript" src="http://localhost:8085/authtool/caseweb.js"></script>-->
@@ -168,92 +207,130 @@
 			//debugger;
 			//debugger;
 		}
+		
+		if(event || window.event)
+			document.getElementById("header").innerHTML = event.type;
 	</script>
 </head>
 <body onLoad="onLoad()" onunload="clearAllHighlighting()" style="margin:0px;">
 	<div id="header" align="center" width="100%" style="border: 1px solid #008CBA;background-color: #008CBA;color:#FFF;padding:0px;margin:0px;cursor:hand">
-		<table width="100%"><tr><td>
+		<table width="100%">
+			<tr>
+			<td>
 		
-			<div id="" style="padding:0px;margin:0px">
-			<h1 style="padding:5px;margin:5px"><b>Authoring Tool (Beta)</b></h1></div></td><td align="right" style="width:50%"><div style="text-align:center;font-size:12px;font-weight:bold">
-			<div style="float: right;" onClick="platformInfo()"><img id="help" src="help.png" style="width:50px;height:50px;" align="right;margin-right:50%;"title="Info" /><br><u>Info</u></div>	
-			<div style="float: right;" onClick="deleteItem()"><img title="Delete slected item(s)" id="bin" src="bin.png" style="width:50px;height:50px;" align="right;margin-right:50%" /><br><u>Delete</u></div> 
-			<div style="float: right;" onclick="undoLastActionOnElement()"><img title="Undo" id="" src="undo.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u>Undo</u></div>
-			<div style="float: right;" onclick="exportCaseViewDataToExcel()"><img title="Export to Excel" id="" src="excel-icon.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u>Excel</u></div>	
-			<div style="float: right;" onclick="exportCaseViewDataToWord()"><img title="Export to Word" id="" src="word.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u>Word</u></div>				
-			<div style="float: right;" onclick="sortElements(this.sorttype)"><img title="Sort(Move Up)" id="sortup" src="sortup.png" style="width:50px;height:50px;" align="right;margin-right:55%" sorttype="up"><br><u>Up</u></div> <div style="float: right;"><img title="Sort(Move Down)" id="sortdown" src="sortdown.png" style="width:50px;height:50px;" align="right;margin-right:55%" sorttype="down" onclick="sortElements(this.sorttype)"><br><u>Down</u></div>
-			<div style="float: right;" onclick="pasteElement()"><img title="Paste" id="paste" src="paste-icon-1500.png" style="width:50px;height:50px;" align="right;margin-right:55%" ><br><u>Paste</u></div>
-			<div style="float: right;" onclick="copyElement()"><img title="Copy" id="copy" src="makecopyof.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u>Copy</u></div> 
-			<div style="float: right;" onclick="sendToPrinter()"><img title="Print" id="printer" src="printer.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u>Print</u></div> 
-			<div style="float: right;" onclick="saveProject()"><img title="Save project" id="saveproject" src="saveicon.png" style="width:50px;height:50px;" align="right;margin-right:55%" ><br><u>Save</u></div> 		
-			<div style="float: right;"><img title="Open project" id="openproject" src="open.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u>Open</u></div> 
-			<div style="float: right;" onclick="ApplyButtonClick()"><img title="Edit board" id="editor" src="47162_check_256x256.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u>Review</u></div> 			
-			<div style="float: right;" onclick="toggleboard('editboard')"><img title="Edit board" id="editor" src="edit.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u>Edit</u></div>
-			<div style="float: right;" onclick="toggleboard('componentboard')"><img title="Component board" id="components" src="iconmaniac_icon_26.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u>Components</u></div>			
-		
+				<div id="" style="padding:0px;margin:0px">
+				<h1 style="padding:5px;margin:5px" data-translate="Authoring Tool">Authoring Tool</h1></div>
+			
+			</td>
+			<td align="right" style="width:75%">
+			<div style="text-align:center;font-size:12px;font-weight:bold">
+			<div style="float: right;margin-left:5px" onClick="platformInfo()"><img id="help" src="help.png" style="width:50px;height:50px;" align="right;margin-right:50%;"title="Info" /><br><u data-translate="Info" class="spacer-left">Info</u></div>	
+			<div style="float: right;" onClick="logUserAction();deleteItem()"><img title="Delete slected item(s)" id="bin" src="bin.png" style="width:50px;height:50px;" align="right;margin-right:50%" /><br><u data-translate="Delete" class="spacer-left">Delete</u></div> 
+			<div style="float: right;" onclick="logUserAction();tracking()"><img title="Tracking" id="tracking" src="tracking.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u data-translate="Track" class="spacer-left">Track</u></div>			
+			<!--<div style="float: right;" onclick="logUserAction();undoLastActionOnElement()"><img title="Undo" id="" src="undo.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u>Undo</u></div>-->
+			<div style="float: right;" onclick="exportCaseViewDataToExcel()"><img title="Export to Excel" id="" src="excel-icon.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u data-translate="Excel" class="spacer-left">Excel</u></div>	
+			<div style="float: right;" onclick="exportCaseViewDataToWord()"><img title="Export to Word" id="" src="word.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u data-translate="Word" class="spacer-left">Word</u></div>				
+			<div style="float: right;" onclick="logUserAction();sortElements(this.sorttype)" sorttype="up"><img title="Sort(Move Up)" id="sortup" src="sortup.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u data-translate="Up" class="spacer-left">Up</u></div> <div style="float: right;" id="sortdown" sorttype="down" onclick="logUserAction();sortElements(this.sorttype)"><img title="Sort(Move Down)" src="sortdown.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u data-translate="Down" class="spacer-left">Down</u></div>
+			<div style="float: right;" onclick="logUserAction();pasteElement()"><img title="Paste" id="paste" src="paste-icon-1500.png" style="width:50px;height:50px;" align="right;margin-right:55%" ><br><u data-translate="Paste" class="spacer-left">Paste</u></div>
+			<div style="float: right;" onclick="copyElement()"><img title="Copy" id="copy" src="makecopyof.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u data-translate="Copy" class="spacer-left">Copy</u></div> 
+			<div style="float: right;" onclick="languageTranslate()"><img title="Translate" id="transate" src="translate.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u data-translate="Translate" class="spacer-left">Translate</u></div>					
+			<div style="float: right;" onclick="sendToPrinter()"><img title="Print" id="printer" src="printer.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u data-translate="Print" class="spacer-left">Print</u></div> 
+			<div style="float: right;" onclick="saveProject()"><img title="Save project" id="saveproject" src="saveicon.png" style="width:50px;height:50px;" align="right;margin-right:55%" ><br><u data-translate="Save" class="spacer-left">Save</u></div> 		
+			<div style="float: right;"><img title="Open project" id="openproject" src="open.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u data-translate="Open" class="spacer-left">Open</u></div> 
+			<div style="float: right;" onclick="ApplyButtonClick()"><img title="Edit board" id="editor" src="47162_check_256x256.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u data-translate="Review" class="spacer-left" class="spacer-left">Review</u></div> 			
+			<div style="float: right;" onclick="toggleboard('editboard')"><img title="Edit board" id="editor" src="edit.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u data-translate="Edit" class="spacer-left">Edit</u></div>
+			<div style="float: right;" onclick="toggleboard('componentboard')"><img title="Component board" id="components" src="iconmaniac_icon_26.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u data-translate="Components" class="spacer-left">Components</u></div>
+			<div style="float: right;" onclick="UndoRedo(1)" id="redo"><img title="Redo" id="redo" src="redo.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u data-translate="Redo" class="spacer-left">Redo</u></div>			
+			<div style="float: right;" onclick="UndoRedo(-1)" id="undo"><img title="Undo" id="undo" src="undo.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u data-translate="Undo" class="spacer-left">Undo</u></div>
+			<div style="float: right;" onclick="goBack()" id="back"><img title="Back" id="back" src="back.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u data-translate="Back" class="spacer-left">Back</u></div>			
+			<div style="float: right;" onclick="refreshDoc()"><img title="Refresh" id="refresh" src="Button Refresh.png" style="width:50px;height:50px;" align="right;margin-right:55%"><br><u data-translate="Refresh" class="spacer-left">Refresh</u></div> 			
 		</div></td></tr></table>
 	</div>
-	<div style="border: 1px solid #008CBA;margin-top:5px;">
+	<div style="border: 1px solid #008CBA;margin-top:5px;" id="bodycontent">
 		<table width="100%">
+		<!--<tr>
+			<td><h1 data-translate="Jugar"></h1>
+		<button onclick="translator.setLanguageRun('es')"><span data-translate="Traducir a"></span> 'es'</button>
+		<button onclick="translator.setLanguageRun('en')"><span data-translate="Traducir a"></span> 'en'</button>
+		<button onclick="dictionaryExample();translator.setLanguageRun('de')"><span data-translate="Traducir a"></span> 'de'</button>
+		<button onclick="translationExample();translator.setLanguageRun('fr')"><span data-translate="Traducir a"></span> 'fr'</button>
+		</td>
+			</tr>-->
 			<tr width="100%">
 				<td width="20%" id="componentboard">
 					<div id="insertoptions" style="background-color:#008CBA;color:#FFFFFF;width:100%;height:40px;text-align:center">
-						<b>Component Board</b><br>
-						(Drag Components to Edit Board)
+						<b data-translate="Component Board">Component Board</b><br>
+						<span data-translate="Drag Components to Edit Board">Drag Components to Edit Board</span>
 					</div>				
 					<div id="insertoptionsmain" style="overflow-y: auto;height:500px;width:100%" ismenu="true">
-						<ul class="categorytitle" ismenu="true"><li style='padding:10px;' ismenu="true"><b>Sections</b></li></ul>
+						<ul class="categorytitle" ismenu="true"><li style='padding:10px;font-weight:bold' ismenu="true" data-translate="Page">Page</li></ul>
 						<ul style='margin-top:0px;margin-bottom:10px' title="New and available in this beta release">
-							<li class="menulinespacer" style="cursor:move" id="NOTECONTROL" name="Note control" sectiontype="PAGE" component="page" objecttype="page" ismenu="true">Page</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownSections(this.id)" id="NOTECONTROL" name="Note control" sectiontype="NOTECONTROL" component="section" objecttype="section" ismenu="true">Note control</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownSections(this.id)" id="SUBNOTECONTROL" name="Sub note control" sectiontype="SUBNOTECONTROL" component="section" objecttype="section" ismenu="true">Sub note control</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownSections(this.id)" id="SUBNOTECONTROLGROUP" name="Sub note control (Group)" sectiontype="SUBNOTECONTROLGROUP" component="section" objecttype="section"ismenu="true">Sub note control (Group)</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownSections(this.id)" id="EXPANDCOLLAPSE" name="Expand collapse" sectiontype="EXPANDCOLLAPSE" component="section" objecttype="section" ismenu="true">Expand collapse</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownSections(this.id)" id="EXPANDCOLLAPSECOMPANY3RDYEAR" name="Expand collapse (Company 3yr)" sectiontype="EXPANDCOLLAPSECOMPANY3RDYEAR" component="section" objecttype="section" ismenu="true">Expand collapse (Company 3yr)</li>
+							<li class="menulinespacer" style="font-weight:bold;background-color:#BDB76B;padding:5px;margin:0px;color:white" id="" name="" sectiontype="" component="" objecttype="" ismenu="true" data-translate="Insert">Insert</li>							
+							<li class="menulinespacer" style="cursor:move" onmousedown="" id="PAGE" name="Page" sectiontype="PAGE" component="page" objecttype="page" ismenu="true" data-translate="New page">New page</li>	
+							<li class="menulinespacer" style="font-weight:bold;background-color:#BDB76B;padding:5px;margin:0px;color:white" id="" name="" sectiontype="" component="" objecttype="" ismenu="true" data-translate="Settings">Settings</li>								
+							<li class="menulinespacer" style="cursor:hand" id="" name="Note control" sectiontype="PAGE" component="page" objecttype="page" ismenu="true" onclick="logUserAction();loadAllPages()" data-translate="Load all pages in Edit Board">Load all pages in Edit Board</li>
+							<li class="menulinespacer" style="cursor:hand" id="" name="" sectiontype="" component="" objecttype="" ismenu="true" onclick="logUserAction();loadLevel1SubSections()" data-translate="Load all level 1 sub-sections in page">Load all level 1 sub-sections in page</li>
+							<li class="menulinespacer" style="cursor:hand" id="" name="Sub note control (Group)" sectiontype="" component="section" objecttype="section"ismenu="true" onclick="logUserAction();loadSubSections()"data-translate="Load all sub-sections">Load all sub-sections</li>
+							<li class="menulinespacer" style="cursor:hand" id="" name="" sectiontype="" component="" objecttype="" ismenu="true" onclick="logUserAction();loadAllTables()"data-translate="Load all tables in page">Load all tables in page</li>
+							<li class="menulinespacer" style="cursor:hand" id="" name="Sub note control (Group)" sectiontype="" component="section" objecttype="section"ismenu="true" onclick="logUserAction();loadAllPara()" data-translate="Load all para in page">Load all para in page</li>							
+							<li class="menulinespacer" style="cursor:hand" id="" name="Expand collapse" sectiontype="" component="hand" objecttype="section" ismenu="true" onclick="logUserAction();turnOffCurrentPage()" data-translate="Turn current page On / Off">Turn current page On / Off</li>
+							<li class="menulinespacer" style="cursor:hand" id="" name="Expand collapse (Company 3yr)" sectiontype="" component="section" objecttype="section" ismenu="true" onclick="logUserAction();turnOffAllPages()" data-translate="Turn all pages On / Off">Turn all pages On / Off</li>
+							<li class="menulinespacer" style="cursor:hand" id="" name="" sectiontype="" component="" objecttype="" ismenu="true" onclick="updateCurrentPage()" data-translate="Update current page">Update current page</li>
+							<li class="menulinespacer" style="cursor:hand" id="" name="" sectiontype="" component="" objecttype="" ismenu="true" onclick="updateAllPages()" data-translate="Update all pages">Update all pages</li>								
+							<li class="menulinespacer" style="cursor:hand" id="" name="" sectiontype="" component="" objecttype="" ismenu="true" onclick="printCurrentPages()" data-translate="Print current page">Print current page</li>
+							<li class="menulinespacer" style="cursor:hand" id="" name="" sectiontype="" component="" objecttype="" ismenu="true" onclick="printAllPages()" data-translate="Print all pages">Print all pages</li>							
+						</ul>					
+						<ul class="categorytitle" ismenu="true"><li style='padding:10px;font-weight:bold' ismenu="true" data-translate="Section">Section</li></ul>
+						<ul style='margin-top:0px;margin-bottom:10px' title="New and available in this beta release">
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownSections(this.id)" id="NOTECONTROL" name="Note control" sectiontype="NOTECONTROL" component="section" objecttype="section" ismenu="true" data-translate="Note control">Note control</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownSections(this.id)" id="SUBNOTECONTROL" name="Sub note control" sectiontype="SUBNOTECONTROL" component="section" objecttype="section" ismenu="true" data-translate="Sub note control">Sub note control</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownSections(this.id)" id="SUBNOTECONTROLGROUP" name="Sub note control (Group)" sectiontype="SUBNOTECONTROLGROUP" component="section" objecttype="section"ismenu="true" data-translate="Sub note control (Group)">Sub note control (Group)</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownSections(this.id)" id="EXPANDCOLLAPSE" name="Expand collapse" sectiontype="EXPANDCOLLAPSE" component="section" objecttype="section" ismenu="true" data-translate="Expand collapse">Expand collapse</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownSections(this.id)" id="EXPANDCOLLAPSECOMPANY3RDYEAR" name="Expand collapse (Company 3yr)" sectiontype="EXPANDCOLLAPSECOMPANY3RDYEAR" component="section" objecttype="section" ismenu="true" data-translate="Expand collapse (Company 3yr)">Expand collapse (Company 3yr)</li>
 						</ul>						
 						<ul class="categorytitle" title="Not available for this beta release" ismenu="true">
-							<li style='padding:10px;' ismenu="true"><b>Table types</b></li>
+							<li style='padding:10px;font-weight:bold' ismenu="true" data-translate="Table">Table</li>
 						</ul>
 						<ul style='margin-top:0px;margin-bottom:10px;' title="Not available for this beta release">
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="CONTROLTABLE" name="Control table" tabletype="CONTROLTABLE" component="table" objecttype="table" ismenu="true">Control table</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="STATEMENTTABLE" name="Statement table" tabletype="STATEMENTTABLE" component="table" objecttype="table" ismenu="true">Statement table</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="MODIFIABLETABLE" name="Modifiable table" tabletype="MODIFIABLETABLE" component="table" objecttype="table" ismenu="true">Modifiable table</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="NOTETABLE" name="Note table" tabletype="NOTETABLE" component="table" objecttype="table" ismenu="true">Note table</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="STD6COLUMNTABLE" name="Std 6 Column table" tabletype="STD6COLUMNTABLE" component="table" objecttype="table" ismenu="true">Std 6 column table</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="SUMMARYTABLE" name="Summary table" tabletype="SUMMARYTABLE" component="table" objecttype="table" ismenu="true">Summary table</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="SUMMARYTABLEGROUP" name="Summary table (Group)" tabletype="SUMMARYTABLEGROUP" component="table" objecttype="table" ismenu="true">Summary table (Group)</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="RECONTABLE" name="Recon table" tabletype="RECONTABLE" component="table" objecttype="table" ismenu="true">Recon table</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="RADIOBUTTONTABLE" name="Radio button table" tabletype="RADIOBUTTONTABLE" component="table" objecttype="table" ismenu="true">Radio button table</li>		
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="CONTROLTABLE" name="Control table" tabletype="CONTROLTABLE" component="table" objecttype="table" ismenu="true" data-translate="Control table">Control table</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="STATEMENTTABLE" name="Statement table" tabletype="STATEMENTTABLE" component="table" objecttype="table" ismenu="true" data-translate="Statement table">Statement table</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="MODIFIABLETABLE" name="Modifiable table" tabletype="MODIFIABLETABLE" component="table" objecttype="table" ismenu="true" data-translate="Modifiable table">Modifiable table</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="NOTETABLE" name="Note table" tabletype="NOTETABLE" component="table" objecttype="table" ismenu="true" data-translate="Note table">Note table</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="STD6COLUMNTABLE" name="Std 6 Column table" tabletype="STD6COLUMNTABLE" component="table" objecttype="table" ismenu="true" data-translate="Std 6 column table">Std 6 column table</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="SUMMARYTABLE" name="Summary table" tabletype="SUMMARYTABLE" component="table" objecttype="table" ismenu="true" data-translate="Summary table">Summary table</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="SUMMARYTABLEGROUP" name="Summary table (Group)" tabletype="SUMMARYTABLEGROUP" component="table" objecttype="table" ismenu="true" data-translate="Summary table (Group)">Summary table (Group)</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="RECONTABLE" name="Recon table" tabletype="RECONTABLE" component="table" objecttype="table" ismenu="true" data-translate="Recon table">Recon table</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownTables(this.id)" id="RADIOBUTTONTABLE" name="Radio button table" tabletype="RADIOBUTTONTABLE" component="table" objecttype="table" ismenu="true" data-translate="Radio button table">Radio button table</li>		
 						</ul>
 						<ul class="categorytitle" ismenu="true">
-							<li style='padding:10px;' onClick="testIt()" ismenu="true"><b>Row types</b></li>
+							<li style='padding:10px;font-weight:bold' onClick="testIt()" ismenu="true" data-translate="Row">Row</li>
 						</ul>
 						<ul style='margin-top:0px;margin-bottom:10px;' ismenu="true">
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="C1" name="Link to map row" rowtype="C1" component="row" objecttype="row" ismenu="true">Link to map row</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="C2" name="Negative link to map row" rowtype="C2" component="row" objecttype="row" ismenu="true">Negative link to map row</li>	
-							<li class="menulinespacer" onmousedown="onMouseDownRows(this.id)" id="C3" name="Link to map (Debits only)" rowtype="C3" component="row" objecttype="row" ismenu="true">Link to map (Debits only)</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="G3" name="Link to map (Credits only)" rowtype="G3" component="row" objecttype="row" ismenu="true">Link to map (Credits only)</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="C4" name="Negative link to map (Debits only)" rowtype="C4" component="row" objecttype="row" ismenu="true">Negative link to map (Debits only)</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="C4" name="Negative link to map (Credits only)" rowtype="G4" component="row" objecttype="row" ismenu="true">Negative link to map (Credits only)</li>	
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="A1" name="Link to account" rowtype="A1" component="row" objecttype="row" ismenu="true">Link to account</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="A2" name="Negative link to account" rowtype="A2" ismenu="true">Negative link to account</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="I1" name="Input row" rowtype="I1" component="row" objecttype="row" ismenu="true">Input row</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="D1" name="Heading row" rowtype="D1" component="row" objecttype="row" ismenu="true">Heading row</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="SUBTOTAL" name="Sub-total row" rowtype="S1" component="row" objecttype="row" ismenu="true">Sub-total row</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="L1" name="Heading row" rowtype="L1" component="row" objecttype="row" ismenu="true">Thin line</li>
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="L2" name="Heading row" rowtype="L2" component="row" objecttype="row" ismenu="true">Thick line</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="C1" name="Link to map row" rowtype="C1" component="row" objecttype="row" ismenu="true" data-translate="Link to map row">Link to map row</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="C2" name="Negative link to map row" rowtype="C2" component="row" objecttype="row" ismenu="true" data-translate="Negative link to map row">Negative link to map row</li>	
+							<li class="menulinespacer" onmousedown="onMouseDownRows(this.id)" id="C3" name="Link to map (Debits only)" rowtype="C3" component="row" objecttype="row" ismenu="true" data-translate="Link to map (Debits only)">Link to map (Debits only)</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="G3" name="Link to map (Credits only)" rowtype="G3" component="row" objecttype="row" ismenu="true" data-translate="Link to map (Credits only)">Link to map (Credits only)</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="C4" name="Negative link to map (Debits only)" rowtype="C4" component="row" objecttype="row" ismenu="true" data-translate="Negative link to map (Debits only)">Negative link to map (Debits only)</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="C4" name="Negative link to map (Credits only)" rowtype="G4" component="row" objecttype="row" ismenu="true" data-translate="Negative link to map (Credits only)">Negative link to map (Credits only)</li>	
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="A1" name="Link to account" rowtype="A1" component="row" objecttype="row" ismenu="true" data-translate="Link to account">Link to account</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="A2" name="Negative link to account" rowtype="A2" ismenu="true" data-translate="Negative link to account">Negative link to account</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="I1" name="Input row" rowtype="I1" component="row" objecttype="row" ismenu="true" data-translate="Input row">Input row</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="D1" name="Heading row" rowtype="D1" component="row" objecttype="row" ismenu="true" data-translate="Heading row">Heading row</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="SUBTOTAL" name="Sub-total row" rowtype="S1" component="row" objecttype="row" ismenu="true" data-translate="Sub-total row">Sub-total row</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="L1" name="Heading row" rowtype="L1" component="row" objecttype="row" ismenu="true" data-translate="Thin line">Thin line</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownRows(this.id)" id="L2" name="Heading row" rowtype="L2" component="row" objecttype="row" ismenu="true" data-translate="Thick line">Thick line</li>
 						</ul>
-						<ul class="categorytitle" title="Not available for this beta release" ismenu="true"><li style='padding:10px;' ismenu="true"><b>Paragraph</b></li></ul>
+						<ul class="categorytitle" title="Not available for this beta release" ismenu="true"><li style='padding:10px;font-weight:bold' ismenu="true" data-translate="Paragraph">Paragraph</li></ul>
 						<ul style='margin-top:0px;margin-bottom:10px;' title="Not available for this beta release" ismenu="true">
-							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownPara(this.id)" id="PARAGRAPH" name="Paragraph" paratype="PARAGRAPH" component="para" objecttype="para" ismenu="true">Input paragraph</li>
+							<li class="menulinespacer" style="cursor:move" onmousedown="onMouseDownPara(this.id)" id="PARAGRAPH" name="Paragraph" paratype="PARAGRAPH" component="para" objecttype="para" ismenu="true" data-translate="Input paragraph">Input paragraph</li>
 							<!--<li class="menulinespacer" onmousedown="onMouseDownPara(this.id)" id="BULLETPARAGRAPH" name="Bullet paragraph" paratype="BULLETPRARGRAPH" component="para" objecttype="para">Bullet input paragraph</li>-->
 						</ul>
-						<ul class="categorytitle" ismenu="true"><li style='padding:10px;' ismenu="true"><b>Subdocument</b></li></ul>
+						<ul class="categorytitle" ismenu="true"><li style='padding:10px;font-weight:bold' ismenu="true" data-translate="Subdocument">Subdocument</li></ul>
 						<ul style='margin-top:0px;margin-bottom:10px;' title="Not available for this beta release" ismenu="true">
-							<li class="menulinespacer" id="freeze" style="cursor:hand" component="subdocument" objecttype="subdocument" ismenu="true" onclick="previewSubDoc()">Freeze</li>
-							<li class="menulinespacer" disabled style="cursor:move" component="subdocument" objecttype="subdocument" ismenu="true">Header</li>
-							<li class="menulinespacer" disabled style="cursor:move" component="subdocument" objecttype="subdocument" ismenu="true">Footer</li>
-							<li class="menulinespacer"  disabled style="cursor:move" component="subdocument" objecttype="subdocument" ismenu="true">External document</li>
+							<li class="menulinespacer" id="freeze" style="cursor:hand" component="subdocument" objecttype="subdocument" ismenu="true" onclick="previewSubDoc()" data-translate="Freeze">Freeze</li>
+							<li class="menulinespacer" disabled style="cursor:move" component="subdocument" objecttype="subdocument" ismenu="true" data-translate="Header">Header</li>
+							<li class="menulinespacer" disabled style="cursor:move" component="subdocument" objecttype="subdocument" ismenu="true" data-translate="Footer">Footer</li>
+							<li class="menulinespacer"  disabled style="cursor:move" component="subdocument" objecttype="subdocument" ismenu="true" data-translate="External document">External document</li>
 						</ul>						
 					</div>
 				</td>			
@@ -265,7 +342,7 @@
 				</td>
 				<td width="50%" style="border-left: 1px solid #008CBA;" id="reviewboard">
 					<div id="" style="background-color:#008CBA;color:#FFFFFF;width:100%;text-align:center;height:40px" >
-						<b>Planning, Design, Edit & Preview Board</b><br>(Select Component in Edit Board to View Properties)
+						<b data-translate="Planning, Design & Visualisation Board">Planning, Design & Visualisation Board</b><br><span data-translate="Select Component in Edit Board to View Properties">Select Component in Edit Board to View Properties</span>
 					</div>	
 					<div style="overflow: auto;height:500px;width:100%;padding-left:5px;vertical-align: top;">
 						<table width="100%" height="100%" style="vertical-align: top;">
@@ -350,6 +427,8 @@
 		}
 		return sSectionLabel;
 	}	
+	//debugger;
+	//debugger;
 	//textAPI = "Note control";//document.documentElement.innerText;
 	//textAPI.translate();
 	//debugger;

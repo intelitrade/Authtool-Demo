@@ -68,7 +68,7 @@
 		var oDoc =  params[0];
 		var oCWApplication = params[1];
 		var sTempMappingString = params[2];
-
+		
 		//var oSortGroups = new ActiveXObject("Scripting.Dictionary");				
 		/*	
 			Force window to come to the fore/front
@@ -95,7 +95,10 @@
 	<script src="platform.js"></script>
 	<!--<script type="text/vbscript" src="ex.vbs"></script>-->
 	<SCRIPT type="text/vbscript" src="utilities.vbs"></SCRIPT>
-	<SCRIPT language="javascript" src="languagetranslate.js"></SCRIPT>
+	<script language="javascript" src="translator.js"></script>
+	<script language="javascript" src="dictionary.js"></script>
+
+	
 	<!--<script language="javascript" src="https://intelitrade.github.io/caseweb/authtool/caseweb.js"></script>-->
 	<!--<script language="javascript" src="http://localhost:8085/authtool/caseweb.js"></script>-->
 	<script>
@@ -137,7 +140,7 @@
 		<table>	
 			<tr>
 				<td align="center" onclick="searchUnorderedList()" style="cursor:hand;color:#FFFFFF">
-					<img src="search.png" style="width:50px;height:50px"><sup><b>Click here to Search...</b></sup>
+					<img src="search.png" style="width:50px;height:50px;font-weight:bold"><sup><span data-translate="Click here to Search...">Click here to Search...</span></sup>
 				</td>
 			</tr>
 			<tr>
@@ -173,7 +176,6 @@
 	</div>	-->
 </body>
 </html>
-<script src="https://cdn.webrtc-experiment.com/Translator.js"> </script>
 <script>
 	//debugger;
 	//debugger;
@@ -187,6 +189,27 @@
 		if(document.getElementById("maincontainer"))
 			document.getElementById("maincontainer").innerHTML = sTempMappingString;	
 	}
+	//debugger;
+	//debugger;
+	sLanguageCode = params[3];
+	
+	translator.setLanguageRun(sLanguageCode);
+	/*if(sLanguageCode=="en"){
+		translator.setLanguageRun('af');
+		sLanguageCode="af";
+		//Update the title
+		document.title = 'Authoring Tool (Beta)';
+		//document.getElementById("ButtonCancel").innerText = "Cancel";
+		//document.getElementById("ButtonApply").innerText = "Apply";
+	}else{
+		translator.setLanguageRun('en');
+		sLanguageCode="en";
+		//Update the title
+		document.title = 'Outeur hulpmiddel (Beta)';
+		//document.getElementById("ButtonCancel").innerText = "Kanselleer";
+		//document.getElementById("ButtonApply").innerText = "Aansoek doen";
+	}*/
+
 	//debugger;
 	//debugger;	
 	//var translator = new Translator();

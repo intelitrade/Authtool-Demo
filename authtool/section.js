@@ -257,8 +257,11 @@ function getSectionName(oDoc,sSection)
 				//var sTable = aTable[i];
 				//Get the section name
 				var oCell = oDoc.cell(sTable+".HEADER");
-				sSectionName = oDoc.cell(sTable+".HEADER").value;
-				break;
+				if(isInputValid(oCell))
+				{
+					sSectionName = oDoc.cell(sTable+".HEADER").value;
+					break;
+				}
 			}else{
 				//If a control table is not found then return the default name section name
 				sSectionName = "Section name";

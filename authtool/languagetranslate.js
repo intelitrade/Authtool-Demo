@@ -1,8 +1,8 @@
 function translateAPI(textAPI,langAPI)
 {
 	try{
-		debugger;
-		debugger;
+		//debugger;
+		//debugger;
 		
 		var url = "https://translate.yandex.net/api/v1.5/tr.json/translate",
 			keyAPI = "trnsl.1.1.20130922T110455Z.4a9208e68c61a760.f819c1db302ba637c2bea1befa4db9f784e9fbb8";//"trnsl.1.1.20190304T101653Z.d5dd800eccf8d0ef.14cee982f1f984b73bd5c413db9f9fac57f35744"; //

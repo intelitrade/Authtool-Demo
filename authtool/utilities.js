@@ -665,9 +665,9 @@ function sendToPrinter(content)
 function sortElements(sSortType)
 {
 	try{
-		/*debugger;
-		debugger;
-		showMappingDialog();
+		//debugger;
+		//debugger;
+		/*showMappingDialog();
 		return;*/
 		//Check if any item has been selected
 		if(aSelectedItems.length==1)
@@ -707,15 +707,18 @@ function getAllMapNoAndDesc()
 		//Get the Mappings collection
 		var mappings = cwClient.mappings;
 		var oEnumerator = new Enumerator(mappings);
-		
+		//debugger;
+		//debugger;
 		var iLength = mappings.Count;
 		var oProgBar = oDoc.createProgressBar("Loading mapping...",iLength,1);	
 		//enumerate the mapping database
 		var aMappingList = [];
+		//var sDictionary = "";
 		for (;!oEnumerator.atEnd(); oEnumerator.moveNext())
 		{
 			//Get an item from the collection
 			var mapItem = oEnumerator.item();
+			//sDictionary = sDictionary+"'"+mapItem.ExDescription.split("|")[1]+ "' : '"+ mapItem.ExDescription.split("|")[3]+"',"
 			var sMapNoFromMappingDbase = mapItem.ID;
 			if (!isInputValid(sMapNoFromMappingDbase))
 				continue;
@@ -727,7 +730,8 @@ function getAllMapNoAndDesc()
 					continue;
 			}	
 					
-			aMappingList[aMappingList.length] = [mapItem.ID, mapItem.Name];
+			//aMappingList[aMappingList.length] = [mapItem.ID, mapItem.Name];
+			aMappingList[aMappingList.length] = [mapItem.ID, mapItem.ExDescription.split("|")[1]];
 			oProgBar.updateProgress(1);
 		}
 		oProgBar.destroyProgressBar();
@@ -737,7 +741,11 @@ function getAllMapNoAndDesc()
 		var oProgBar = oDoc.createProgressBar("Creating mapping list...",iLength,1);
 		for(var i=0;i<iLength;i++)
 		{
-			sStr = sStr+"<li mapno='"+aMappingList[i][0]+"' description='"+aMappingList[i][1]+"' style='width:100%' onclick='highlightElement(this)'><table style='border:1px solid black;width:100%'><tr><td>"+aMappingList[i][1]+"</td><td style='width:30%;align:left'>"+aMappingList[i][0]+"</td></tr></table></li>";
+			//if(i<5000)
+				sStr = sStr+"<li mapno='"+aMappingList[i][0]+"' description='"+aMappingList[i][1]+"' style='width:100%' onclick='highlightElement(this)'><table style='border:1px solid black;width:100%'><tr><td data-translate='"+trim(aMappingList[i][1])+"'>"+trim(aMappingList[i][1])+"</td><td style='width:30%;align:left'>"+aMappingList[i][0]+"</td></tr></table></li>";
+			//else
+				//sStr = sStr+"<li mapno='"+aMappingList[i][0]+"' description='"+aMappingList[i][1]+"' style='width:100%' onclick='highlightElement(this)'><table style='border:1px solid black;width:100%'><tr><td>"+aMappingList[i][1]+"</td><td style='width:30%;align:left'>"+aMappingList[i][0]+"</td></tr></table></li>";				
+			
 			oProgBar.updateProgress(1);
 			//sStr = sStr+"<li mapno='"+aMapping[i][0]+"' description='"+aMapping[i][1]+"' style='width:100%'>"+aMapping[i][1]+" | "+aMapping[i][0]+"</li>";
 		}
@@ -757,6 +765,10 @@ function getAllMapNoAndDesc()
 	}
 }
 
+function trim(string) {
+return String(string).replace(/^ +| +$/g, '');
+}
+
 function showMappingDialog(sElement)
 {
 	//debugger;
@@ -767,7 +779,7 @@ function showMappingDialog(sElement)
 		if(sMappingString=="")
 			sMappingString = getAllMapNoAndDesc();
 		//launch custom script interface
-		var sResult = oCWApplication.runHTMLDialog2(sHTMLPath, 1, oDoc,oCWApplication,sMappingString);
+		var sResult = oCWApplication.runHTMLDialog2(sHTMLPath, 1, oDoc,oCWApplication,sMappingString,sLanguageCode);
 		//debugger;
 		//debugger;		
 		if(isInputValid(sResult))
@@ -1176,6 +1188,190 @@ function copyStringToClipboard (str) {
    // Remove temporary element
    document.body.removeChild(el);
 }
+
+function newwindow()  
+{  
+    var myChild = window.open('childwindow.html','','width=,height=,resizable=no');  
+   // myChild.blur();
+	return myChild;
+}
+function refreshDoc()
+{
+	try{
+		debugger;
+		debugger
+		oChild = newwindow();
+		oChild.document.body;
+		return;
+		window.location.replace("https://translate.google.com/#view=home&op=translate&sl=en&tl=af&text=hello%20everyone");
+		var shell = new ActiveXObject("WScript.Shell");
+		//var oReturn = shell.run("Firefox http://www.google.com");
+		var oReturn = shell.run("Chrome https://translate.google.com/#view=home&op=translate&sl=en&tl=af&text=hello%20everyone");
+		x=1;
+		return;
+		var aScript = document.getElementsByTagName('script');
+		var iChildren = aScript.length;
+		for(var i=0;i<iChildren;i++){
+			var oScript = aScript[i];
+			if(oScript.src!="")
+			{
+				var sScriptFilePath = oScript.src;
+				oScript.src = "";
+				oScript.src = sScriptFilePath;
+			}
+		}
+		
+		//reload the menu
+		var sHeader = document.getElementById("header").innerHTML;
+		document.getElementById("header").innerHTML = sHeader;
+	}catch(e)
+	{
+		alert(e.description);
+	}finally{
+		
+	}
+}
+
+function openURL()
+{
+	var shell = new ActiveXObject("WScript.Shell");
+	shell.run("Firefox http://www.google.com");
+}
+
+function shellSutff()
+{
+	// Instantiate the Shell object and invoke its execute method.
+	var oShell = new ActiveXObject("Shell.Application");
+
+	var commandtoRun = "C:\\Winnt\\Notepad.exe";
+	if (inputparms != "") {
+	  var commandParms = document.Form1.filename.value;
+	}
+
+	// Invoke the execute method.  
+	oShell.ShellExecute(commandtoRun, commandParms, "", "open", "1");	
+}
+
+function goBack()
+{
+	//debugger;
+	//debugger;
+	try{
+		
+	}catch(e)
+	{
+		alert(e.description);
+	}finally{
+		
+	}
+}
+
+function UndoRedo(iAction) {
+
+	try{	
+		
+		//window.history.back();
+		if(aLog.length>0)
+		{
+			//debugger;
+			//debugger;
+			if(iUndoPosition=="" && iAction==aLog.length)
+				return;
+			
+			/*if(iUndoPosition=="" || iUndoPosition==0)
+				iUndoPosition = aLog.length;//-1;
+			
+			if(sanitize(aLog[iUndoPosition])==sanitize(document.body.innerHTML))
+				return;*/
+			
+			if(iAction==1)
+				iUndoPosition++;
+			else
+				iUndoPosition--;
+			
+			if(iUndoPosition>=aLog.length)
+				iUndoPosition = aLog.length-1;
+			
+			if(iUndoPosition<0)
+				iUndoPosition=0;
+			
+			document.body.innerHTML = aLog[iUndoPosition];
+			
+		}
+			
+  	}catch(e)
+	{
+		alert(e.description);
+	}finally{
+		
+	}
+}
+
+function logUserAction()
+{
+	//Stores a snap shot of the Edit & Review/Planning/Design Board
+	try{
+		if(iTracking==1)
+			aLog[aLog.length] = document.body.innerHTML;//documentElement.innerHTML;
+	}catch(e)
+	{
+		alert(e.description);
+	}finally{
+		
+	}
+}
+
+function tracking()
+{
+	//Stores a snap shot of the Edit & Review/Planning/Design Board
+	try{
+		if(iTracking==0)
+			iTracking = 1;
+		else{
+			iTracking = 0;
+			aLog = [];
+		}
+	}catch(e)
+	{
+	}
+}
+
+function languageTranslate()
+{
+	try{
+		if(sLanguageCode=="en"){
+			translator.setLanguageRun('af');
+			sLanguageCode="af";
+			//Update the title
+			document.title = 'Authoring Tool (Beta)';
+			//document.getElementById("ButtonCancel").innerText = "Cancel";
+			//document.getElementById("ButtonApply").innerText = "Apply";
+		}else{
+			translator.setLanguageRun('en');
+			sLanguageCode="en";
+			//Update the title
+			document.title = 'Outeur hulpmiddel (Beta)';
+			//document.getElementById("ButtonCancel").innerText = "Kanselleer";
+			//document.getElementById("ButtonApply").innerText = "Aansoek doen";
+		}
+	}catch(e)
+	{
+		alert(e.description);
+	}finally{
+		
+	}
+}
+function countWords(){
+
+var Element= document.getElementsByTagName("body");
+
+ // Split the innerHtml .
+ var count = Element[0].textContent.split(' ').length;
+
+document.write("Number of words: "+count);
+}
+
+
 /*
 var testCase = ["A","B","C","Z","AA","AB","BY"];
 
